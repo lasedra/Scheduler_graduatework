@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Background="LightGray">
-            <Button Height="60" Width="60" HorizontalAlignment="Left" Background="IndianRed">
+            <Button Height="60" Width="60" HorizontalAlignment="Left" Background="IndianRed" Name="HomeButton" Click="HomeButton_Click">
                 <Image Source="/Resources/homeico.png" Margin="5"/>
             </Button>
             <DockPanel HorizontalAlignment="Center" Background="DimGray" LastChildFill="False">

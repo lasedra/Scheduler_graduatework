@@ -1,28 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Scheduler.Models;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Scheduler.Pages
 {
-    /// <summary>
-    /// Interaction logic for MainSchedulePage.xaml
-    /// </summary>
     public partial class MainSchedulePage : Page
     {
         public MainSchedulePage()
         {
             InitializeComponent();
+            MondayGrid.ItemsSource = SchedulerDbContext.dbContext.ScheduleViews.ToList();
+        }
+
+        private void AddViewRow_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            SchedulerDbContext.dbContext.ScheduleViews.Add(new ScheduleView
+            {
+                AtDay = "Вторник",
+                StudentGroup = "1312",
+                ClassesTimings = "Основное",
+                OfDate = new DateOnly(2020, 01, 02),
+                StartTime = new TimeOnly(9, 00),
+                EndTime = new TimeOnly(10, 30),
+                Subject = "Англ. Яз",
+                AtCabinet = 705,
+                Tutor = "Смелянцев И. И."
+            });
+            SchedulerDbContext.dbContext.SaveChanges();
         }
     }
 }

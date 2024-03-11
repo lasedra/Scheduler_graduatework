@@ -9,12 +9,12 @@
       Title="AuthorisationPage">
 
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">
-            <TextBlock Text="Логин:"/>
-            <TextBox/>
-            <TextBlock Text="Пароль: "/>
-            <TextBox/>
-            <Button Height="30" Margin="5" Content="Войти"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Background="Bisque">
+            <TextBlock Text="Логин:" Margin="5 5 5 0"/>
+            <TextBox Name="LoginTextBox" Margin="5"/>
+            <TextBlock Text="Пароль: " Margin="5 5 5 0"/>
+            <TextBox Name="PasswordTextBox" Margin="5"/>
+            <Button Height="30" Margin="5" Content="Войти" Name="LogInButton" Click="LogInButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>
