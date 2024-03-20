@@ -69,7 +69,7 @@ Create table "ClassesTiming_body"
  primary key ("TimeSlot_ID")
 );
 
-Create table "DailySchedule_header" -- Пересмотреть первичные ключи
+Create table "DailySchedule_header"
 (
 	"DayOfTheWeek_ID" Integer references "DayOfTheWeek" ("DayOfTheWeek_ID") NOT NULL,
 	"DailySchedule_header_ID" uuid default gen_random_uuid() NOT NULL,
@@ -111,4 +111,30 @@ FROM "DailySchedule_body"
     LEFT JOIN "Subject" ON "DailySchedule_body"."Subject_ID" = "Subject"."Subject_ID"
     LEFT JOIN "Cabinet" ON "DailySchedule_body"."Cabinet_ID" = "Cabinet"."Cabinet_ID"
     LEFT JOIN "Employee" ON "DailySchedule_body"."Employee_ID" = "Employee"."Employee_ID";
+
+
+			/* УНИВЕРСАЛЬНЫЙ СЕЛЕКТ */
+SELECT
+    "DayOfTheWeek"."Name" AS "At day",
+    "StudentGroup"."Code" AS "Student group",
+    "ClassesTiming_header"."Name" AS "Classes timings",
+    "DailySchedule_header"."OfDate" AS "Of date",
+    "ClassesTiming_body"."StartTime" AS "Start time",
+    "ClassesTiming_body"."EndTime" AS "End time",
+    "Subject"."Name" AS "Subject",
+    "Cabinet"."Number" AS "At cabinet",
+    "Employee"."Name" AS "Tutor"
+FROM "DailySchedule_body"
+    LEFT JOIN "DailySchedule_header" ON "DailySchedule_body"."DailySchedule_header_ID" = "DailySchedule_header"."DailySchedule_header_ID"
+    LEFT JOIN "DayOfTheWeek" ON "DailySchedule_header"."DayOfTheWeek_ID" = "DayOfTheWeek"."DayOfTheWeek_ID"
+    LEFT JOIN "StudentGroup" ON "DailySchedule_header"."StudentGroup_ID" = "StudentGroup"."StudentGroup_ID"
+    LEFT JOIN "ClassesTiming_header" ON "DailySchedule_header"."ClassesTiming_header_ID" = "ClassesTiming_header"."ClassesTiming_header_ID"
+    LEFT JOIN "ClassesTiming_body" ON "DailySchedule_body"."TimeSlot_ID" = "ClassesTiming_body"."TimeSlot_ID"
+    LEFT JOIN "Subject" ON "DailySchedule_body"."Subject_ID" = "Subject"."Subject_ID"
+    LEFT JOIN "Cabinet" ON "DailySchedule_body"."Cabinet_ID" = "Cabinet"."Cabinet_ID"
+    LEFT JOIN "Employee" ON "DailySchedule_body"."Employee_ID" = "Employee"."Employee_ID"
+WHERE
+	"DailySchedule_header"."OfDate" BETWEEN '01.01.2020' AND '02.01.2020'
+	AND
+	"StudentGroup"."Code" = 'В4212';
 	
