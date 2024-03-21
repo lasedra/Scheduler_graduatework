@@ -13,5 +13,5 @@ public partial class Subject
 
     public virtual ICollection<DailyScheduleBody> DailyScheduleBodies { get; set; } = new List<DailyScheduleBody>();
 
-    public virtual ICollection<TutionLog> TutionLogs { get; set; } = new List<TutionLog>();
+    public virtual ICollection<Tution> Tutions { get; set; } = new List<Tution>();
 }

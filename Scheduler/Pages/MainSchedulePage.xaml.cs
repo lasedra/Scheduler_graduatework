@@ -3,7 +3,6 @@ using Scheduler.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Scheduler.Pages
@@ -13,29 +12,31 @@ namespace Scheduler.Pages
         public MainSchedulePage()
         {
             InitializeComponent();
-            /* TODO: Перенести с чернового варианта разные connectionSrtings */
-            /* TODO: Подправить БД */
+            /* TODO: Подумать над TimeSpan */
+            /* TODO: Сделать .gitignore */
+            /* TODO: Функционал для учителя */
+            /* TODO: Сделать миграции */
             /* TODO: Дизайн норм сделать */
             /* TODO: ScheduleController */
             /* TODO: Использовать регулярки в регистрации и т.п.*/
             /* TODO: Функционал:
                         1) Оповещения МУП-а о внесении изменений в расписание
                         2) Логгирование*/
-            
+
             MondayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212");
             MondayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212").First().AtDay;
 
-            TuesdayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 02), new DateOnly(2020, 01, 02), "В4212");
-            TuesdayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 02), new DateOnly(2020, 01, 02), "В4212").First().AtDay;
+            //TuesdayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 02), new DateOnly(2020, 01, 02), "В4212");
+            //TuesdayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 02), new DateOnly(2020, 01, 02), "В4212").First().AtDay;
 
-            WednesdayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 03), new DateOnly(2020, 01, 03), "В4212");
-            WednesdayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 03), new DateOnly(2020, 01, 03), "В4212").First().AtDay;
+            //WednesdayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 03), new DateOnly(2020, 01, 03), "В4212");
+            //WednesdayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 03), new DateOnly(2020, 01, 03), "В4212").First().AtDay;
 
-            ThursdayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212");
-            ThursdayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212").First().AtDay;
+            //ThursdayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212");
+            //ThursdayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212").First().AtDay;
 
-            FridayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212");
-            FridayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212").First().AtDay;
+            //FridayGrid.ItemsSource = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212");
+            //FridayGridHeader.Header = GetWeekTabsQuery(new DateOnly(2020, 01, 01), new DateOnly(2020, 01, 01), "В4212").First().AtDay;
         }
 
         public class DayTab
@@ -95,7 +96,7 @@ namespace Scheduler.Pages
             return queryResult.ToList();
         }
 
-        
+
         private void AddRowIntoSchedule()
         {
             SchedulerDbContext.dbContext.DailyScheduleBodies.Add(new DailyScheduleBody()
@@ -109,7 +110,6 @@ namespace Scheduler.Pages
                 Employee = null
             });
             SchedulerDbContext.dbContext.SaveChanges();
-            MondayGrid.ItemsSource = SchedulerDbContext.dbContext.ScheduleViews.ToList();
         } // Справочный метод
     }
 }

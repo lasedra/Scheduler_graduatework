@@ -11,11 +11,13 @@ public partial class DailyScheduleBody
 
     public Guid TimeSlotId { get; set; }
 
+    public Guid? TutionRowId { get; set; }
+
     public Guid? SubjectId { get; set; }
 
-    public Guid? CabinetId { get; set; }
-
     public Guid? EmployeeId { get; set; }
+
+    public Guid? CabinetId { get; set; }
 
     public virtual Cabinet? Cabinet { get; set; }
 
@@ -26,4 +28,6 @@ public partial class DailyScheduleBody
     public virtual Subject? Subject { get; set; }
 
     public virtual ClassesTimingBody TimeSlot { get; set; } = null!;
+
+    public virtual Tution? TutionRow { get; set; }
 }

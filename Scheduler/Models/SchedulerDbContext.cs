@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Scheduler.Windows;
 
 namespace Scheduler.Models;
 
 public partial class SchedulerDbContext : DbContext
 {
-    public static SchedulerDbContext dbContext = new SchedulerDbContext();
+    public static IConfiguration AppConfig = null!;
+    public static SchedulerDbContext dbContext = null!;
 
-    public SchedulerDbContext()
+    public SchedulerDbContext(IConfiguration configuration)
     {
-    }
-
-    public SchedulerDbContext(DbContextOptions<SchedulerDbContext> options)
-        : base(options)
-    {
+        AppConfig = configuration;
     }
 
     public virtual DbSet<Cabinet> Cabinets { get; set; }
@@ -31,17 +28,20 @@ public partial class SchedulerDbContext : DbContext
 
     public virtual DbSet<Employee> Employees { get; set; }
 
-    public virtual DbSet<ScheduleView> ScheduleViews { get; set; }
+    public virtual DbSet<EventLog> EventLogs { get; set; }
 
     public virtual DbSet<StudentGroup> StudentGroups { get; set; }
 
     public virtual DbSet<Subject> Subjects { get; set; }
 
-    public virtual DbSet<TutionLog> TutionLogs { get; set; }
+    public virtual DbSet<Tution> Tutions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Server=localhost;Database=SchedulerDB;UserName=postgres;Password=password");
+    {
+        ConnectionPickWindow connectionPickWindow = new ConnectionPickWindow();
+        connectionPickWindow.ShowDialog();
+        optionsBuilder.UseNpgsql(connectionPickWindow.ReturnString);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -104,6 +104,7 @@ public partial class SchedulerDbContext : DbContext
             entity.Property(e => e.EmployeeId).HasColumnName("Employee_ID");
             entity.Property(e => e.SubjectId).HasColumnName("Subject_ID");
             entity.Property(e => e.TimeSlotId).HasColumnName("TimeSlot_ID");
+            entity.Property(e => e.TutionRowId).HasColumnName("TutionRow_ID");
 
             entity.HasOne(d => d.Cabinet).WithMany(p => p.DailyScheduleBodies)
                 .HasForeignKey(d => d.CabinetId)
@@ -126,6 +127,10 @@ public partial class SchedulerDbContext : DbContext
                 .HasForeignKey(d => d.TimeSlotId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DailySchedule_body_TimeSlot_ID_fkey");
+
+            entity.HasOne(d => d.TutionRow).WithMany(p => p.DailyScheduleBodies)
+                .HasForeignKey(d => d.TutionRowId)
+                .HasConstraintName("DailySchedule_body_TutionRow_ID_fkey");
         });
 
         modelBuilder.Entity<DailyScheduleHeader>(entity =>
@@ -194,27 +199,16 @@ public partial class SchedulerDbContext : DbContext
                 .HasColumnName("Telegram_ID");
         });
 
-        modelBuilder.Entity<ScheduleView>(entity =>
+        modelBuilder.Entity<EventLog>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToView("ScheduleView");
+            entity.HasKey(e => e.EventId).HasName("EVENT_LOG_pkey");
 
-            entity.Property(e => e.AtCabinet).HasColumnName("At cabinet");
-            entity.Property(e => e.AtDay)
-                .HasColumnType("character varying")
-                .HasColumnName("At day");
-            entity.Property(e => e.ClassesTimings)
-                .HasColumnType("character varying")
-                .HasColumnName("Classes timings");
-            entity.Property(e => e.EndTime).HasColumnName("End time");
-            entity.Property(e => e.OfDate).HasColumnName("Of date");
-            entity.Property(e => e.StartTime).HasColumnName("Start time");
-            entity.Property(e => e.StudentGroup)
-                .HasColumnType("character varying")
-                .HasColumnName("Student group");
-            entity.Property(e => e.Subject).HasColumnType("character varying");
-            entity.Property(e => e.Tutor).HasColumnType("character varying");
+            entity.ToTable("EVENT_LOG");
+
+            entity.Property(e => e.EventId).HasColumnName("Event_ID");
+            entity.Property(e => e.Level).HasColumnType("character varying");
+            entity.Property(e => e.Message).HasColumnType("character varying");
+            entity.Property(e => e.Time).HasColumnType("timestamp without time zone");
         });
 
         modelBuilder.Entity<StudentGroup>(entity =>
@@ -245,27 +239,27 @@ public partial class SchedulerDbContext : DbContext
             entity.Property(e => e.Name).HasColumnType("character varying");
         });
 
-        modelBuilder.Entity<TutionLog>(entity =>
+        modelBuilder.Entity<Tution>(entity =>
         {
-            entity.HasKey(e => e.StatementId).HasName("TutionLog_pkey");
+            entity.HasKey(e => e.TutionRowId).HasName("Tution_pkey");
 
-            entity.ToTable("TutionLog");
+            entity.ToTable("Tution");
 
-            entity.Property(e => e.StatementId)
-                .ValueGeneratedNever()
-                .HasColumnName("Statement_ID");
+            entity.Property(e => e.TutionRowId)
+                .HasDefaultValueSql("gen_random_uuid()")
+                .HasColumnName("TutionRow_ID");
             entity.Property(e => e.EmployeeId).HasColumnName("Employee_ID");
             entity.Property(e => e.SubjectId).HasColumnName("Subject_ID");
 
-            entity.HasOne(d => d.Employee).WithMany(p => p.TutionLogs)
+            entity.HasOne(d => d.Employee).WithMany(p => p.Tutions)
                 .HasForeignKey(d => d.EmployeeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("TutionLog_Employee_ID_fkey");
+                .HasConstraintName("Tution_Employee_ID_fkey");
 
-            entity.HasOne(d => d.Subject).WithMany(p => p.TutionLogs)
+            entity.HasOne(d => d.Subject).WithMany(p => p.Tutions)
                 .HasForeignKey(d => d.SubjectId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("TutionLog_Subject_ID_fkey");
+                .HasConstraintName("Tution_Subject_ID_fkey");
         });
 
         OnModelCreatingPartial(modelBuilder);
