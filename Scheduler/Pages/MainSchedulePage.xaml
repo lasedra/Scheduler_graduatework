@@ -17,9 +17,13 @@
         <DockPanel Grid.Row="0" Background="Gray">
             <StackPanel Orientation="Horizontal" Margin="15 10 10 10" HorizontalAlignment="Left" Background="DarkGray">
                 <TextBlock Text="РАСПИСАНИЕ ДЛЯ ГРУППЫ:" VerticalAlignment="Center"/>
-                <ComboBox Height="25" Width="100" Margin="5 0 0 0">
-                    <ComboBoxItem Content="Группа 1"/>
-                    <ComboBoxItem Content="Группа 2"/>
+                <ComboBox Name="StudentGroupComboBox" SelectedIndex="0"
+                          Height="25" Width="100" Margin="5 0 0 0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Code}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="DarkGray">

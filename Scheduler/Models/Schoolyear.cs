@@ -3,11 +3,15 @@ using System.Collections.Generic;
 
 namespace Scheduler.Models;
 
-public partial class DayOfTheWeek
+public partial class Schoolyear
 {
-    public int DayOfTheWeekId { get; set; }
+    public Guid SchoolyearId { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string? Years { get; set; }
+
+    public DateOnly StartDate { get; set; }
+
+    public DateOnly EndDate { get; set; }
 
     public virtual ICollection<DailyScheduleHeader> DailyScheduleHeaders { get; set; } = new List<DailyScheduleHeader>();
 }

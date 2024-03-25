@@ -1,5 +1,4 @@
 -- Active: 1697616242142@@127.0.0.1@5432@SchedulerDB
-Create DATABASE "SchedulerDB";
 
 Create table "EVENT_LOG"
 (
@@ -8,6 +7,15 @@ Create table "EVENT_LOG"
 	"Level" Varchar NOT NULL,
 	"Message" Varchar NOT NULL,
  primary key ("Event_ID")
+);
+
+Create table "Schoolyear"
+(
+	"Schoolyear_ID" uuid default gen_random_uuid() NOT NULL,
+	"Years" Varchar UNIQUE,
+	"StartDate" Date NOT NULL,
+	"EndDate" Date NOT NULL,
+primary key ("Schoolyear_ID")
 );
 
 Create table "Employee"
@@ -40,13 +48,6 @@ Create table "Tution"
 	"StartDate" Date NOT NULL,
 	"EndDate" Date,
  primary key ("TutionRow_ID")
-);
-
-Create table "DayOfTheWeek"
-(
-	"DayOfTheWeek_ID" Integer NOT NULL,
-	"Name" Varchar NOT NULL,
- primary key ("DayOfTheWeek_ID")
 );
 
 Create table "Cabinet"
@@ -82,11 +83,11 @@ Create table "ClassesTiming_body"
 
 Create table "DailySchedule_header"
 (
-	"DayOfTheWeek_ID" Integer references "DayOfTheWeek" ("DayOfTheWeek_ID") NOT NULL,
 	"DailySchedule_header_ID" uuid default gen_random_uuid() NOT NULL,
-	"StudentGroup_ID" uuid references "StudentGroup" ("StudentGroup_ID") NOT NULL,
+	"StudentGroup_ID" uuid references "StudentGroup" ("StudentGroup_ID"),
 	"ClassesTiming_header_ID" uuid references "ClassesTiming_header" ("ClassesTiming_header_ID") NOT NULL,
 	"OfDate" Date NOT NULL,
+	"Schoolyear_ID" uuid references "Schoolyear" ("Schoolyear_ID") NOT NULL,
  primary key ("DailySchedule_header_ID")
 );
 
@@ -102,13 +103,12 @@ Create table "DailySchedule_body"
  primary key ("Lesson_ID")
 );
 
-
 			/* УНИВЕРСАЛЬНЫЙ СЕЛЕКТ */
 SELECT
-    "DayOfTheWeek"."Name" AS "At day",
+	"Schoolyear"."Years" AS "Schoolyear",
+    "DailySchedule_header"."OfDate" AS "Of date",
     "StudentGroup"."Code" AS "Student group",
     "ClassesTiming_header"."Name" AS "Classes timings",
-    "DailySchedule_header"."OfDate" AS "Of date",
     "ClassesTiming_body"."StartTime" AS "Start time",
     "ClassesTiming_body"."EndTime" AS "End time",
     "Subject"."Name" AS "Subject",
@@ -116,7 +116,7 @@ SELECT
     "Employee"."Name" AS "Tutor"
 FROM "DailySchedule_body"
     LEFT JOIN "DailySchedule_header" ON "DailySchedule_body"."DailySchedule_header_ID" = "DailySchedule_header"."DailySchedule_header_ID"
-    LEFT JOIN "DayOfTheWeek" ON "DailySchedule_header"."DayOfTheWeek_ID" = "DayOfTheWeek"."DayOfTheWeek_ID"
+	LEFT JOIN "Schoolyear" ON "DailySchedule_header"."Schoolyear_ID" = "Schoolyear"."Schoolyear_ID"
     LEFT JOIN "StudentGroup" ON "DailySchedule_header"."StudentGroup_ID" = "StudentGroup"."StudentGroup_ID"
     LEFT JOIN "ClassesTiming_header" ON "DailySchedule_header"."ClassesTiming_header_ID" = "ClassesTiming_header"."ClassesTiming_header_ID"
     LEFT JOIN "ClassesTiming_body" ON "DailySchedule_body"."TimeSlot_ID" = "ClassesTiming_body"."TimeSlot_ID"
@@ -127,4 +127,3 @@ WHERE
 	"DailySchedule_header"."OfDate" BETWEEN '01.01.2020' AND '02.01.2020'
 	AND
 	"StudentGroup"."Code" = 'В4212';
-	

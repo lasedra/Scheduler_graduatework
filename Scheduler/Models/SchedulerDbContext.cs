@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Scheduler.Windows;
 
@@ -14,6 +16,7 @@ public partial class SchedulerDbContext : DbContext
         AppConfig = configuration;
     }
 
+
     public virtual DbSet<Cabinet> Cabinets { get; set; }
 
     public virtual DbSet<ClassesTimingBody> ClassesTimingBodies { get; set; }
@@ -24,23 +27,24 @@ public partial class SchedulerDbContext : DbContext
 
     public virtual DbSet<DailyScheduleHeader> DailyScheduleHeaders { get; set; }
 
-    public virtual DbSet<DayOfTheWeek> DayOfTheWeeks { get; set; }
-
     public virtual DbSet<Employee> Employees { get; set; }
 
     public virtual DbSet<EventLog> EventLogs { get; set; }
+
+    public virtual DbSet<Schoolyear> Schoolyears { get; set; }
 
     public virtual DbSet<StudentGroup> StudentGroups { get; set; }
 
     public virtual DbSet<Subject> Subjects { get; set; }
 
     public virtual DbSet<Tution> Tutions { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
     {
-        ConnectionPickWindow connectionPickWindow = new ConnectionPickWindow();
-        connectionPickWindow.ShowDialog();
-        optionsBuilder.UseNpgsql(connectionPickWindow.ReturnString);
+#warning Pick connection here
+        //ConnectionPickWindow connectionPickWindow = new ConnectionPickWindow();
+        //connectionPickWindow.ShowDialog();
+        //optionsBuilder.UseNpgsql(connectionPickWindow.ReturnString);
+        optionsBuilder.UseNpgsql(AppConfig.GetConnectionString("localhost"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -143,7 +147,7 @@ public partial class SchedulerDbContext : DbContext
                 .HasDefaultValueSql("gen_random_uuid()")
                 .HasColumnName("DailySchedule_header_ID");
             entity.Property(e => e.ClassesTimingHeaderId).HasColumnName("ClassesTiming_header_ID");
-            entity.Property(e => e.DayOfTheWeekId).HasColumnName("DayOfTheWeek_ID");
+            entity.Property(e => e.SchoolyearId).HasColumnName("Schoolyear_ID");
             entity.Property(e => e.StudentGroupId).HasColumnName("StudentGroup_ID");
 
             entity.HasOne(d => d.ClassesTimingHeader).WithMany(p => p.DailyScheduleHeaders)
@@ -151,27 +155,14 @@ public partial class SchedulerDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DailySchedule_header_ClassesTiming_header_ID_fkey");
 
-            entity.HasOne(d => d.DayOfTheWeek).WithMany(p => p.DailyScheduleHeaders)
-                .HasForeignKey(d => d.DayOfTheWeekId)
+            entity.HasOne(d => d.Schoolyear).WithMany(p => p.DailyScheduleHeaders)
+                .HasForeignKey(d => d.SchoolyearId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DailySchedule_header_DayOfTheWeek_ID_fkey");
+                .HasConstraintName("DailySchedule_header_Schoolyear_ID_fkey");
 
             entity.HasOne(d => d.StudentGroup).WithMany(p => p.DailyScheduleHeaders)
                 .HasForeignKey(d => d.StudentGroupId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DailySchedule_header_StudentGroup_ID_fkey");
-        });
-
-        modelBuilder.Entity<DayOfTheWeek>(entity =>
-        {
-            entity.HasKey(e => e.DayOfTheWeekId).HasName("DayOfTheWeek_pkey");
-
-            entity.ToTable("DayOfTheWeek");
-
-            entity.Property(e => e.DayOfTheWeekId)
-                .ValueGeneratedNever()
-                .HasColumnName("DayOfTheWeek_ID");
-            entity.Property(e => e.Name).HasColumnType("character varying");
         });
 
         modelBuilder.Entity<Employee>(entity =>
@@ -209,6 +200,20 @@ public partial class SchedulerDbContext : DbContext
             entity.Property(e => e.Level).HasColumnType("character varying");
             entity.Property(e => e.Message).HasColumnType("character varying");
             entity.Property(e => e.Time).HasColumnType("timestamp without time zone");
+        });
+
+        modelBuilder.Entity<Schoolyear>(entity =>
+        {
+            entity.HasKey(e => e.SchoolyearId).HasName("Schoolyear_pkey");
+
+            entity.ToTable("Schoolyear");
+
+            entity.HasIndex(e => e.Years, "Schoolyear_Years_key").IsUnique();
+
+            entity.Property(e => e.SchoolyearId)
+                .HasDefaultValueSql("gen_random_uuid()")
+                .HasColumnName("Schoolyear_ID");
+            entity.Property(e => e.Years).HasColumnType("character varying");
         });
 
         modelBuilder.Entity<StudentGroup>(entity =>

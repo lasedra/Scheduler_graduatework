@@ -1,4 +1,7 @@
 -- Active: 1697616242142@@127.0.0.1@5432@SchedulerDB
+insert into "Schoolyear" values
+(default, '2022-2023', '2022-09-01', '2023-07-10');
+
 insert into "Employee" values
 (default, true, 'Иванов Иван Иванович', false, 'ivanov_i-i', 'vanya123', '@ivanov_ivan', '+7 910 536-73-85', 'ivanovivan@mail.ru'),
 (default, true, 'Петрова Ирина Сергеевна', true, 'petrova_irina', '579irishka', '@irina505', '+7 980 517-72-54', null),
@@ -51,195 +54,95 @@ insert into "Tution" values
 (select "Employee_ID" from "Employee" where "Login" = 'e-chernishev'),
 '2019-02-01', '2019-07-05');
 
-insert into "DayOfTheWeek" values 
-(1, 'Понедельник'),
-(2, 'Вторник'),
-(3, 'Среда'),
-(4, 'Четверг'),
-(5, 'Пятница'),
-(6, 'Суббота'),
-(7, 'Воскресенье');
-
 insert into "Cabinet" values
 (default, 701, null),
 (default, 702, 'Purple'),
 (default, 703, 'Blue'),
 (default, 705, 'Orange');
 
-insert into "StudentGroup" values 
+insert into "StudentGroup" values
+(default, 'Не указана'), -- БАЗОВАЯ
 (default, 'В4212'),
 (default, 'C2311'),
 (default, '1312');
 
 insert into "ClassesTiming_header" values 
-(default, 'Основное'),
-(default, 'Сокращённое');
+(default, 'Основное'), -- БАЗОВАЯ
+(default, 'Сокращённое'); -- БАЗОВАЯ
 insert into "ClassesTiming_body" values 
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'), 
-default, '9:00', '10:30'),
+default, '9:00', '10:30'), -- БАЗОВАЯ
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'), 
-default, '10:40', '12:10'),
+default, '10:40', '12:10'), -- БАЗОВАЯ
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'), 
-default, '13:00', '14:30'),
+default, '13:00', '14:30'), -- БАЗОВАЯ
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'), 
-default, '14:40', '16:10'),
+default, '14:40', '16:10'), -- БАЗОВАЯ
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Сокращённое'), 
-default, '9:00', '10:00'),
+default, '9:00', '10:00'), -- БАЗОВАЯ
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Сокращённое'), 
-default, '10:10', '11:10'),
+default, '10:10', '11:10'), -- БАЗОВАЯ
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Сокращённое'), 
-default, '11:20', '12:20'),
+default, '11:20', '12:20'), -- БАЗОВАЯ
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Сокращённое'), 
-default, '12:30', '13:30');
+default, '12:30', '13:30'); -- БАЗОВАЯ
 
 
-/*------------------------------------------------Расписание на 2020-01-01 на два урока математики для группы B4212----------------------------------------------------*/
+/*------------------------------------------------Расписание на 2022-09-01 (пустое-базовое)------------------------------------------------------------*/
 insert into "DailySchedule_header" values -- Шапка
-(1, default,
-(select "StudentGroup_ID" from "StudentGroup" where "Code" = 'В4212'), 
+(default,
+null, 
 (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-'2020-01-01'),
-(2, default,
-(select "StudentGroup_ID" from "StudentGroup" where "Code" = 'В4212'), 
-(select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-'2020-01-02'),
-(3, default,
-(select "StudentGroup_ID" from "StudentGroup" where "Code" = 'В4212'), 
-(select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Сокращённое'),
-'2020-01-03');
+'2022-07-09',
+(select "Schoolyear_ID" from "Schoolyear" where "Years" = '2022-2023'));
 
-insert into "DailySchedule_body" values -- Табличная часть 2020-01-01
+
+insert into "DailySchedule_body" values -- Табличная часть
                         /* Первый урок */
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-01'),
+((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2022-07-09'),
     default, 
     (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-01') and 
+        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2022-07-09') and 
         "StartTime" = '9:00' and 
         "EndTime" = '10:30'),
-    (select "TutionRow_ID" from "Tution" where 
-        "Subject_ID" = (select "Subject_ID" from "Subject" where "Name" = 'Математика') and
-        "Employee_ID" = (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i')),
-    (select "Subject_ID" from "Subject" where "Name" = 'Математика'),
-    (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 703)
+ 	null,
+ 	null,
+ 	null,
+ 	null
 ),
                         /* Второй урок */
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-01'), 
+((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2022-07-09'),
     default, 
     (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-01') and 
+        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2022-07-09') and 
         "StartTime" = '10:40' and 
         "EndTime" = '12:10'),
-    (select "TutionRow_ID" from "Tution" where 
-        "Subject_ID" = (select "Subject_ID" from "Subject" where "Name" = 'Математика') and
-        "Employee_ID" = (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i')),
-    (select "Subject_ID" from "Subject" where "Name" = 'Математика'),
-    (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 703)
+    null,
+ 	null,
+ 	null,
+ 	null
 ),
                         /* Третий урок */ 
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-01'), 
+((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2022-07-09'), 
     default, 
     (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-01') and 
+        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2022-07-09') and 
         "StartTime" = '13:00' and 
         "EndTime" = '14:30'),
-    (select "TutionRow_ID" from "Tution" where 
-        "Subject_ID" = (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык') and
-        "Employee_ID" = (select "Employee_ID" from "Employee" where "Login" = 'petrova_irina')),
-    (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык'),
-    (select "Employee_ID" from "Employee" where "Login" = 'petrova_irina'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 702)
-);
-
-insert into "DailySchedule_body" values -- Табличная часть 2020-01-02
-                        /* Первый урок */
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-02'),
-    default, 
-    (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-02') and 
-        "StartTime" = '9:00' and 
-        "EndTime" = '10:30'),
-    (select "Subject_ID" from "Subject" where "Name" = 'Математика'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 703),
-    (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i')
-),
-                        /* Второй урок */
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-02'), 
-    default, 
-    (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-02') and 
-        "StartTime" = '10:40' and 
-        "EndTime" = '12:10'),
-    (select "Subject_ID" from "Subject" where "Name" = 'Английский Язык'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 705),
-    (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i')
-),
-                        /* Третий урок */ 
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-02'), 
-    default, 
-    (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-02') and 
-        "StartTime" = '13:00' and 
-        "EndTime" = '14:30'),
-    (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 702),
-    (select "Employee_ID" from "Employee" where "Login" = 'petrova_irina')
+ 	null,
+ 	null,
+ 	null,
+ 	null
 ),
                         /* Четвёртый урок */ 
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-02'), 
+((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2022-07-09'), 
     default, 
     (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-02') and 
+        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2022-07-09') and 
         "StartTime" = '14:40' and 
         "EndTime" = '16:10'),
-    (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 702),
-    (select "Employee_ID" from "Employee" where "Login" = 'petrova_irina')
-);
-
-insert into "DailySchedule_body" values -- Табличная часть 2020-01-03
-                        /* Первый урок */
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-03'),
-    default, 
-    (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-03') and 
-        "StartTime" = '9:00' and 
-        "EndTime" = '10:00'),
-    (select "Subject_ID" from "Subject" where "Name" = 'Математика'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 703),
-    (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i')
-),
-                        /* Второй урок */
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-03'), 
-    default, 
-    (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-03') and 
-        "StartTime" = '10:10' and 
-        "EndTime" = '11:10'),
-    (select "Subject_ID" from "Subject" where "Name" = 'Английский Язык'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 705),
-    (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i')
-),
-                        /* Третий урок */ 
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-03'), 
-    default, 
-    (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-03') and 
-        "StartTime" = '11:20' and 
-        "EndTime" = '12:20'),
-    (select "Subject_ID" from "Subject" where "Name" = 'Английский Язык'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 705),
-    (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i')
-),
-                        /* Четвёртый урок */ 
-((select "DailySchedule_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-03'), 
-    default, 
-    (select "TimeSlot_ID" from "ClassesTiming_body" where 
-        "ClassesTiming_header_ID" = (select "ClassesTiming_header_ID" from "DailySchedule_header" where "OfDate" = '2020-01-03') and 
-        "StartTime" = '12:30' and 
-        "EndTime" = '13:30'),
-    (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык'),
-    (select "Cabinet_ID" from "Cabinet" where "Number" = 702),
-    (select "Employee_ID" from "Employee" where "Login" = 'petrova_irina')
+ 	null,
+ 	null,
+ 	null,
+ 	null
 );
