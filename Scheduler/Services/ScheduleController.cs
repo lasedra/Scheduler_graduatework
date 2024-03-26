@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace Scheduler.Services
 {
@@ -10,25 +11,25 @@ namespace Scheduler.Services
         public TimePeriod CurrentWeek { get; set; }
         public string CurrentGroupCode { get; set; }
 
-        public DayTab MondayTab { get; set; }
-        public DayTab TuesdayTab { get; set; }
-        public DayTab WednesdayTab { get; set; }
-        public DayTab ThursdayTab { get; set; }
-        public DayTab FridayTab { get; set; }
-        public DayTab? SaturdayTab { get; set; }
+        public List<DayTab> MondayTab { get; set; }
+        public List<DayTab> TuesdayTab { get; set; }
+        public List<DayTab> WednesdayTab { get; set; }
+        public List<DayTab> ThursdayTab { get; set; }
+        public List<DayTab> FridayTab { get; set; }
+        public List<DayTab>? SaturdayTab { get; set; }
 
         public ScheduleController()
         {
             CurrentWeek = new TimePeriod();
             CreatePivotScheduleIfHasNoAny();
-            //MondayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, null).First(c => c.OfDate.DayOfWeek == DayOfWeek.Monday);
-            //TuesdayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, null).First(c => c.OfDate.DayOfWeek == DayOfWeek.Tuesday);
-            //WednesdayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, null).First(c => c.OfDate.DayOfWeek == DayOfWeek.Wednesday);
-            //ThursdayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, null).First(c => c.OfDate.DayOfWeek == DayOfWeek.Thursday);
-            //FridayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, null).First(c => c.OfDate.DayOfWeek == DayOfWeek.Friday);
+            MondayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, DayOfWeek.Monday, null);
+            TuesdayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, DayOfWeek.Tuesday, null);
+            WednesdayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, DayOfWeek.Wednesday, null);
+            ThursdayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, DayOfWeek.Thursday, null);
+            FridayTab = GetDaytabs(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, DayOfWeek.Friday, null);
         }
 
-        public List<DayTab> GetDaytabs(DateOnly fromDate, DateOnly toDate, string? studentGroupCode)
+        public List<DayTab> GetDaytabs(DateOnly fromDate, DateOnly toDate, DayOfWeek dayOfWeek, string? studentGroupCode)
         {
             var queryResult = from dailyScheduleBody in SchedulerDbContext.dbContext.DailyScheduleBodies
                               join dailyScheduleHeader in SchedulerDbContext.dbContext.DailyScheduleHeaders
@@ -57,20 +58,24 @@ namespace Scheduler.Services
                               from employee in empGroup.DefaultIfEmpty()
                               where dailyScheduleHeader.OfDate >= fromDate &&
                                     dailyScheduleHeader.OfDate <= toDate &&
-                                    studentGroup.Code == studentGroupCode
+                                    studentGroup.Code == studentGroupCode &&
+                                    dailyScheduleHeader.OfDate.DayOfWeek == dayOfWeek
                               select new DayTab
                               {
                                   Year = schoolyear.Years,
+                                  DayOfWeek = dailyScheduleHeader.OfDate.DayOfWeek,
                                   StudentGroup = studentGroup.Code,
                                   ClassesTimings = classesTimingHeader.Name,
                                   OfDate = dailyScheduleHeader.OfDate,
                                   TimeSlot = $"{classesTimingBody.StartTime} - {classesTimingBody.EndTime}",
+                                  StartTime = classesTimingBody.StartTime,
+                                  EndTime = classesTimingBody.EndTime,
                                   Subject = subject.Name,
                                   AtCabinet = cabinet.Number,
                                   Tutor = employee.Name
                               };
 
-            return queryResult.ToList();
+            return queryResult.OrderBy(c => c.StartTime).ToList();
         }
 
         public void CreatePivotScheduleIfHasNoAny()
@@ -138,6 +143,8 @@ namespace Scheduler.Services
                     }
                     SchedulerDbContext.dbContext.SaveChanges();
                 }
+
+                MessageBox.Show("Вы стали первым пользователем, создавшим расписание!\nВозмите с полки пирожок!", "Поздравляю!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -196,10 +203,13 @@ namespace Scheduler.Services
         public class DayTab
         {
             public string Year { get; set; }
+            public DayOfWeek DayOfWeek { get; set; }
             public string StudentGroup { get; set; }
             public string ClassesTimings { get; set; }
             public DateOnly OfDate { get; set; }
             public string TimeSlot { get; set; }
+            public TimeOnly StartTime { get; set; }
+            public TimeOnly EndTime { get; set; }
             public string? Subject { get; set; }
             public int? AtCabinet { get; set; }
             public string? Tutor { get; set; }

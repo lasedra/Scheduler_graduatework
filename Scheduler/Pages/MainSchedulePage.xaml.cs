@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Scheduler.Services;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace Scheduler.Pages
@@ -25,6 +26,11 @@ namespace Scheduler.Pages
         {
             InitializeComponent();
             ScheduleController schController = new ScheduleController();
+            MondayGrid.ItemsSource = schController.MondayTab;
+            TuesdayGrid.ItemsSource= schController.TuesdayTab;
+            WednesdayGrid.ItemsSource = schController.WednesdayTab;
+            ThursdayGrid.ItemsSource = schController.ThursdayTab;
+            FridayGrid.ItemsSource = schController.FridayTab;
         }
     }
 }

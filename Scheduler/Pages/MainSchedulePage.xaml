@@ -44,15 +44,16 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            
+
             <StackPanel Margin="5" Grid.Row="0" Grid.Column="0">
                 <DataGrid Name="MondayGrid" 
                           AutoGenerateColumns="False" 
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
+                          CanUserSortColumns="False"
                           HeadersVisibility="Column">
                     <DataGrid.Columns>
-                        <DataGridTextColumn d:Header="День недели"
+                        <DataGridTextColumn Header="Понедельник"
                             x:Name="MondayGridHeader"
                             Binding="{Binding TimeSlot}">
                             <DataGridTextColumn.HeaderStyle>
@@ -80,9 +81,10 @@
                           AutoGenerateColumns="False" 
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
+                          CanUserSortColumns="False"
                           HeadersVisibility="Column">
                     <DataGrid.Columns>
-                        <DataGridTextColumn d:Header="День недели"
+                        <DataGridTextColumn Header="Вторник"
                             x:Name="TuesdayGridHeader"
                             Binding="{Binding TimeSlot}">
                             <DataGridTextColumn.HeaderStyle>
@@ -110,9 +112,10 @@
                           AutoGenerateColumns="False" 
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
+                          CanUserSortColumns="False"
                           HeadersVisibility="Column">
                     <DataGrid.Columns>
-                        <DataGridTextColumn d:Header="День недели"
+                        <DataGridTextColumn Header="Среда"
                             x:Name="WednesdayGridHeader"
                             Binding="{Binding TimeSlot}">
                             <DataGridTextColumn.HeaderStyle>
@@ -140,9 +143,10 @@
                           AutoGenerateColumns="False" 
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
+                          CanUserSortColumns="False"
                           HeadersVisibility="Column">
                     <DataGrid.Columns>
-                        <DataGridTextColumn d:Header="День недели"
+                        <DataGridTextColumn Header="Четверг"
                             x:Name="ThursdayGridHeader"
                             Binding="{Binding TimeSlot}">
                             <DataGridTextColumn.HeaderStyle>
@@ -170,9 +174,10 @@
                           AutoGenerateColumns="False" 
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
+                          CanUserSortColumns="False"
                           HeadersVisibility="Column">
                     <DataGrid.Columns>
-                        <DataGridTextColumn d:Header="День недели"
+                        <DataGridTextColumn Header="Пятница"
                             x:Name="FridayGridHeader"
                             Binding="{Binding TimeSlot}">
                             <DataGridTextColumn.HeaderStyle>
