@@ -6,15 +6,37 @@
       xmlns:local="clr-namespace:Scheduler.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AuthorisationPage">
+      Title="AuthorisationPage"
+      Loaded="Page_Loaded">
 
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Background="Bisque">
-            <TextBlock Text="Логин:" Margin="5 5 5 0"/>
-            <TextBox Name="LoginTextBox" Margin="5"/>
-            <TextBlock Text="Пароль: " Margin="5 5 5 0"/>
-            <TextBox Name="PasswordTextBox" Margin="5"/>
-            <Button Height="30" Margin="5" Content="Войти" Name="LogInButton" Click="LogInButton_Click"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="Auto">
+            <DockPanel Margin="5 5 5 15">
+                <Image Source="/Resources/loginico.png" Margin="5" Height="50" Width="50"/>
+                <TextBlock Text="Добро пожаловать в Scheduler" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
+                               Foreground="{StaticResource Text gray}" FontSize="18" FontWeight="Bold"/>
+            </DockPanel>
+            <StackPanel Width="300">
+                <DockPanel>
+                    <TextBlock Text="Логин:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
+                    <TextBox Name="LoginTextBox" Width="220" HorizontalAlignment="Right"
+                             VerticalAlignment="Center" Margin="5"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock Text="Пароль: " VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
+                    <TextBox Name="PasswordTextBox" Width="220" HorizontalAlignment="Right"      
+                             VerticalAlignment="Center" Margin="5"/>
+                </DockPanel>
+                <Button Height="30" Margin="5 10 5 5" Content="Войти" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
+                    Name="LogInButton" Click="LogInButton_Click"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 15 10 10">
+                    <TextBlock Text="Нет аккаунта? " 
+                       Foreground="{StaticResource Text gray}" FontSize="12"/>
+                    <TextBlock x:Name="RegistrationLink" Text="Зарегистрируйтесь" MouseLeftButtonDown="RegistrationLink_MouseLeftButtonDown" VerticalAlignment="Center"
+                       Foreground="{StaticResource Mid red}"  Cursor="Hand" FontSize="12"/>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

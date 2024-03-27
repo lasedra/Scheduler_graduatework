@@ -1,4 +1,5 @@
 ﻿using Scheduler.Models;
+using Scheduler.Services;
 using System;
 using System.Linq;
 using System.Windows;
@@ -25,14 +26,26 @@ namespace Scheduler.Pages
                 if (_loggingEmployee != null)
                 {
                     CurrentUser.SetCurrentUser(_loggingEmployee);
-                    if (CurrentUser.Role == true)
-                        MessageBox.Show("Вы менеджер");
-                    else
-                        MessageBox.Show("Вы преподаватель");
+
+                    ((TextBlock)Window.GetWindow(this).FindName("UserNameTextBlock")).Text = CurrentUser.Name;
+                    ((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Visible;
+
+                    NavigationService.Navigate(new MainSchedulePage());
                 }
                 else
                     MessageBox.Show("Аккаунт не найден. \nНеверные учётные данные или пользователь не зарегистрирован.", "Ошибка доступа!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void RegistrationLink_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new RegistrationPage());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            ((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Collapsed;
         }
     }
 }

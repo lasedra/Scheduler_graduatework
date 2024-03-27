@@ -1,7 +1,8 @@
 ﻿using Scheduler.Models;
 using System;
+using System.Windows;
 
-namespace Scheduler
+namespace Scheduler.Services
 {
     public static class CurrentUser
     {

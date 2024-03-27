@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Scheduler"
+        xmlns:other="clr-namespace:Scheduler.Services"
         mc:Ignorable="d"
         Title="Scheduler"
         WindowStartupLocation="CenterScreen"
@@ -12,11 +13,11 @@
         Icon="/Resources/winico.ico">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60 "/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" Background="{StaticResource Mid gray}">
+        <DockPanel  Height="60" Name="MenuPanel" Grid.Row="0" Background="{StaticResource Mid gray}">
             <Button Height="60" Width="60" HorizontalAlignment="Left" Background="{StaticResource Mid red}" Style="{StaticResource RoundedButtonStyle}"
                     Name="HomeButton" Click="HomeButton_Click">
                 <Image Source="/Resources/homeico.png" Margin="10"/>
@@ -32,8 +33,8 @@
                         Height="35" Content="Расписания звонков" Width="165" Margin="10"/>
             </DockPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-                <Image Source="/Resources/userico.png" Name="UserImage" MouseLeftButtonDown="UserImage_MouseLeftButtonDown"/>
-                <TextBlock Text="UserName" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Text gray}" VerticalAlignment="Center" Margin="10"/>
+                <Image Source="/Resources/userico.png" Margin="5 5 0 5" Name="UserImage" MouseLeftButtonDown="UserImage_MouseLeftButtonDown"/>
+                <TextBlock Name="UserNameTextBlock" Text="{Binding Name}" FontSize="16" FontWeight="Bold" Foreground="{StaticResource Text gray}" VerticalAlignment="Center"/>
             </StackPanel>
         </DockPanel>
 

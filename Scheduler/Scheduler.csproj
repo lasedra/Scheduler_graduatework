@@ -11,18 +11,30 @@
     <None Remove="Resources\appico.ico" />
     <None Remove="Resources\appico.png" />
     <None Remove="Resources\homeico.png" />
+    <None Remove="Resources\loginico.png" />
+    <None Remove="Resources\registerico.png" />
     <None Remove="Resources\userico.png" />
     <None Remove="Resources\winico.ico" />
+    <None Remove="Resources\_.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\homeico.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\loginico.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\registerico.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\userico.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\winico.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\_.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

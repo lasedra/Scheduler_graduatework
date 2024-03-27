@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using System.Windows.Navigation;
-using Scheduler.Models;
 using Scheduler.Pages;
+using Scheduler.Services;
 
 namespace Scheduler
 {
@@ -10,7 +9,7 @@ namespace Scheduler
         public MainWindow()
         {
             InitializeComponent();
-            PagesFrame.Navigate(new MainSchedulePage());
+            PagesFrame.Navigate(new AuthorisationPage());
         }
 
         private void UserImage_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

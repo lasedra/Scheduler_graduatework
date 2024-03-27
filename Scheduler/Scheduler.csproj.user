@@ -13,11 +13,17 @@
     <Compile Update="Pages\MainSchedulePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\RegistrationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\ConnectionPickWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Windows\ConnectionPickWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
