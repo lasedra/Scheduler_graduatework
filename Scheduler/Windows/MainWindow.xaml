@@ -5,32 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Scheduler"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Scheduler"
         WindowStartupLocation="CenterScreen"
         Height="700" Width="1200"
-        MinHeight="700" MinWidth="1200">
+        MinHeight="700" MinWidth="1200"
+        Icon="/Resources/winico.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60 "/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" Background="LightGray">
-            <Button Height="60" Width="60" HorizontalAlignment="Left" Background="IndianRed" Name="HomeButton" Click="HomeButton_Click">
-                <Image Source="/Resources/homeico.png" Margin="5"/>
+        <DockPanel Grid.Row="0" Background="{StaticResource Mid gray}">
+            <Button Height="60" Width="60" HorizontalAlignment="Left" Background="{StaticResource Mid red}" Style="{StaticResource RoundedButtonStyle}"
+                    Name="HomeButton" Click="HomeButton_Click">
+                <Image Source="/Resources/homeico.png" Margin="10"/>
             </Button>
-            <DockPanel HorizontalAlignment="Center" Background="DimGray" LastChildFill="False">
-                <Button Background="IndianRed" Height="30" Content="Журнал преподавания" Width="140" Margin="10"/>
-                <Button Background="IndianRed" Height="30" Content="Кабинеты" Width="80" Margin="10"/>
-                <Button Background="IndianRed" Height="30" Content="Группы" Width="60" Margin="10"/>
-                <Button Background="IndianRed" Height="30" Content="Расписания звонков" Width="130" Margin="10"/>
+            <DockPanel HorizontalAlignment="Center" LastChildFill="False">
+                <Button Background="{StaticResource Mid red}" Foreground="White" FontWeight="SemiBold" FontSize="15" Style="{StaticResource RoundedButtonStyle}"
+                        Height="35" Content="Журнал преподавания" Width="180" Margin="10"/>
+                <Button Background="{StaticResource Mid red}" Foreground="White" FontWeight="SemiBold" FontSize="15" Style="{StaticResource RoundedButtonStyle}"
+                        Height="35" Content="Кабинеты" Width="90" Margin="10"/>
+                <Button Background="{StaticResource Mid red}" Foreground="White" FontWeight="SemiBold" FontSize="15" Style="{StaticResource RoundedButtonStyle}"
+                        Height="35" Content="Группы" Width="80" Margin="10"/>
+                <Button Background="{StaticResource Mid red}" Foreground="White" FontWeight="SemiBold" FontSize="15" Style="{StaticResource RoundedButtonStyle}"
+                        Height="35" Content="Расписания звонков" Width="165" Margin="10"/>
             </DockPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" Background="Gray">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
                 <Image Source="/Resources/userico.png" Name="UserImage" MouseLeftButtonDown="UserImage_MouseLeftButtonDown"/>
-                <TextBlock Text="UserName" VerticalAlignment="Center" Margin="5"/>
+                <TextBlock Text="UserName" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Text gray}" VerticalAlignment="Center" Margin="10"/>
             </StackPanel>
         </DockPanel>
 
-        <Frame Grid.Row="1" Background="DarkSlateGray" Name="PagesFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" Background="{StaticResource Dark gray}" Name="PagesFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

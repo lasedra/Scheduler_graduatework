@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Navigation;
-//using Scheduler.Models;
+using Scheduler.Models;
 using Scheduler.Pages;
 
 namespace Scheduler

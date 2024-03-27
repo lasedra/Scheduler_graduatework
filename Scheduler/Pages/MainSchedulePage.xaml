@@ -14,11 +14,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" Background="Gray">
-            <StackPanel Orientation="Horizontal" Margin="15 10 10 10" HorizontalAlignment="Left" Background="DarkGray">
-                <TextBlock Text="РАСПИСАНИЕ ДЛЯ ГРУППЫ:" VerticalAlignment="Center"/>
-                <ComboBox Name="StudentGroupComboBox" SelectedIndex="0"
-                          Height="25" Width="100" Margin="5 0 0 0">
+        <DockPanel Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Margin="20 0 0 0" Height="50">
+                <TextBlock Foreground="{StaticResource Text gray}" FontWeight="Bold" Text="РАСПИСАНИЕ ДЛЯ ГРУППЫ:" VerticalAlignment="Center"/>
+                <ComboBox Style="{StaticResource ComboBoxStyle}"
+                          Name="StudentGroupComboBox" SelectedIndex="0"
+                          Height="30" Width="100" Margin="5 0 0 0">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Code}"/>
@@ -26,14 +27,17 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="DarkGray">
-                <Button Content="Назад" Width="50" Height="30" Margin="5"/>
-                <TextBlock Text="01.01.2020 - 05.01.2020" VerticalAlignment="Center" Margin="5"/>
-                <Button Content="+" Width="30" Height="30" Margin="5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Назад" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
+                        Width="60" Height="30" Margin="5"/> 
+                <TextBlock Foreground="{StaticResource Text gray}" FontWeight="Bold" VerticalAlignment="Center" Margin="5"
+                           Text="01.01.2020 - 05.01.2020"/>
+                <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
+                        Width="30" Height="30" Margin="5 0 20 0"/>
             </StackPanel>
         </DockPanel>
 
-        <Grid Grid.Row="1" Margin="10" Background="Gray">
+        <Grid Grid.Row="1" Margin="10 0 10 0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -73,7 +77,7 @@
                             Binding="{Binding AtCabinet}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Изменить" Padding="5" Background="LightPink"/>
+                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="0" Grid.Column="1">
@@ -104,7 +108,7 @@
                             Binding="{Binding AtCabinet}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Изменить" Padding="5" Background="LightPink"/>
+                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="1" Grid.Column="0">
@@ -135,7 +139,7 @@
                             Binding="{Binding AtCabinet}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Изменить" Padding="5" Background="LightPink"/>
+                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="1" Grid.Column="1">
@@ -166,7 +170,7 @@
                             Binding="{Binding AtCabinet}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Изменить" Padding="5" Background="LightPink"/>
+                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
             <StackPanel Margin="5" Grid.Row="2" Grid.Column="0">
@@ -197,7 +201,7 @@
                             Binding="{Binding AtCabinet}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Изменить" Padding="5" Background="LightPink"/>
+                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
         </Grid>
     </Grid>
