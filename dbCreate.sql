@@ -25,10 +25,10 @@ Create table "Employee"
 	"Name" Varchar NOT NULL,
 	"Role" Boolean NOT NULL,
 	"Login" Varchar NOT NULL UNIQUE,
-	"Password" Varchar NOT NULL, -- Регулярка
-	"Telegram_ID" Varchar NOT NULL, -- Регулярка
-	"Phone_Number" Varchar NOT NULL, -- Регулярка
-	"E-mail" Varchar, -- Регулярка
+	"Password" Varchar NOT NULL,
+	"Telegram_ID" Varchar NOT NULL,
+	"Phone_Number" Varchar NOT NULL,
+	"E-mail" Varchar,
  primary key ("Employee_ID")
 );
 
@@ -86,7 +86,7 @@ Create table "DailySchedule_header"
 	"DailySchedule_header_ID" uuid default gen_random_uuid() NOT NULL,
 	"StudentGroup_ID" uuid references "StudentGroup" ("StudentGroup_ID"),
 	"ClassesTiming_header_ID" uuid references "ClassesTiming_header" ("ClassesTiming_header_ID") NOT NULL,
-	"OfDate" Date NOT NULL,
+	"OfDate" Date NOT NULL, -- Исключить август
 	"Schoolyear_ID" uuid references "Schoolyear" ("Schoolyear_ID") NOT NULL,
  primary key ("DailySchedule_header_ID")
 );

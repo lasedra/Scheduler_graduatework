@@ -9,7 +9,7 @@ namespace Scheduler
         public MainWindow()
         {
             InitializeComponent();
-            PagesFrame.Navigate(new AuthorisationPage());
+            PagesFrame.Navigate(new RegistrationPage());
         }
 
         private void UserImage_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
