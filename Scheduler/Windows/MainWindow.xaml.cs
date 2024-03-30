@@ -1,25 +1,34 @@
 ﻿using System.Windows;
+using System.Windows.Navigation;
 using Scheduler.Pages;
-using Scheduler.Services;
 
 namespace Scheduler
 {
     public partial class MainWindow : Window
     {
+
+        public MainSchedulePage MainSchedulePage = new();
+
+        public AuthorisationPage AuthorisationPage = new();
+        public RegistrationPage RegistrationPage = new();
+        public UserProfilePage UserProfilePage = new();
+        public EditScheduleTabPage EditScheduleTabPage = new();
+
         public MainWindow()
         {
             InitializeComponent();
-            PagesFrame.Navigate(new RegistrationPage());
-        }
-
-        private void UserImage_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            PagesFrame.Navigate(new AuthorisationPage());
+            PagesFrame.Navigate(AuthorisationPage);
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            PagesFrame.Navigate(new MainSchedulePage());
+            if(PagesFrame.Content != MainSchedulePage)
+                PagesFrame.Navigate(MainSchedulePage);
+        }
+
+        private void UserNamePanel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PagesFrame.Navigate(UserProfilePage);
         }
     }
 }

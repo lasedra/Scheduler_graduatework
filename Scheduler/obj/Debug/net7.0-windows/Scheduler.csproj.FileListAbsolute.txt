@@ -74,3 +74,10 @@ C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.pdb
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.genruntimeconfig.cache
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\ref\Scheduler.dll
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\UserProfilePage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\UserProfilePage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\EditScheduleTabPage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Services\SchedulerUserControl.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\EditScheduleTabPage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Services\SchedulerUserControl.baml

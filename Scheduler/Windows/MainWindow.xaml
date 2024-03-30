@@ -32,8 +32,9 @@
                 <Button Background="{StaticResource Mid red}" Foreground="White" FontWeight="SemiBold" FontSize="15" Style="{StaticResource RoundedButtonStyle}"
                         Height="35" Content="Расписания звонков" Width="165" Margin="10"/>
             </DockPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-                <Image Source="/Resources/userico.png" Margin="5 5 0 5" Name="UserImage" MouseLeftButtonDown="UserImage_MouseLeftButtonDown"/>
+            <StackPanel Name="UserNamePanel" MouseLeftButtonDown="UserNamePanel_MouseLeftButtonDown"
+                Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+                <Image Source="/Resources/userico.png" Margin="5" Name="UserImage"/>
                 <TextBlock Name="UserNameTextBlock" Text="{Binding Name}" FontSize="16" FontWeight="Bold" Foreground="{StaticResource Text gray}" VerticalAlignment="Center"/>
             </StackPanel>
         </DockPanel>

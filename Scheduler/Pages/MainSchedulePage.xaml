@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Scheduler.Pages"
+      xmlns:sevices="clr-namespace:Scheduler.Services"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainSchedulePage">
@@ -30,7 +31,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Назад" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
-                        Width="60" Height="30" Margin="5"/> 
+                        Width="60" Height="30" Margin="5"/>
                 <TextBlock Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="5"
                            Text="01.01.2020 - 05.01.2020"/>
                 <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
@@ -49,161 +50,19 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <sevices:SchedulerUserControl x:Name="MondayTab"/>
 
-            <StackPanel Margin="5" Grid.Row="0" Grid.Column="0">
-                <DataGrid Name="MondayGrid" 
-                          AutoGenerateColumns="False" 
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          CanUserSortColumns="False"
-                          HeadersVisibility="Column">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Понедельник"
-                            x:Name="MondayGridHeader"
-                            Binding="{Binding TimeSlot}">
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="Foreground" Value="DarkRed"/>
-                                    <Setter Property="FontSize" Value="16"/>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет"
-                            Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель"
-                            Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет"
-                            Binding="{Binding AtCabinet}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
-            </StackPanel>
+            <sevices:SchedulerUserControl x:Name="TuesdayTab"
+                Grid.Column="1"/>
 
-            <StackPanel Margin="5" Grid.Row="0" Grid.Column="1">
-                <DataGrid Name="TuesdayGrid" 
-                          AutoGenerateColumns="False" 
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          CanUserSortColumns="False"
-                          HeadersVisibility="Column">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Вторник"
-                            x:Name="TuesdayGridHeader"
-                            Binding="{Binding TimeSlot}">
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="Foreground" Value="DarkRed"/>
-                                    <Setter Property="FontSize" Value="16"/>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет"
-                            Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель"
-                            Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет"
-                            Binding="{Binding AtCabinet}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
-            </StackPanel>
+            <sevices:SchedulerUserControl x:Name="WednesdayTab"
+                Grid.Row="1"/>
 
-            <StackPanel Margin="5" Grid.Row="1" Grid.Column="0">
-                <DataGrid Name="WednesdayGrid" 
-                          AutoGenerateColumns="False" 
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          CanUserSortColumns="False"
-                          HeadersVisibility="Column">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Среда"
-                            x:Name="WednesdayGridHeader"
-                            Binding="{Binding TimeSlot}">
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="Foreground" Value="DarkRed"/>
-                                    <Setter Property="FontSize" Value="16"/>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет"
-                            Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель"
-                            Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет"
-                            Binding="{Binding AtCabinet}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
-            </StackPanel>
+            <sevices:SchedulerUserControl x:Name="ThursdayTab"
+                Grid.Row="1" Grid.Column="1"/>
 
-            <StackPanel Margin="5" Grid.Row="1" Grid.Column="1">
-                <DataGrid Name="ThursdayGrid" 
-                          AutoGenerateColumns="False" 
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          CanUserSortColumns="False"
-                          HeadersVisibility="Column">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Четверг"
-                            x:Name="ThursdayGridHeader"
-                            Binding="{Binding TimeSlot}">
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="Foreground" Value="DarkRed"/>
-                                    <Setter Property="FontSize" Value="16"/>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет"
-                            Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель"
-                            Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет"
-                            Binding="{Binding AtCabinet}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
-            </StackPanel>
-
-            <StackPanel Margin="5" Grid.Row="2" Grid.Column="0">
-                <DataGrid Name="FridayGrid" 
-                          AutoGenerateColumns="False" 
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          CanUserSortColumns="False"
-                          HeadersVisibility="Column">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Пятница"
-                            x:Name="FridayGridHeader"
-                            Binding="{Binding TimeSlot}">
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="Foreground" Value="DarkRed"/>
-                                    <Setter Property="FontSize" Value="16"/>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет"
-                            Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель"
-                            Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет"
-                            Binding="{Binding AtCabinet}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="Изменить" Padding="5" Height="30" Background="LightPink" Style="{StaticResource RoundedButtonStyle}"/>
-            </StackPanel>
+            <sevices:SchedulerUserControl x:Name="FridayTab"
+                Grid.Row="2" Grid.Column="0"/>
         </Grid>
     </Grid>
 </Page>

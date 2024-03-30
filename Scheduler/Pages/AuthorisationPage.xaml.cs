@@ -14,6 +14,8 @@ namespace Scheduler.Pages
         public AuthorisationPage()
         {
             InitializeComponent();
+            LoginTextBox.Text = "ivanov_i-i";
+            PasswordTextBox.Text = "vanya123";
         }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
@@ -47,19 +49,14 @@ namespace Scheduler.Pages
                 e.Handled = true;
         }
 
-        private void RegistrationLink_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new RegistrationPage());
-        }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Collapsed;
+            ((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Collapsed;
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            ///((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Visible;
+            ((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Visible;
         }
     }
 }

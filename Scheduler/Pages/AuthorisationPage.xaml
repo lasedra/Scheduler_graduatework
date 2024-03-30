@@ -35,13 +35,6 @@
                 </DockPanel>
                 <Button Height="30" Margin="5" Content="Войти" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
                     Name="LogInButton" Click="LogInButton_Click"/>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 15 10 10">
-                    <TextBlock Text="Нет аккаунта? " 
-                       Foreground="{StaticResource Text gray}" FontSize="12"/>
-                    <TextBlock x:Name="RegistrationLink" Text="Зарегистрируйтесь" MouseLeftButtonDown="RegistrationLink_MouseLeftButtonDown" VerticalAlignment="Center"
-                       Foreground="{StaticResource Mid red}"  Cursor="Hand" FontSize="12"/>
-                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

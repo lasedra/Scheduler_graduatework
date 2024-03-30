@@ -12,9 +12,8 @@ namespace Scheduler.Pages
             - аккаунт админа
             - основное и сокращённое расписания
     */
-    /* TODO: Перемещение во времени по расписанию */
-    /* TODO: Доделать навигацию */
     /* TODO: Использовать хеширование */
+    /* TODO: Сделать "Запомнить меня" */
     /* TODO: Функционал:
                 1) Оповещения МУП-а о внесении изменений в расписание
                 2) Логгирование*/
@@ -26,11 +25,7 @@ namespace Scheduler.Pages
         {
             InitializeComponent();
             ScheduleController schController = new ScheduleController();
-            MondayGrid.ItemsSource = schController.MondayTab;
-            TuesdayGrid.ItemsSource= schController.TuesdayTab;
-            WednesdayGrid.ItemsSource = schController.WednesdayTab;
-            ThursdayGrid.ItemsSource = schController.ThursdayTab;
-            FridayGrid.ItemsSource = schController.FridayTab;
+            MondayTab.ScheduleDataGrid.ItemsSource = schController.MondayTab;
         }
     }
 }
