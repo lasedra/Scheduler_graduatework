@@ -6,7 +6,9 @@
       xmlns:local="clr-namespace:Scheduler.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EditScheduleTabPage">
+      Title="EditScheduleTabPage"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded">
 
     <Grid>
         <Button Name="GoBackBttn" Click="GoBackBttn_Click"

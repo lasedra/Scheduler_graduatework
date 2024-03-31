@@ -6,9 +6,9 @@ using System.Windows.Navigation;
 
 namespace Scheduler.Services
 {
-    public partial class SchedulerUserControl : UserControl
+    public partial class ScheduleUserControl : UserControl
     {
-        public SchedulerUserControl()
+        public ScheduleUserControl()
         {
             InitializeComponent();
         }

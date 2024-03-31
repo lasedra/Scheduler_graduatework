@@ -50,18 +50,18 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <sevices:SchedulerUserControl x:Name="MondayTab"/>
+            <sevices:ScheduleUserControl x:Name="MondayTab"/>
 
-            <sevices:SchedulerUserControl x:Name="TuesdayTab"
+            <sevices:ScheduleUserControl x:Name="TuesdayTab"
                 Grid.Column="1"/>
 
-            <sevices:SchedulerUserControl x:Name="WednesdayTab"
+            <sevices:ScheduleUserControl x:Name="WednesdayTab"
                 Grid.Row="1"/>
 
-            <sevices:SchedulerUserControl x:Name="ThursdayTab"
+            <sevices:ScheduleUserControl x:Name="ThursdayTab"
                 Grid.Row="1" Grid.Column="1"/>
 
-            <sevices:SchedulerUserControl x:Name="FridayTab"
+            <sevices:ScheduleUserControl x:Name="FridayTab"
                 Grid.Row="2" Grid.Column="0"/>
         </Grid>
     </Grid>
