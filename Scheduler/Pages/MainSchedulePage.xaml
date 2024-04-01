@@ -24,45 +24,23 @@
                           Height="30" Width="100" Margin="5 0 0 0">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Code}"/>
+                            <TextBlock Text="{Binding StudentGroupCode}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Назад" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
+                <Button x:Name="BackOnTimelineBttn" Click="BackOnTimelineBttn_Click"
+                        Content="Назад" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
                         Width="60" Height="30" Margin="5"/>
                 <TextBlock Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="5"
-                           Text="01.01.2020 - 05.01.2020"/>
-                <Button Content="+" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
+                           Name="ScheduleWeekSpanTB"/>
+                <Button x:Name="ForwardOnTimelineBttn" Click="ForwardOnTimelineBttn_Click"
+                        Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
                         Width="30" Height="30" Margin="5 0 20 0"/>
             </StackPanel>
         </DockPanel>
 
-        <Grid Grid.Row="2" Margin="10 0 10 0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <sevices:ScheduleUserControl x:Name="MondayTab"/>
-
-            <sevices:ScheduleUserControl x:Name="TuesdayTab"
-                Grid.Column="1"/>
-
-            <sevices:ScheduleUserControl x:Name="WednesdayTab"
-                Grid.Row="1"/>
-
-            <sevices:ScheduleUserControl x:Name="ThursdayTab"
-                Grid.Row="1" Grid.Column="1"/>
-
-            <sevices:ScheduleUserControl x:Name="FridayTab"
-                Grid.Row="2" Grid.Column="0"/>
-        </Grid>
+        <sevices:ScheduleUserControl Grid.Row="2" x:Name="Schedule"/>
     </Grid>
 </Page>

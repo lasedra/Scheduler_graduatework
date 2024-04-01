@@ -1,6 +1,5 @@
 ﻿using Scheduler.Models;
 using System;
-using System.Windows;
 
 namespace Scheduler.Services
 {
@@ -33,7 +32,7 @@ namespace Scheduler.Services
                 Password = loggingEmployee.Password;
                 TelegramId = loggingEmployee.TelegramId;
                 PhoneNumber = loggingEmployee.PhoneNumber;
-                EMail = loggingEmployee.EMail is not null ? loggingEmployee.EMail : "почта не указана";
+                EMail = loggingEmployee.EMail is not null ? loggingEmployee.EMail : "Почта не указана";
             }
             else
                 throw new ArgumentNullException(nameof(loggingEmployee));

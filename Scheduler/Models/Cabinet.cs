@@ -5,9 +5,7 @@ namespace Scheduler.Models;
 
 public partial class Cabinet
 {
-    public Guid CabinetId { get; set; }
-
-    public int Number { get; set; }
+    public string Number { get; set; } = null!;
 
     public string? Name { get; set; }
 

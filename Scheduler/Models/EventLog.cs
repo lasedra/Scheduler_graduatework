@@ -7,7 +7,7 @@ public partial class EventLog
 {
     public int EventId { get; set; }
 
-    public DateTime Time { get; set; }
+    public DateTime DateTime { get; set; }
 
     public string Level { get; set; } = null!;
 

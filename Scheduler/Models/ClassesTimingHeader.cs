@@ -10,6 +10,4 @@ public partial class ClassesTimingHeader
     public string Name { get; set; } = null!;
 
     public virtual ICollection<ClassesTimingBody> ClassesTimingBodies { get; set; } = new List<ClassesTimingBody>();
-
-    public virtual ICollection<DailyScheduleHeader> DailyScheduleHeaders { get; set; } = new List<DailyScheduleHeader>();
 }

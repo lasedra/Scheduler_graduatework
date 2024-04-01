@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Scheduler.Models;
+using Scheduler.Windows;
 using System.Windows;
 
 namespace Scheduler

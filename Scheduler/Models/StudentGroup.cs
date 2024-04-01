@@ -5,9 +5,9 @@ namespace Scheduler.Models;
 
 public partial class StudentGroup
 {
-    public Guid StudentGroupId { get; set; }
+    public string StudentGroupCode { get; set; } = null!;
 
-    public string Code { get; set; } = null!;
+    public string? Specialization { get; set; }
 
     public virtual ICollection<DailyScheduleHeader> DailyScheduleHeaders { get; set; } = new List<DailyScheduleHeader>();
 }

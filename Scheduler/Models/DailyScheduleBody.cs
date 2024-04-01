@@ -5,29 +5,25 @@ namespace Scheduler.Models;
 
 public partial class DailyScheduleBody
 {
-    public Guid DailyScheduleHeaderId { get; set; }
+    public string StudentGroupCode { get; set; } = null!;
 
-    public Guid LessonId { get; set; }
+    public DateOnly OfDate { get; set; }
 
-    public Guid TimeSlotId { get; set; }
+    public int ClassNumber { get; set; }
 
-    public Guid? TutionRowId { get; set; }
-
-    public Guid? SubjectId { get; set; }
+    public Guid ClassesTimingHeaderId { get; set; }
 
     public Guid? EmployeeId { get; set; }
 
-    public Guid? CabinetId { get; set; }
+    public Guid? SubjectId { get; set; }
 
-    public virtual Cabinet? Cabinet { get; set; }
+    public string? CabinetNumber { get; set; }
+
+    public virtual Cabinet? CabinetNumberNavigation { get; set; }
 
     public virtual DailyScheduleHeader DailyScheduleHeader { get; set; } = null!;
 
     public virtual Employee? Employee { get; set; }
 
     public virtual Subject? Subject { get; set; }
-
-    public virtual ClassesTimingBody TimeSlot { get; set; } = null!;
-
-    public virtual Tution? TutionRow { get; set; }
 }

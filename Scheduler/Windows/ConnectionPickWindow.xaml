@@ -11,8 +11,8 @@
         MaxHeight="130" MaxWidth="300"
         Loaded="ToolWindow_Loaded">
     <Grid>
-        <StackPanel Background="PaleGreen">
-            <TextBlock Margin="5 5 5 0" Text="Выберите сервер для подключения:"/>
+        <StackPanel Background="{StaticResource Mid gray}">
+            <TextBlock Margin="5 5 5 0" Text="Выберите сервер для подключения:" Foreground="White" FontWeight="SemiBold" FontSize="15"/>
             <ComboBox Margin="5" Name="ConnectionsComboBox" SelectionChanged="ConnectionsComboBox_SelectionChanged" SelectedIndex="0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -20,7 +20,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Content="Подтвердить" Name="SubmitBttn" Click="SubmitBttn_Click" Margin="5" Padding="5" Background="LightPink"/>
+            <Button Content="Подтвердить" Name="SubmitBttn" Click="SubmitBttn_Click" Margin="5" Padding="5" Background="{StaticResource Light red}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Scheduler.Windows;
 
 namespace Scheduler.Models;
@@ -15,7 +14,6 @@ public partial class SchedulerDbContext : DbContext
     {
         AppConfig = configuration;
     }
-
 
     public virtual DbSet<Cabinet> Cabinets { get; set; }
 
@@ -31,19 +29,19 @@ public partial class SchedulerDbContext : DbContext
 
     public virtual DbSet<EventLog> EventLogs { get; set; }
 
-    public virtual DbSet<Schoolyear> Schoolyears { get; set; }
-
     public virtual DbSet<StudentGroup> StudentGroups { get; set; }
 
     public virtual DbSet<Subject> Subjects { get; set; }
 
     public virtual DbSet<Tution> Tutions { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 #warning Pick connection here
-        //ConnectionPickWindow connectionPickWindow = new ConnectionPickWindow();
-        //connectionPickWindow.ShowDialog();
-        //optionsBuilder.UseNpgsql(connectionPickWindow.ReturnString);
+//        ConnectionPickWindow connectionPickWindow = new ConnectionPickWindow();
+//        connectionPickWindow.ShowDialog();
+//        optionsBuilder.UseNpgsql(connectionPickWindow.ReturnString);
         optionsBuilder.UseNpgsql(AppConfig.GetConnectionString("localhost"));
     }
 
@@ -51,27 +49,20 @@ public partial class SchedulerDbContext : DbContext
     {
         modelBuilder.Entity<Cabinet>(entity =>
         {
-            entity.HasKey(e => e.CabinetId).HasName("Cabinet_pkey");
+            entity.HasKey(e => e.Number).HasName("Cabinet_pkey");
 
             entity.ToTable("Cabinet");
 
-            entity.HasIndex(e => e.Number, "Cabinet_Number_key").IsUnique();
-
-            entity.Property(e => e.CabinetId)
-                .HasDefaultValueSql("gen_random_uuid()")
-                .HasColumnName("Cabinet_ID");
+            entity.Property(e => e.Number).HasColumnType("character varying");
             entity.Property(e => e.Name).HasColumnType("character varying");
         });
 
         modelBuilder.Entity<ClassesTimingBody>(entity =>
         {
-            entity.HasKey(e => e.TimeSlotId).HasName("ClassesTiming_body_pkey");
+            entity.HasKey(e => new { e.ClassesTimingHeaderId, e.ClassNumber }).HasName("ClassesTiming_body_pkey");
 
             entity.ToTable("ClassesTiming_body");
 
-            entity.Property(e => e.TimeSlotId)
-                .HasDefaultValueSql("gen_random_uuid()")
-                .HasColumnName("TimeSlot_ID");
             entity.Property(e => e.ClassesTimingHeaderId).HasColumnName("ClassesTiming_header_ID");
 
             entity.HasOne(d => d.ClassesTimingHeader).WithMany(p => p.ClassesTimingBodies)
@@ -96,28 +87,19 @@ public partial class SchedulerDbContext : DbContext
 
         modelBuilder.Entity<DailyScheduleBody>(entity =>
         {
-            entity.HasKey(e => e.LessonId).HasName("DailySchedule_body_pkey");
+            entity.HasKey(e => new { e.StudentGroupCode, e.OfDate, e.ClassNumber }).HasName("DailySchedule_body_pkey");
 
             entity.ToTable("DailySchedule_body");
 
-            entity.Property(e => e.LessonId)
-                .HasDefaultValueSql("gen_random_uuid()")
-                .HasColumnName("Lesson_ID");
-            entity.Property(e => e.CabinetId).HasColumnName("Cabinet_ID");
-            entity.Property(e => e.DailyScheduleHeaderId).HasColumnName("DailySchedule_header_ID");
+            entity.Property(e => e.StudentGroupCode).HasColumnType("character varying");
+            entity.Property(e => e.CabinetNumber).HasColumnType("character varying");
+            entity.Property(e => e.ClassesTimingHeaderId).HasColumnName("ClassesTiming_header_ID");
             entity.Property(e => e.EmployeeId).HasColumnName("Employee_ID");
             entity.Property(e => e.SubjectId).HasColumnName("Subject_ID");
-            entity.Property(e => e.TimeSlotId).HasColumnName("TimeSlot_ID");
-            entity.Property(e => e.TutionRowId).HasColumnName("TutionRow_ID");
 
-            entity.HasOne(d => d.Cabinet).WithMany(p => p.DailyScheduleBodies)
-                .HasForeignKey(d => d.CabinetId)
-                .HasConstraintName("DailySchedule_body_Cabinet_ID_fkey");
-
-            entity.HasOne(d => d.DailyScheduleHeader).WithMany(p => p.DailyScheduleBodies)
-                .HasForeignKey(d => d.DailyScheduleHeaderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DailySchedule_body_DailySchedule_header_ID_fkey");
+            entity.HasOne(d => d.CabinetNumberNavigation).WithMany(p => p.DailyScheduleBodies)
+                .HasForeignKey(d => d.CabinetNumber)
+                .HasConstraintName("DailySchedule_body_CabinetNumber_fkey");
 
             entity.HasOne(d => d.Employee).WithMany(p => p.DailyScheduleBodies)
                 .HasForeignKey(d => d.EmployeeId)
@@ -127,42 +109,24 @@ public partial class SchedulerDbContext : DbContext
                 .HasForeignKey(d => d.SubjectId)
                 .HasConstraintName("DailySchedule_body_Subject_ID_fkey");
 
-            entity.HasOne(d => d.TimeSlot).WithMany(p => p.DailyScheduleBodies)
-                .HasForeignKey(d => d.TimeSlotId)
+            entity.HasOne(d => d.DailyScheduleHeader).WithMany(p => p.DailyScheduleBodies)
+                .HasForeignKey(d => new { d.StudentGroupCode, d.OfDate })
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DailySchedule_body_TimeSlot_ID_fkey");
-
-            entity.HasOne(d => d.TutionRow).WithMany(p => p.DailyScheduleBodies)
-                .HasForeignKey(d => d.TutionRowId)
-                .HasConstraintName("DailySchedule_body_TutionRow_ID_fkey");
+                .HasConstraintName("DailySchedule_body_StudentGroupCode_OfDate_fkey");
         });
 
         modelBuilder.Entity<DailyScheduleHeader>(entity =>
         {
-            entity.HasKey(e => e.DailyScheduleHeaderId).HasName("DailySchedule_header_pkey");
+            entity.HasKey(e => new { e.StudentGroupCode, e.OfDate }).HasName("DailySchedule_header_pkey");
 
             entity.ToTable("DailySchedule_header");
 
-            entity.Property(e => e.DailyScheduleHeaderId)
-                .HasDefaultValueSql("gen_random_uuid()")
-                .HasColumnName("DailySchedule_header_ID");
-            entity.Property(e => e.ClassesTimingHeaderId).HasColumnName("ClassesTiming_header_ID");
-            entity.Property(e => e.SchoolyearId).HasColumnName("Schoolyear_ID");
-            entity.Property(e => e.StudentGroupId).HasColumnName("StudentGroup_ID");
+            entity.Property(e => e.StudentGroupCode).HasColumnType("character varying");
 
-            entity.HasOne(d => d.ClassesTimingHeader).WithMany(p => p.DailyScheduleHeaders)
-                .HasForeignKey(d => d.ClassesTimingHeaderId)
+            entity.HasOne(d => d.StudentGroupCodeNavigation).WithMany(p => p.DailyScheduleHeaders)
+                .HasForeignKey(d => d.StudentGroupCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DailySchedule_header_ClassesTiming_header_ID_fkey");
-
-            entity.HasOne(d => d.Schoolyear).WithMany(p => p.DailyScheduleHeaders)
-                .HasForeignKey(d => d.SchoolyearId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DailySchedule_header_Schoolyear_ID_fkey");
-
-            entity.HasOne(d => d.StudentGroup).WithMany(p => p.DailyScheduleHeaders)
-                .HasForeignKey(d => d.StudentGroupId)
-                .HasConstraintName("DailySchedule_header_StudentGroup_ID_fkey");
+                .HasConstraintName("DailySchedule_header_StudentGroupCode_fkey");
         });
 
         modelBuilder.Entity<Employee>(entity =>
@@ -197,37 +161,19 @@ public partial class SchedulerDbContext : DbContext
             entity.ToTable("EVENT_LOG");
 
             entity.Property(e => e.EventId).HasColumnName("Event_ID");
+            entity.Property(e => e.DateTime).HasColumnType("timestamp without time zone");
             entity.Property(e => e.Level).HasColumnType("character varying");
             entity.Property(e => e.Message).HasColumnType("character varying");
-            entity.Property(e => e.Time).HasColumnType("timestamp without time zone");
-        });
-
-        modelBuilder.Entity<Schoolyear>(entity =>
-        {
-            entity.HasKey(e => e.SchoolyearId).HasName("Schoolyear_pkey");
-
-            entity.ToTable("Schoolyear");
-
-            entity.HasIndex(e => e.Years, "Schoolyear_Years_key").IsUnique();
-
-            entity.Property(e => e.SchoolyearId)
-                .HasDefaultValueSql("gen_random_uuid()")
-                .HasColumnName("Schoolyear_ID");
-            entity.Property(e => e.Years).HasColumnType("character varying");
         });
 
         modelBuilder.Entity<StudentGroup>(entity =>
         {
-            entity.HasKey(e => e.StudentGroupId).HasName("StudentGroup_pkey");
+            entity.HasKey(e => e.StudentGroupCode).HasName("StudentGroup_pkey");
 
             entity.ToTable("StudentGroup");
 
-            entity.HasIndex(e => e.Code, "StudentGroup_Code_key").IsUnique();
-
-            entity.Property(e => e.StudentGroupId)
-                .HasDefaultValueSql("gen_random_uuid()")
-                .HasColumnName("StudentGroup_ID");
-            entity.Property(e => e.Code).HasColumnType("character varying");
+            entity.Property(e => e.StudentGroupCode).HasColumnType("character varying");
+            entity.Property(e => e.Specialization).HasColumnType("character varying");
         });
 
         modelBuilder.Entity<Subject>(entity =>
@@ -246,15 +192,12 @@ public partial class SchedulerDbContext : DbContext
 
         modelBuilder.Entity<Tution>(entity =>
         {
-            entity.HasKey(e => e.TutionRowId).HasName("Tution_pkey");
+            entity.HasKey(e => new { e.SubjectId, e.EmployeeId }).HasName("Tution_pkey");
 
             entity.ToTable("Tution");
 
-            entity.Property(e => e.TutionRowId)
-                .HasDefaultValueSql("gen_random_uuid()")
-                .HasColumnName("TutionRow_ID");
-            entity.Property(e => e.EmployeeId).HasColumnName("Employee_ID");
             entity.Property(e => e.SubjectId).HasColumnName("Subject_ID");
+            entity.Property(e => e.EmployeeId).HasColumnName("Employee_ID");
 
             entity.HasOne(d => d.Employee).WithMany(p => p.Tutions)
                 .HasForeignKey(d => d.EmployeeId)

@@ -1,3 +1,4 @@
+-- Active: 1697616242142@@127.0.0.1@5432@SchedulerDB
 Create table "EVENT_LOG"
 (
 	"Event_ID" serial NOT NULL,
@@ -88,3 +89,22 @@ Create table "DailySchedule_body"
  foreign key ("StudentGroupCode", "OfDate") references "DailySchedule_header" ("StudentGroupCode", "OfDate"),
  foreign key ("ClassNumber", "ClassesTiming_header_ID") references "ClassesTiming_body" ("ClassNumber", "ClassesTiming_header_ID")
 );
+
+		/* УНИВЕРСАЛЬНЫЙ СЕЛЕКТ */
+SELECT
+    "DailySchedule_body"."OfDate" AS "Of date",
+	to_char("DailySchedule_body"."OfDate", 'Day') AS "Day of week",
+    "DailySchedule_body"."StudentGroupCode" AS "Student group",
+	"ClassesTiming_header"."Name" as "Timing name",
+    "DailySchedule_body"."ClassNumber" AS "Class number",
+	"Employee"."Name" as "Tutor",
+	"Subject"."Name" as "Subject",
+	"DailySchedule_body"."CabinetNumber" as "At cabinet"
+FROM "DailySchedule_body"
+    LEFT JOIN "ClassesTiming_header" ON "DailySchedule_body"."ClassesTiming_header_ID" = "ClassesTiming_header"."ClassesTiming_header_ID"
+	LEFT JOIN "Employee" ON "DailySchedule_body"."Employee_ID" = "Employee"."Employee_ID"
+    LEFT JOIN "Subject" ON "DailySchedule_body"."Subject_ID" = "Subject"."Subject_ID"
+WHERE
+	"OfDate" BETWEEN '2022-07-09' AND '2022-07-09'
+	AND
+	"StudentGroupCode" = '1312';

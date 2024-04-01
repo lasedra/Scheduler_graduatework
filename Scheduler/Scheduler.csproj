@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appconfig.json" />
     <None Remove="Resources\appico.ico" />
     <None Remove="Resources\appico.png" />
     <None Remove="Resources\homeico.png" />
@@ -16,6 +17,12 @@
     <None Remove="Resources\userico.png" />
     <None Remove="Resources\winico.ico" />
     <None Remove="Resources\_.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appconfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
