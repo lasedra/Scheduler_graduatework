@@ -9,11 +9,70 @@
       Title="EditScheduleTabPage"
       Loaded="Page_Loaded"
       Unloaded="Page_Unloaded">
-
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Button Name="GoBackBttn" Click="GoBackBttn_Click"
             Content="Back" Margin="10" Style="{StaticResource RoundedButtonStyle}" Height="30" Width="50" Background="{StaticResource Light red}"
                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Text="Here's gotta be an EditScheduleTabPage" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <StackPanel VerticalAlignment="Center" Margin="10">
+            <TextBlock Margin="5" Text="Тип расписания:"/>
+            <ComboBox Name="ClassesTimingComboBox" SelectedIndex="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Margin="10" Grid.Column="1" VerticalAlignment="Center">
+            <DataGrid x:Name="EditedGrid"
+                    AutoGenerateColumns="False" 
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    CanUserSortColumns="False"
+                    HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="DayOfWeekHeader" Binding="{Binding TimeSlot}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Foreground" Value="DarkRed"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn Header="Преподаватель" x:Name="TutorTemplateColumn">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Tutor.Name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding DataContext.Tutors, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                          SelectedItem="{Binding Tutor}" DisplayMemberPath="Name"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <!--<DataGridComboBoxColumn Header="Предмет" x:Name="SubjectColumn" Width="*" 
+                                            DisplayMemberPath="Name" SelectedValueBinding="{Binding Subject}"
+                                            TextBinding="{Binding Subject}"/>
+                    <DataGridComboBoxColumn Header="Преподаватель" x:Name="TutorColumn" Width="*" 
+                                            DisplayMemberPath="Name"
+                                            SelectedItemBinding="{Binding Tutor}"/>
+                    <DataGridComboBoxColumn Header="Кабинет" x:Name="CabinetColumn" Width="*" 
+                                            DisplayMemberPath="Number" SelectedValueBinding="{Binding AtCabinet}"
+                                            TextBinding="{Binding Subject}"/>-->
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Page>

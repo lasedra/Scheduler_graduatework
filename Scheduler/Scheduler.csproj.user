@@ -28,6 +28,9 @@
     <Compile Update="Windows\ConnectionPickWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\StudentGroupPickWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\EditScheduleTabPage.xaml">
@@ -52,6 +55,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\MainSchedulePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\StudentGroupPickWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

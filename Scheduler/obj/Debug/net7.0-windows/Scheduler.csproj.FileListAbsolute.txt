@@ -83,3 +83,5 @@ C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.sourcelink.json
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.csproj.Up2Date
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\appconfig.json
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Windows\StudentGroupPickWindow.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Windows\StudentGroupPickWindow.baml

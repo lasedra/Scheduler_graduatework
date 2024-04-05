@@ -1,0 +1,20 @@
+﻿Scheduler
+
+
+winexe
+C#
+.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\
+Scheduler
+none
+false
+TRACE;RELEASE;NET;NET7_0;NETCOREAPP
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\App.xaml
+9-675896766
+
+24-1791721571
+2181206209647
+Pages\AuthorisationPage.xaml;Pages\EditScheduleTabPage.xaml;Pages\MainSchedulePage.xaml;Pages\RegistrationPage.xaml;Pages\UserProfilePage.xaml;Services\ScheduleUserControl.xaml;Windows\ConnectionPickWindow.xaml;Windows\MainWindow.xaml;Windows\StudentGroupPickWindow.xaml;
+
+True
+

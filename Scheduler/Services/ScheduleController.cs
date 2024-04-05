@@ -24,25 +24,12 @@ namespace Scheduler.Services
             CurrentWeek = new TimePeriod(DateOnly.FromDateTime(DateTime.Now.Date));
             CurrentGroupCode = "Не указано";
 
-            if (CreatePivotScheduleIfHasNoAny())
-            {
-                MondayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Monday);
-                TuesdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Tuesday);
-                WednesdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Wednesday);
-                ThursdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Thursday);
-                FridayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Friday);
-            }
-            else
+            if (!CreatePivotScheduleIfHasNoAny())
             {
                 CurrentWeek = new TimePeriod(SchedulerDbContext.dbContext.DailyScheduleHeaders.Max(c => c.OfDate));
                 CurrentGroupCode = SchedulerDbContext.dbContext.DailyScheduleHeaders.First(c => c.OfDate == CurrentWeek.TodayDate).StudentGroupCode;
-
-                MondayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Monday);
-                TuesdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Tuesday);
-                WednesdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Wednesday);
-                ThursdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Thursday);
-                FridayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Friday);
             }
+            SetDayTabs();
         }
 
         public List<DayTab> GetDayTabOf(DateOnly fromDate, DateOnly toDate, string studentGroupCode, DayOfWeek dayOfWeek)
@@ -94,9 +81,10 @@ namespace Scheduler.Services
                             StartTime = 
                                 SchedulerDbContext.dbContext.ClassesTimingBodies.First(c => c.ClassesTimingHeader == timing && c.ClassNumber == dailySchedule.ClassNumber).StartTime,
                             EndTime = 
-                                SchedulerDbContext.dbContext.ClassesTimingBodies.First(c => c.ClassesTimingHeader == timing && c.ClassNumber == dailySchedule.ClassNumber).EndTime,Tutor = emp.Name,
-                            Subject = subj.Name,
-                            AtCabinet = dailySchedule.CabinetNumber
+                                SchedulerDbContext.dbContext.ClassesTimingBodies.First(c => c.ClassesTimingHeader == timing && c.ClassNumber == dailySchedule.ClassNumber).EndTime,
+                            Tutor = SchedulerDbContext.dbContext.Employees.First(c => c.EmployeeId == dailySchedule.EmployeeId),
+                            Subject = SchedulerDbContext.dbContext.Subjects.First(c => c.SubjectId == dailySchedule.SubjectId),
+                            AtCabinet = SchedulerDbContext.dbContext.Cabinets.First(c => c.Number == dailySchedule.CabinetNumber)
                         };
             return quey.Where(c => c.DayOfWeek == dayOfWeek).ToList();
         }
@@ -140,7 +128,7 @@ namespace Scheduler.Services
             else return false;
         }
 
-        public void AddSchedule(string studentGroupCode, string classesTimingName)
+        public void AddSchedule(string studentGroupCode)
         {
             DateOnly nextWeek = CurrentWeek.WeekStart.AddDays(7);
 
@@ -164,7 +152,7 @@ namespace Scheduler.Services
                     {
                         DailyScheduleHeader = SchedulerDbContext.dbContext.DailyScheduleHeaders.First(c => c.OfDate == nextWeek.AddDays(d)),
                         ClassNumber = i + 1,
-                        ClassesTimingHeaderId = SchedulerDbContext.dbContext.ClassesTimingHeaders.First(c => c.Name == classesTimingName).ClassesTimingHeaderId,
+                        ClassesTimingHeaderId = SchedulerDbContext.dbContext.ClassesTimingHeaders.First(c => c.Name == "Основное").ClassesTimingHeaderId,
                         Subject = null,
                         Employee = null,
                         CabinetNumber = null
@@ -176,6 +164,15 @@ namespace Scheduler.Services
             }
 
             MessageBox.Show("Расписание на следующую неделю успешно создано!", "Поздравляю!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void SetDayTabs()
+        {
+            MondayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Monday);
+            TuesdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Tuesday);
+            WednesdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Wednesday);
+            ThursdayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Thursday);
+            FridayTab = GetDayTabOf(CurrentWeek.WeekStart, CurrentWeek.WeekEnd, CurrentGroupCode, DayOfWeek.Friday);
         }
 
 
@@ -241,9 +238,10 @@ namespace Scheduler.Services
             public TimeOnly StartTime { get; set; }
             public TimeOnly EndTime { get; set; }
             public string TimeSlot { get { return $"{StartTime}-{EndTime}"; } }
-            public string? Subject { get; set; }
-            public string? AtCabinet { get; set; }
-            public string? Tutor { get; set; }
+            public Subject? Subject { get; set; }
+            public Cabinet? AtCabinet { get; set; }
+            public Employee? Tutor { get; set; }
+            /* TODO:  Расписания*/
         }
     }
 }

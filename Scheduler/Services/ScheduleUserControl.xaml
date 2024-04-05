@@ -18,8 +18,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Margin="5">
-                <DataGrid x:Name="MondayGrid"
+            <StackPanel Margin="5" x:Name="ModayStackPanel">
+                <DataGrid x:Name="MondayGrid" Uid="mondayGrid"
               AutoGenerateColumns="False" 
               CanUserAddRows="False"
               CanUserDeleteRows="False"
@@ -36,17 +36,17 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет" Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет" Binding="{Binding AtCabinet}" Width="*"/>
+                        <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Subject.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Path=Tutor.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Кабинет" Binding="{Binding Path=AtCabinet.Number}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Click="EditTabBttn_Click"
+                <Button x:Name="MondayEditBttn" Click="EditTabBttn_Click"
         Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Margin="5">
-                <DataGrid x:Name="TuesdayGrid"
+            <StackPanel Grid.Column="1" Margin="5" x:Name="TuesdayStackPanel">
+                <DataGrid x:Name="TuesdayGrid" Uid="tuesdayGrid"
               AutoGenerateColumns="False" 
               CanUserAddRows="False"
               CanUserDeleteRows="False"
@@ -63,17 +63,17 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет" Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет" Binding="{Binding AtCabinet}" Width="*"/>
+                        <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Subject.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Path=Tutor.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Кабинет" Binding="{Binding Path=AtCabinet.Number}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Click="EditTabBttn_Click"
-        Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
+                <Button x:Name="TuesdayEditBttn" Click="EditTabBttn_Click"
+                        Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Margin="5">
-                <DataGrid x:Name="WednesdayGrid"
+            <StackPanel Grid.Row="1" Margin="5" x:Name="WednesdayStackPanel">
+                <DataGrid x:Name="WednesdayGrid" Uid="wednesdayGrid"
               AutoGenerateColumns="False" 
               CanUserAddRows="False"
               CanUserDeleteRows="False"
@@ -90,17 +90,17 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет" Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет" Binding="{Binding AtCabinet}" Width="*"/>
+                        <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Subject.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Path=Tutor.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Кабинет" Binding="{Binding Path=AtCabinet.Number}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Click="EditTabBttn_Click"
-        Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
+                <Button x:Name="WednesdayEditBttn" Click="EditTabBttn_Click"
+                        Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
-                <DataGrid x:Name="ThursdayGrid"
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5" x:Name="ThursdayStackPanel">
+                <DataGrid x:Name="ThursdayGrid" Uid="thursdayGrid"
               AutoGenerateColumns="False" 
               CanUserAddRows="False"
               CanUserDeleteRows="False"
@@ -117,17 +117,17 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет" Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет" Binding="{Binding AtCabinet}" Width="*"/>
+                        <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Subject.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Path=Tutor.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Кабинет" Binding="{Binding Path=AtCabinet.Number}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Click="EditTabBttn_Click"
+                <Button x:Name="ThursdayEditBttn" Click="EditTabBttn_Click"
         Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Margin="5">
-                <DataGrid x:Name="FridayGrid"
+            <StackPanel Grid.Row="2" Margin="5" x:Name="FridayStackPanel">
+                <DataGrid x:Name="FridayGrid" Uid="fridayGrid"
               AutoGenerateColumns="False" 
               CanUserAddRows="False"
               CanUserDeleteRows="False"
@@ -144,13 +144,13 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Предмет" Binding="{Binding Subject}" Width="*"/>
-                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Tutor}" Width="*"/>
-                        <DataGridTextColumn Header="Кабинет" Binding="{Binding AtCabinet}" Width="*"/>
+                        <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Subject.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Path=Tutor.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Кабинет" Binding="{Binding Path=AtCabinet.Number}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Click="EditTabBttn_Click"
-        Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
+                <Button x:Name="FridayEditBttn" Click="EditTabBttn_Click"
+                        Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
         </Grid>
     </Grid>

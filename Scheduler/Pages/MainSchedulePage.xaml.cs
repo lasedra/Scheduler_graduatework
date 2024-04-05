@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Scheduler.Models;
 using Scheduler.Services;
+using Scheduler.Windows;
 using System;
 using System.Linq;
 using System.Windows;
@@ -44,9 +45,10 @@ namespace Scheduler.Pages
             if(ForwardOnTimelineBttn.Content == "+")
             {
                 /* TODO: Предоставить выбор */
-                schController.AddSchedule("Не указано", "Основное");
+                StudentGroupPickWindow studentGroupPickWindow = new();
+                studentGroupPickWindow.ShowDialog();
+                schController.AddSchedule(studentGroupPickWindow.ReturnString);
                 UpdateScheduleSource();
-
             }
             else
             {
@@ -58,6 +60,7 @@ namespace Scheduler.Pages
         public void UpdateScheduleSource()
         {
             StudentGroupComboBox.ItemsSource = SchedulerDbContext.dbContext.StudentGroups.ToList();
+            /* TODO: ЕБАНО ГРУППЫ ФИЛЬТРУЮТСЯ */
             StudentGroupComboBox.SelectedItem = SchedulerDbContext.dbContext.StudentGroups.First(c => c.StudentGroupCode == schController.CurrentGroupCode);
 
             ScheduleWeekSpanTB.Text = schController.CurrentWeek.GetWeekSpan();

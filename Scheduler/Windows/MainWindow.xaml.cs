@@ -12,7 +12,6 @@ namespace Scheduler
         public AuthorisationPage AuthorisationPage = new();
         public RegistrationPage RegistrationPage = new();
         public UserProfilePage UserProfilePage = new();
-        public EditScheduleTabPage EditScheduleTabPage = new();
 
         public MainWindow()
         {

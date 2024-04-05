@@ -1,0 +1,15 @@
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Scheduler.csproj.AssemblyReference.cache
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Services\ScheduleUserControl.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Pages\AuthorisationPage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Pages\EditScheduleTabPage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Pages\MainSchedulePage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Pages\RegistrationPage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Pages\UserProfilePage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Services\ScheduleUserControl.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Windows\ConnectionPickWindow.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Windows\MainWindow.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Windows\StudentGroupPickWindow.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\App.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Scheduler_MarkupCompile.cache
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\Scheduler_MarkupCompile.lref
