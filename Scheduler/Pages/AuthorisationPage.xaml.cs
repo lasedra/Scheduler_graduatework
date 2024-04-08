@@ -39,7 +39,7 @@ namespace Scheduler.Pages
                         CurrentUser.SetCurrentUser(_loggingEmployee);
                         ((TextBlock)Window.GetWindow(this).FindName("UserNameTextBlock")).Text = CurrentUser.Name;
                         ((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Visible;
-                        NavigationService.Navigate(new MainSchedulePage());
+                        NavigationService.Navigate(((MainWindow)Application.Current.MainWindow).MainSchedulePage);
                     }
                     else
                         MessageBox.Show("Аккаунт не найден. \nНеверные учётные данные или пользователь не зарегистрирован.", "Ошибка доступа!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -58,12 +58,12 @@ namespace Scheduler.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Collapsed;
+            ((DockPanel)((MainWindow)Application.Current.MainWindow).FindName("MenuPanel")).Visibility = Visibility.Collapsed;
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            ((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Visible;
+            ((DockPanel)((MainWindow)Application.Current.MainWindow).FindName("MenuPanel")).Visibility = Visibility.Visible;
         }
     }
 }

@@ -9,10 +9,14 @@
 
   <ItemGroup>
     <None Remove="appconfig.json" />
+    <None Remove="Resources\acceptico.png" />
     <None Remove="Resources\appico.ico" />
     <None Remove="Resources\appico.png" />
+    <None Remove="Resources\declineico.png" />
+    <None Remove="Resources\editico.png" />
     <None Remove="Resources\homeico.png" />
     <None Remove="Resources\loginico.png" />
+    <None Remove="Resources\profileico.png" />
     <None Remove="Resources\registerico.png" />
     <None Remove="Resources\userico.png" />
     <None Remove="Resources\winico.ico" />
@@ -26,10 +30,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\acceptico.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\declineico.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\editico.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\homeico.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\loginico.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\profileico.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\registerico.png">
@@ -39,9 +55,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\winico.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\_.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

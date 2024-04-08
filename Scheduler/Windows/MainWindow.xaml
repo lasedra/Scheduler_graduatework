@@ -35,7 +35,7 @@
             <StackPanel Name="UserNamePanel" MouseLeftButtonDown="UserNamePanel_MouseLeftButtonDown"
                 Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
                 <Image Source="/Resources/userico.png" Margin="5" Name="UserImage"/>
-                <TextBlock Name="UserNameTextBlock" Text="{Binding Name}" FontSize="16" FontWeight="Bold" Foreground="{StaticResource Text gray}" VerticalAlignment="Center"/>
+                <TextBlock Name="UserNameTextBlock" FontSize="16" FontWeight="Bold" Foreground="{StaticResource Text gray}" VerticalAlignment="Center"/>
             </StackPanel>
         </DockPanel>
 

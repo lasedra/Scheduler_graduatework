@@ -61,11 +61,11 @@ namespace Scheduler.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Collapsed;
+            ((DockPanel)((MainWindow)Application.Current.MainWindow).FindName("MenuPanel")).Visibility = Visibility.Collapsed;
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            //((DockPanel)Window.GetWindow(this).FindName("MenuPanel")).Visibility = Visibility.Visible;
+            ((DockPanel)((MainWindow)Application.Current.MainWindow).FindName("MenuPanel")).Visibility = Visibility.Visible;
         }
     }
 }

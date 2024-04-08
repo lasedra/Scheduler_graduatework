@@ -6,9 +6,95 @@
       xmlns:local="clr-namespace:Scheduler.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserProfilePage">
-
+      Title="UserProfilePage"
+      Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style TargetType="TextBox" x:Key="ReadOnlyTextBoxStyle">
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Text gray}" />
+                </Trigger>
+                <Trigger Property="IsReadOnly" Value="False">
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
-        <TextBlock Text="Here's gotta be UserProfilePage" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="Auto">
+            <DockPanel Margin="5 5 5 15">
+                <Image Source="/Resources/profileico.png" Margin="5" Height="50" Width="50"/>
+                <TextBlock Name="ProfileNameTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
+                           Foreground="{StaticResource Text gray}" FontSize="18" FontWeight="Bold"/>
+            </DockPanel>
+
+            <StackPanel Width="400">
+                <DockPanel>
+                    <TextBlock Text="Логин:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                        <TextBox Name="LoginTextBox" Width="220" IsReadOnly="True" VerticalAlignment="Center"
+                                 Margin="5" Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+                        <Image Name="EditLoginBttn" MouseLeftButtonDown="EditLoginBttn_MouseLeftButtonDown" Source="/Resources/editico.png" 
+                               Height="20" Width="20" Margin="0 0 5 0"/>
+                        <StackPanel Name="LoginDecision" Visibility="Collapsed" Orientation="Horizontal" Margin="0 0 5 0">
+                            <Image Name="LoginAcceptBttn" Source="/Resources/acceptico.png" 
+                                   Height="20" Width="20" MouseLeftButtonDown="LoginAcceptBttn_MouseLeftButtonDown"/>
+                            <Image Name="LoginDeclineBttn" Source="/Resources/declineico.png" 
+                                   Height="20" Width="20" MouseLeftButtonDown="LoginDeclineBttn_MouseLeftButtonDown"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock Text="Тел. номер:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBox Name="PhoneTextBox" Width="220" IsReadOnly="True" VerticalAlignment="Center"
+                                 PreviewTextInput="PhoneTextBox_PreviewTextInput" PreviewKeyDown="AccesNoSpaceInput"
+                                 Margin="5" Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+                        <Image Name="EditPhoneBttn" Source="/Resources/editico.png" Height="20" Margin="0 0 5 0" Width="20" MouseLeftButtonDown="EditPhoneBttn_MouseLeftButtonDown"/>
+                        <StackPanel Name="PhoneDecision" Visibility="Collapsed" Orientation="Horizontal" Margin="0 0 5 0">
+                            <Image Name="PhoneAcceptBttn" Source="/Resources/acceptico.png" 
+                                    Height="20" Width="20" MouseLeftButtonDown="PhoneAcceptBttn_MouseLeftButtonDown"/>
+                            <Image Name="PhoneDeclineBttn" Source="/Resources/declineico.png" 
+                                    Height="20" Width="20" MouseLeftButtonDown="PhoneDeclineBttn_MouseLeftButtonDown"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock Text="Telegram link:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <TextBlock Text="@" Margin="0 0 5 0" VerticalAlignment="Center" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
+                            <TextBox Name="TelegramIDTextBox" Width="200" IsReadOnly="True" Margin="0 0 5 0"
+                                     PreviewTextInput="TelegramIDTextBox_PreviewTextInput" PreviewKeyDown="AccesNoSpaceInput"
+                                     VerticalAlignment="Center" Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+                            <Image Name="EditTgLinkBttn" Source="/Resources/editico.png" Height="20" Width="20" MouseLeftButtonDown="EditTgLinkBttn_MouseLeftButtonDown"/>
+                            <StackPanel Name="TgLinkDecision" Visibility="Collapsed" Orientation="Horizontal" Margin="0 0 5 0">
+                                <Image Name="TgLinkAcceptBttn" Source="/Resources/acceptico.png" 
+                                        Height="20" Width="20" MouseLeftButtonDown="TgLinkAcceptBttn_MouseLeftButtonDown"/>
+                                <Image Name="TgLinkDeclineBttn" Source="/Resources/declineico.png" 
+                                        Height="20" Width="20" MouseLeftButtonDown="TgLinkDeclineBttn_MouseLeftButtonDown"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock Text="E-mail:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBox Name="EmailTextBox" Width="220" IsReadOnly="True"
+                                 PreviewKeyDown="AccesNoSpaceInput" PreviewTextInput="EmailTextBox_PreviewTextInput"
+                                 VerticalAlignment="Center" Margin="5" Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+                        <Image Name="EditEmailBttn" Source="/Resources/editico.png" Height="20" Margin="0 0 5 0" Width="20" MouseLeftButtonDown="EditEmailBttn_MouseLeftButtonDown"/>
+                        <StackPanel Name="EmailDecision" Visibility="Collapsed" Orientation="Horizontal" Margin="0 0 5 0">
+                            <Image Name="EmailAcceptBttn" Source="/Resources/acceptico.png" 
+                                   Height="20" Width="20" MouseLeftButtonDown="EmailAcceptBttn_MouseLeftButtonDown"/>
+                            <Image Name="EmailDeclineBttn" Source="/Resources/declineico.png" 
+                                   Height="20" Width="20" MouseLeftButtonDown="EmailDeclineBttn_MouseLeftButtonDown"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+                <Button Height="30" Margin="5 10 5 5" Content="Выйти из аккаунта" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
+                        Name="LogOutBttn" Click="LogOutBttn_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
