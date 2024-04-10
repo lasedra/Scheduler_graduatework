@@ -48,29 +48,50 @@
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
 
+                    <DataGridTemplateColumn Header="Предмет" x:Name="SubjectTemplateColumn">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Subject.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding DataContext.Subjects, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                          SelectedItem="{Binding Subject, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"
+                                          SelectionChanged="SubjectCBcell_SelectionChanged"
+                                          MouseLeftButtonDown="ComboBox_MouseLeftButtonDown"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    
                     <DataGridTemplateColumn Header="Преподаватель" x:Name="TutorTemplateColumn">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Tutor.Name}"/>
+                                <TextBlock Text="{Binding Tutor.Name, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
                                 <ComboBox ItemsSource="{Binding DataContext.Tutors, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                          SelectedItem="{Binding Tutor}" DisplayMemberPath="Name"/>
+                                          SelectedItem="{Binding Tutor, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"
+                                          SelectionChanged="TutorCBcell_SelectionChanged"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
-                    
-                    <!--<DataGridComboBoxColumn Header="Предмет" x:Name="SubjectColumn" Width="*" 
-                                            DisplayMemberPath="Name" SelectedValueBinding="{Binding Subject}"
-                                            TextBinding="{Binding Subject}"/>
-                    <DataGridComboBoxColumn Header="Преподаватель" x:Name="TutorColumn" Width="*" 
-                                            DisplayMemberPath="Name"
-                                            SelectedItemBinding="{Binding Tutor}"/>
-                    <DataGridComboBoxColumn Header="Кабинет" x:Name="CabinetColumn" Width="*" 
-                                            DisplayMemberPath="Number" SelectedValueBinding="{Binding AtCabinet}"
-                                            TextBinding="{Binding Subject}"/>-->
+
+                    <DataGridTemplateColumn Header="Кабинет" x:Name="CabinetTemplateColumn">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding AtCabinet.Number}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding DataContext.Cabinets, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                          SelectedItem="{Binding AtCabinet}" DisplayMemberPath="Number"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

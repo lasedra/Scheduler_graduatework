@@ -108,3 +108,6 @@ WHERE
 	"OfDate" BETWEEN '2022-07-09' AND '2022-07-09'
 	AND
 	"StudentGroupCode" = '1312';
+
+SELECT * FROM "Employee" WHERE "Employee"."Employee_ID" = 
+	(SELECT "Employee_ID" FROM "Tution" WHERE )
