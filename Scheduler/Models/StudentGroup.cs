@@ -10,4 +10,6 @@ public partial class StudentGroup
     public string? Specialization { get; set; }
 
     public virtual ICollection<DailyScheduleHeader> DailyScheduleHeaders { get; set; } = new List<DailyScheduleHeader>();
+
+    public virtual ICollection<Studying> Studyings { get; set; } = new List<Studying>();
 }

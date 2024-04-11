@@ -8,6 +8,11 @@ insert into "Employee" values
 (default, false, 'Югова Карина Антоновна', false, 'k-yugova', 'south_K', '@karinayugova42', '+7 910 885-76-19', 'karina_yugova@yandex.com'),
 (default, false, 'Чернышёв Евгений Павлович', true, 'e-chernishev', 'jeka_cherny', '@chernishevevgeny', '+7 977 534-92-14', null);
 
+insert into "StudentGroup" values
+('B4212', 'Информационные технологии'),
+('C2311', 'Иностранные языки'),
+('ПШ2020', 'Компьютерная грамотность');
+
 insert into "Subject" values 
 (default, 'Математика', 56),
 (default, 'Русский Язык', 42),
@@ -51,16 +56,25 @@ insert into "Tution" values
 (select "Employee_ID" from "Employee" where "Login" = 'e-chernishev'),
 '2019-02-01', '2019-07-05');
 
+insert into "Studying" values
+('B4212', (select "Subject_ID" from "Subject" where "Name" = 'Информатика')),
+('B4212', (select "Subject_ID" from "Subject" where "Name" = 'Математика')),
+('B4212', (select "Subject_ID" from "Subject" where "Name" = 'Английский Язык')),
+('B4212', (select "Subject_ID" from "Subject" where "Name" = 'Физика')),
+('C2311', (select "Subject_ID" from "Subject" where "Name" = 'Английский Язык')),
+('C2311', (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык')),
+('C2311', (select "Subject_ID" from "Subject" where "Name" = 'История')),
+('C2311', (select "Subject_ID" from "Subject" where "Name" = 'Обществознание')),
+('ПШ2020', (select "Subject_ID" from "Subject" where "Name" = 'Информатика')),
+('ПШ2020', (select "Subject_ID" from "Subject" where "Name" = 'Биология')),
+('ПШ2020', (select "Subject_ID" from "Subject" where "Name" = 'Физическая культура')),
+('ПШ2020', (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык'));
+
 insert into "Cabinet" values
 (701, null),
 (702, 'Purple'),
 (703, 'Blue'),
 (705, 'Orange');
-
-insert into "StudentGroup" values
-('В4212', 'Информационные технологии'),
-('C2311', 'Иностранные языки'),
-('1312', null);
 
 insert into "ClassesTiming_header" values 
 (default, 'Сокращённое');
@@ -77,7 +91,8 @@ insert into "ClassesTiming_body" values
 
 /*------------------------------------------------Расписание на 2022-09-01 (pivot example)------------------------------------------------------------*/
 insert into "DailySchedule_header" values
-('1312', '2022-07-09');
+('1312', '2022-07-09'),
+('1311', '2022-07-09');
 insert into "DailySchedule_body" values
                         /* Первый урок */
 ('1312', '2022-07-09',
@@ -99,4 +114,24 @@ insert into "DailySchedule_body" values
     4, 
     (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
     null, null, null);
-
+insert into "DailySchedule_body" values
+                        /* Первый урок */
+('1311', '2022-07-09',
+    1, 
+    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
+    null, null, null),
+                        /* Второй урок */
+('1311', '2022-07-09',
+    2, 
+    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
+    null, null, null),
+                        /* Третий урок */
+('1311', '2022-07-09',
+    3, 
+    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
+    null, null, null),
+                        /* Четвёртый урок */
+('1311', '2022-07-09',
+    4, 
+    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
+    null, null, null);

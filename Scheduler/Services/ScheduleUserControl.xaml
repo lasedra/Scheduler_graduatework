@@ -152,6 +152,9 @@
                 <Button x:Name="FridayEditBttn" Click="EditTabBttn_Click"
                         Content="Изменить" Padding="5" Height="30" Background="{StaticResource Light red}" Style="{StaticResource RoundedButtonStyle}"/>
             </StackPanel>
+
+            <Button Grid.Column="1" Grid.Row="2" Width="300" Height="50" 
+                    Name="ScheduleEditingBttn" Content="Изменение расписания" Click="ScheduleEditingBttn_Click"/>
         </Grid>
     </Grid>
 </UserControl>

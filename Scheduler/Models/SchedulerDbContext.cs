@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Scheduler.Windows;
 
 namespace Scheduler.Models;
 
@@ -14,6 +12,7 @@ public partial class SchedulerDbContext : DbContext
     {
         AppConfig = configuration;
     }
+
 
     public virtual DbSet<Cabinet> Cabinets { get; set; }
 
@@ -31,17 +30,18 @@ public partial class SchedulerDbContext : DbContext
 
     public virtual DbSet<StudentGroup> StudentGroups { get; set; }
 
+    public virtual DbSet<Studying> Studyings { get; set; }
+
     public virtual DbSet<Subject> Subjects { get; set; }
 
     public virtual DbSet<Tution> Tutions { get; set; }
 
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 #warning Pick connection here
-//        ConnectionPickWindow connectionPickWindow = new ConnectionPickWindow();
-//        connectionPickWindow.ShowDialog();
-//        optionsBuilder.UseNpgsql(connectionPickWindow.ReturnString);
+        //ConnectionPickWindow connectionPickWindow = new ConnectionPickWindow();
+        //connectionPickWindow.ShowDialog();
+        //optionsBuilder.UseNpgsql(connectionPickWindow.ReturnString);
         optionsBuilder.UseNpgsql(AppConfig.GetConnectionString("localhost"));
     }
 
@@ -174,6 +174,26 @@ public partial class SchedulerDbContext : DbContext
 
             entity.Property(e => e.StudentGroupCode).HasColumnType("character varying");
             entity.Property(e => e.Specialization).HasColumnType("character varying");
+        });
+
+        modelBuilder.Entity<Studying>(entity =>
+        {
+            entity.HasKey(e => new { e.SubjectId, e.StudentGroupCode }).HasName("Studying_pkey");
+
+            entity.ToTable("Studying");
+
+            entity.Property(e => e.SubjectId).HasColumnName("Subject_ID");
+            entity.Property(e => e.StudentGroupCode).HasColumnType("character varying");
+
+            entity.HasOne(d => d.StudentGroupCodeNavigation).WithMany(p => p.Studyings)
+                .HasForeignKey(d => d.StudentGroupCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Studying_StudentGroupCode_fkey");
+
+            entity.HasOne(d => d.Subject).WithMany(p => p.Studyings)
+                .HasForeignKey(d => d.SubjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Studying_Subject_ID_fkey");
         });
 
         modelBuilder.Entity<Subject>(entity =>

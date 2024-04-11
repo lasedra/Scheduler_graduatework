@@ -13,6 +13,8 @@ namespace Scheduler
         public RegistrationPage RegistrationPage = new();
         public UserProfilePage UserProfilePage = new();
 
+        public StudentGroupPage StudentGroupPage = new();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,6 +30,11 @@ namespace Scheduler
         private void UserNamePanel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             PagesFrame.Navigate(UserProfilePage);
+        }
+
+        private void StudentGroupPageBttn_Click(object sender, RoutedEventArgs e)
+        {
+            PagesFrame.Navigate(StudentGroupPage);
         }
     }
 }

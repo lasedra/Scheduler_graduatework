@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Scheduler.Models;
+using Scheduler.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +22,11 @@ namespace Scheduler.Services
 
         public ScheduleController()
         {
+            #warning В первую очередь текущую неделю
             CurrentWeek = new TimePeriod(DateOnly.FromDateTime(DateTime.Now.Date));
-            CurrentGroupCode = "Не указано";
 
-            if (!CreatePivotScheduleIfHasNoAny())
-            {
-                CurrentWeek = new TimePeriod(SchedulerDbContext.dbContext.DailyScheduleHeaders.Max(c => c.OfDate));
-                CurrentGroupCode = SchedulerDbContext.dbContext.DailyScheduleHeaders.First(c => c.OfDate == CurrentWeek.TodayDate).StudentGroupCode;
-            }
+            CreatePivotScheduleIfHasNoAny();
+            CurrentGroupCode = SchedulerDbContext.dbContext.DailyScheduleHeaders.First().StudentGroupCode;
             SetDayTabs();
         }
 
@@ -89,43 +87,53 @@ namespace Scheduler.Services
             return quey.Where(c => c.DayOfWeek == dayOfWeek).ToList();
         }
 
-        public bool CreatePivotScheduleIfHasNoAny()
+        public void CreatePivotScheduleIfHasNoAny()
         {
+            // Pivot расписание на каждый день текущей недели, для каждой группы студентов
             if (!SchedulerDbContext.dbContext.DailyScheduleHeaders.Any(c => c.OfDate > CurrentWeek.SchoolyearStart))
             {
-                // Pivot расписание на каждый день текущей недели
-                for (int d = 0; d <= 4; d++)
+                StudentGroupPage studentGroupPage = new StudentGroupPage();
+
+
+                List<StudentGroup> groups = SchedulerDbContext.dbContext.StudentGroups.ToList();
+
+                // Шапки
+                foreach (StudentGroup group in groups)
                 {
-                    SchedulerDbContext.dbContext.DailyScheduleHeaders.Add(new DailyScheduleHeader()
+                    for (int d = 0; d <= 4; d++)
                     {
-                        StudentGroupCode = "Не указано",
-                        OfDate = CurrentWeek.WeekStart.AddDays(d),
-                    });
+                        SchedulerDbContext.dbContext.DailyScheduleHeaders.Add(new DailyScheduleHeader()
+                        {
+                            StudentGroupCode = group.StudentGroupCode,
+                            OfDate = CurrentWeek.WeekStart.AddDays(d),
+                        });
+                    }
                 }
                 SchedulerDbContext.dbContext.SaveChanges();
 
-
-                for (int d = 0; d <= 4; d++) // Дней в неделе
+                // Табличные части
+                foreach (StudentGroup group in groups)
                 {
-                    for (int i = 0; i <= 3; i++) // Уроков в день
+                    for (int d = 0; d <= 4; d++) // Дней в неделе
                     {
-                        SchedulerDbContext.dbContext.DailyScheduleBodies.Add(new DailyScheduleBody()
+                        for (int i = 0; i <= 3; i++) // Уроков в день
                         {
-                            DailyScheduleHeader = SchedulerDbContext.dbContext.DailyScheduleHeaders.First(c => c.OfDate == CurrentWeek.WeekStart.AddDays(d)),
-                            ClassNumber = i + 1,
-                            ClassesTimingHeaderId = SchedulerDbContext.dbContext.ClassesTimingHeaders.First(c => c.Name == "Основное").ClassesTimingHeaderId,
-                            Subject = null,
-                            Employee = null,
-                            CabinetNumber = null
-                        });
+                            SchedulerDbContext.dbContext.DailyScheduleBodies.Add(new DailyScheduleBody()
+                            {
+                                DailyScheduleHeader = SchedulerDbContext.dbContext.DailyScheduleHeaders.First
+                                    (c => c.OfDate == CurrentWeek.WeekStart.AddDays(d) && c.StudentGroupCode == group.StudentGroupCode),
+                                ClassNumber = i + 1,
+                                ClassesTimingHeaderId = SchedulerDbContext.dbContext.ClassesTimingHeaders.First(c => c.Name == "Основное").ClassesTimingHeaderId,
+                                Subject = null,
+                                Employee = null,
+                                CabinetNumber = null
+                            });
+                        }
                     }
-                    SchedulerDbContext.dbContext.SaveChanges();
                 }
-
-                MessageBox.Show("Вы стали первым пользователем, создавшим расписание!\nВозмите с полки пирожок!", "Поздравляю!", MessageBoxButton.OK, MessageBoxImage.Information);
-                return true;
-            } 
-            else return false;
+                SchedulerDbContext.dbContext.SaveChanges();
+                MessageBox.Show("Для каждой учебной группы созданы пустые расписания на текущую неделю", "Поздравляю!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         public void AddSchedule(string studentGroupCode)
@@ -208,18 +216,16 @@ namespace Scheduler.Services
                             break; 
                         }
                 }
-                if (TodayDate.Month != 8)
+                if (TodayDate.Month >= 9)
                 {
-                    if (TodayDate.Month >= 9) {
-                        SchoolyearStart = new DateOnly(TodayDate.Year, 9, 1);
-                        SchoolyearEnd = new DateOnly(TodayDate.Year + 1, 7, 30);
-                    } else {
-                        SchoolyearStart = new DateOnly(TodayDate.Year - 1, 9, 1);
-                        SchoolyearEnd = new DateOnly(TodayDate.Year, 7, 30);
-                    }
+                    SchoolyearStart = new DateOnly(TodayDate.Year, 9, 1);
+                    SchoolyearEnd = new DateOnly(TodayDate.Year + 1, 7, 30);
                 }
                 else
-                    throw new Exception("It's vacation... \nGo touch some grass, bruh");
+                {
+                    SchoolyearStart = new DateOnly(TodayDate.Year - 1, 9, 1);
+                    SchoolyearEnd = new DateOnly(TodayDate.Year, 7, 30);
+                }
             }
 
             public string GetWeekSpan() 

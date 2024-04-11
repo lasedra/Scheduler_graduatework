@@ -26,8 +26,15 @@ Create table "Subject"
 (
 	"Subject_ID" uuid default gen_random_uuid() NOT NULL,
 	"Name" Varchar NOT NULL UNIQUE,
-	"ClassesNumber" Integer NOT NULL,
+	"ClassesNumber" Integer,
  primary key ("Subject_ID")
+);
+
+Create table "StudentGroup"
+(
+	"StudentGroupCode" Varchar NOT NULL,
+	"Specialization" Varchar,
+ primary key ("StudentGroupCode")
 );
 
 Create table "Tution"
@@ -39,18 +46,20 @@ Create table "Tution"
  primary key ("Subject_ID", "Employee_ID")
 );
 
+Create table "Studying"
+(
+	"StudentGroupCode" Varchar references "StudentGroup" ("StudentGroupCode") NOT NULL,
+	"Subject_ID" uuid references "Subject" ("Subject_ID") NOT NULL,
+	"StartDate" Date,
+	"EndDate" Date,
+primary key ("Subject_ID", "StudentGroupCode")
+);
+
 Create table "Cabinet"
 (
 	"Number" Varchar NOT NULL,
 	"Name" Varchar,
  primary key ("Number")
-);
-
-Create table "StudentGroup"
-(
-	"StudentGroupCode" Varchar NOT NULL,
-	"Specialization" Varchar,
- primary key ("StudentGroupCode")
 );
 
 Create table "ClassesTiming_header"

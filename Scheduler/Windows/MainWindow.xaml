@@ -28,7 +28,8 @@
                 <Button Background="{StaticResource Mid red}" Foreground="White" FontWeight="SemiBold" FontSize="15" Style="{StaticResource RoundedButtonStyle}"
                         Height="35" Content="Кабинеты" Width="90" Margin="10"/>
                 <Button Background="{StaticResource Mid red}" Foreground="White" FontWeight="SemiBold" FontSize="15" Style="{StaticResource RoundedButtonStyle}"
-                        Height="35" Content="Группы" Width="80" Margin="10"/>
+                        Height="35" Content="Группы" Width="80" Margin="10"
+                        Name="StudentGroupPageBttn" Click="StudentGroupPageBttn_Click"/>
                 <Button Background="{StaticResource Mid red}" Foreground="White" FontWeight="SemiBold" FontSize="15" Style="{StaticResource RoundedButtonStyle}"
                         Height="35" Content="Расписания звонков" Width="165" Margin="10"/>
             </DockPanel>

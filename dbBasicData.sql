@@ -1,9 +1,6 @@
 insert into "Employee" values
 (default, true, 'Admin', true, 'admin', 'admin01', '@admin', '+7 000 000-00-00', 'admin@mail.ru');
 
-insert into "StudentGroup" values
-('Не указано', null);
-
 insert into "ClassesTiming_header" values 
 (default, 'Основное');
 insert into "ClassesTiming_body" values 

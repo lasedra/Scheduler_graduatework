@@ -9,29 +9,20 @@ using System.Windows.Controls;
 
 namespace Scheduler.Pages
 {
-    /* 
-      TODO: Миграции
-            Базовые справочные данные:
-            - Студ. группа типа "Не указана"
-            - аккаунт админа
-            - основное и сокращённое расписания
-    */
+    // TODO: Фильтрация расписания по группам
+    /* TODO: Миграции */
     /* TODO: Использовать хеширование */
-    /* TODO: Пофиксить скрытие верхней панели */
-    /* TODO: Сделать "Запомнить меня" */
     /* TODO: Функционал:
                 1) Оповещения МУП-а о внесении изменений в расписание
                 2) Логгирование*/
 
     public partial class MainSchedulePage : Page
     {
-        ScheduleController schController = new ScheduleController();
+        ScheduleController schController = null!;
 
         public MainSchedulePage()
         {
             InitializeComponent();
-            UpdateScheduleSource();
-            
         }
 
         private void BackOnTimelineBttn_Click(object sender, RoutedEventArgs e)
@@ -45,9 +36,7 @@ namespace Scheduler.Pages
             if(ForwardOnTimelineBttn.Content == "+")
             {
                 /* TODO: Предоставить выбор */
-                StudentGroupPickWindow studentGroupPickWindow = new();
-                studentGroupPickWindow.ShowDialog();
-                schController.AddSchedule(studentGroupPickWindow.ReturnString);
+                schController.AddSchedule(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
                 UpdateScheduleSource();
             }
             else
@@ -60,7 +49,6 @@ namespace Scheduler.Pages
         public void UpdateScheduleSource()
         {
             StudentGroupComboBox.ItemsSource = SchedulerDbContext.dbContext.StudentGroups.ToList();
-            /* TODO: ЕБАНО ГРУППЫ ФИЛЬТРУЮТСЯ */
             StudentGroupComboBox.SelectedItem = SchedulerDbContext.dbContext.StudentGroups.First(c => c.StudentGroupCode == schController.CurrentGroupCode);
 
             ScheduleWeekSpanTB.Text = schController.CurrentWeek.GetWeekSpan();
@@ -75,6 +63,19 @@ namespace Scheduler.Pages
             Schedule.WednesdayGrid.ItemsSource = schController.WednesdayTab;
             Schedule.ThursdayGrid.ItemsSource = schController.ThursdayTab;
             Schedule.FridayGrid.ItemsSource = schController.FridayTab;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!SchedulerDbContext.dbContext.StudentGroups.Any())
+            {
+                NavigationService.Navigate(new StudentGroupPage(true));
+            }
+            else
+            {
+                schController = new();
+                UpdateScheduleSource();
+            }
         }
     }
 }

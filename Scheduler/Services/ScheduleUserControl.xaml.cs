@@ -32,5 +32,10 @@ namespace Scheduler.Services
             }
             NavigationService.GetNavigationService(this).Navigate(new EditScheduleTabPage(sourceDayTab));
         }
+
+        private void ScheduleEditingBttn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new ScheduleEditingPage());
+        }
     }
 }

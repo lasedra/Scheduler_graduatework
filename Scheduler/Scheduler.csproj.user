@@ -19,6 +19,12 @@
     <Compile Update="Pages\RegistrationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ScheduleEditingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\StudentGroupPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\UserProfilePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,15 +34,18 @@
     <Compile Update="Windows\ConnectionPickWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\StudentGroupPickWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\EditScheduleTabPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ScheduleEditingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\StudentGroupPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\UserProfilePage.xaml">
@@ -55,9 +64,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\MainSchedulePage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Windows\StudentGroupPickWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
