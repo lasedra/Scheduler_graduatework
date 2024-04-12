@@ -20,7 +20,7 @@
         <DockPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal" Margin="20 0 0 0" Height="50">
                 <TextBlock Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Text="РАСПИСАНИЕ ДЛЯ ГРУППЫ:" VerticalAlignment="Center"/>
-                <ComboBox Style="{StaticResource ComboBoxStyle}"
+                <ComboBox Style="{StaticResource ComboBoxStyle}" SelectionChanged="StudentGroupComboBox_SelectionChanged"
                           Name="StudentGroupComboBox" SelectedIndex="0"
                           Height="30" Width="100" Margin="5 0 0 0">
                     <ComboBox.ItemTemplate>
