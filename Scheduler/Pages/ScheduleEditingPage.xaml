@@ -3,87 +3,128 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Scheduler.Pages"
+      xmlns:local="clr-namespace:Scheduler.Pages" xmlns:sevices="clr-namespace:Scheduler.Services"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ScheduleEditingPage">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="175"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" VerticalAlignment="Center" Background="{StaticResource Light gray}">
+        <StackPanel VerticalAlignment="Center">
+            <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Преподаватель" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
+                    <ComboBox Name="TutorComboBox" SelectionChanged="TutorComboBox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <TextBlock Text="Группа" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
+                    <ComboBox Name="StudentGroupComboBox" >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding StudentGroupCode}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <TextBlock Text="Предмет" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
+                    <ComboBox Name="SubjectComboBox" IsEnabled="False">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <TextBlock Text="Аудитория" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5" HorizontalAlignment="Left"/>
+                    <ComboBox Name="CabinetComboBox">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Number}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel Grid.Row="0" Margin="5" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal" Margin="5" DockPanel.Dock="Left">
+                    <TextBlock Text="Пары:" VerticalAlignment="Center" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="10 5 5 5"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="1" Margin="2" Height="30" Width="30"/>
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="2" Margin="2" Height="30" Width="30"/>
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="3" Margin="2" Height="30" Width="30"/>
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="4" Margin="2" Height="30" Width="30"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Дни недели:" VerticalAlignment="Center" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="10 5 5 5"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Пн" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Вт" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Ср" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Чт" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Пт" Margin="2" Height="30" Width="50"/>
+                    </StackPanel>
+                </StackPanel>
 
-            <StackPanel Margin="5">
-                <TextBlock Text="Преподаватель"/>
-                <ComboBox Name="TutorComboBox" SelectionChanged="TutorComboBox_SelectionChanged">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
-
-            <StackPanel Margin="5">
-                <TextBlock Text="Группа"/>
-                <ComboBox Name="StudentGroupComboBox">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding StudentGroupCode}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
-
-            <StackPanel Margin="5">
-                <TextBlock Text="Предмет"/>
-                <ComboBox Name="SubjectComboBox" IsEnabled="False">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
-
-            <StackPanel Margin="5">
-                <TextBlock Text="Аудитория"/>
-                <ComboBox Name="CabinetComboBox">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Number}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
-
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Button Content="Отмена" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}" 
+                            Width="70" Margin="5"/>
+                    <Button Content="Сохранить" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}" 
+                            Width="90" Margin="5"/>
+                </StackPanel>
+            </DockPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Background="{StaticResource Light gray}" Height="100" VerticalAlignment="Top">
-            <StackPanel Margin="5">
-                <TextBlock Text="Пары"/>
-                <StackPanel Orientation="Horizontal">
-                    <CheckBox Content="1"/>
-                    <CheckBox Content="2"/>
-                    <CheckBox Content="3"/>
-                    <CheckBox Content="4"/>
-                    <CheckBox Content="5"/>
+        <StackPanel Grid.Row="1">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="BackOnTimelineBttn" d:Content="&#xAB;"
+                        Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
+                        Width="30" Height="30" Margin="5"/>
+                    <TextBlock Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="5"
+                           Name="ScheduleWeekSpanTB"/>
+                    <Button x:Name="ForwardOnTimelineBttn" d:Content="&#xBB;"
+                        Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
+                        Width="30" Height="30" Margin="5 0 20 0"/>
                 </StackPanel>
-            </StackPanel>
-
-            <StackPanel Margin="5">
-                <TextBlock Text="Дни недели"/>
-                <StackPanel Orientation="Horizontal">
-                    <CheckBox Content="Пн"/>
-                    <CheckBox Content="Вт"/>
-                    <CheckBox Content="Ср"/>
-                    <CheckBox Content="Чт"/>
-                    <CheckBox Content="Пт"/>
-                    <CheckBox Content="Сб"/>
-                </StackPanel>
-            </StackPanel>
+            </DockPanel>
+            <DataGrid x:Name="MondayGrid" Uid="mondayGrid"
+                      AutoGenerateColumns="False" 
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserSortColumns="False"
+                      HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Пара">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Foreground" Value="DarkRed"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Понедельник" Width="*"/>
+                    <DataGridTextColumn Header="Вторник" Width="*"/>
+                    <DataGridTextColumn Header="Среда" Width="*"/>
+                    <DataGridTextColumn Header="Четверг" Width="*"/>
+                    <DataGridTextColumn Header="Пятница" Width="*"/>
+                    <DataGridTextColumn Header="Суббота" Width="*"/>
+                    <DataGridTextColumn Header="Воскресенье" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </Page>

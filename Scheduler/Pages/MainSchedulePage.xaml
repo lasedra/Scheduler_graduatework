@@ -20,7 +20,7 @@
         <DockPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal" Margin="20 0 0 0" Height="50">
                 <TextBlock Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Text="РАСПИСАНИЕ ДЛЯ ГРУППЫ:" VerticalAlignment="Center"/>
-                <ComboBox Style="{StaticResource ComboBoxStyle}" SelectionChanged="StudentGroupComboBox_SelectionChanged"
+                <ComboBox SelectionChanged="StudentGroupComboBox_SelectionChanged"
                           Name="StudentGroupComboBox" SelectedIndex="0"
                           Height="30" Width="100" Margin="5 0 0 0">
                     <ComboBox.ItemTemplate>
@@ -36,7 +36,7 @@
                         Width="60" Height="30" Margin="5"/>
                 <TextBlock Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="5"
                            Name="ScheduleWeekSpanTB"/>
-                <Button x:Name="ForwardOnTimelineBttn" Click="ForwardOnTimelineBttn_Click"
+                <Button x:Name="ForwardOnTimelineBttn" Click="ForwardOnTimelineBttn_Click" d:Content="&#xBB;"
                         Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
                         Width="30" Height="30" Margin="5 0 20 0"/>
             </StackPanel>

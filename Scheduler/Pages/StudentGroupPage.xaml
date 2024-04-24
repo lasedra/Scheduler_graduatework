@@ -15,12 +15,12 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Width="250" Height="50" Margin="10">
-                <TextBlock Text="Код группы:" Foreground="{StaticResource Text gray}"/>
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <TextBlock Text="Код группы:" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
                 <TextBox x:Name="StudentGroupCodeTxtBox"/>
             </StackPanel>
-            <StackPanel Width="250" Height="50" Margin="10">
-                <TextBlock Text="Специализация: (не обяз.)" Foreground="{StaticResource Text gray}"/>
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <TextBlock Text="Специализация: (не обяз.)" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
                 <TextBox x:Name="SpecializationTxtBox"/>
             </StackPanel>
             <Button Content="Добавить группу" Margin="10" Height="50" Padding="10"
