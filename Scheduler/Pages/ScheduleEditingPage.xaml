@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Scheduler.Pages" xmlns:sevices="clr-namespace:Scheduler.Services"
+      xmlns:local="clr-namespace:Scheduler.Pages" 
+      xmlns:sevices="clr-namespace:Scheduler.Services"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ScheduleEditingPage">
@@ -14,18 +15,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel VerticalAlignment="Center">
-            <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                <StackPanel Margin="5">
-                    <TextBlock Text="Преподаватель" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
-                    <ComboBox Name="TutorComboBox" SelectionChanged="TutorComboBox_SelectionChanged">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel Margin="5">
+            <DockPanel Grid.Row="0" HorizontalAlignment="Center">
+                <StackPanel Margin="10">
                     <TextBlock Text="Группа" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
                     <ComboBox Name="StudentGroupComboBox" >
                         <ComboBox.ItemTemplate>
@@ -35,7 +26,17 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel Margin="5">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Преподаватель" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
+                    <ComboBox Name="TutorComboBox" SelectionChanged="TutorComboBox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="10">
                     <TextBlock Text="Предмет" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5"/>
                     <ComboBox Name="SubjectComboBox" IsEnabled="False">
                         <ComboBox.ItemTemplate>
@@ -45,7 +46,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel Margin="5">
+                <StackPanel Margin="10">
                     <TextBlock Text="Аудитория" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="5" HorizontalAlignment="Left"/>
                     <ComboBox Name="CabinetComboBox">
                         <ComboBox.ItemTemplate>
@@ -60,28 +61,26 @@
                 <StackPanel Orientation="Horizontal" Margin="5" DockPanel.Dock="Left">
                     <TextBlock Text="Пары:" VerticalAlignment="Center" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="10 5 5 5"/>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="1" Margin="2" Height="30" Width="30"/>
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="2" Margin="2" Height="30" Width="30"/>
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="3" Margin="2" Height="30" Width="30"/>
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="4" Margin="2" Height="30" Width="30"/>
+                        <ToggleButton Name="FirstClass" Style="{StaticResource RoundedToggleButtonStyle}" Content="1" Margin="2" Height="30" Width="30"/>
+                        <ToggleButton x:Name="SecondClass" Style="{StaticResource RoundedToggleButtonStyle}" Content="2" Margin="2" Height="30" Width="30"/>
+                        <ToggleButton x:Name="ThirdClass" Style="{StaticResource RoundedToggleButtonStyle}" Content="3" Margin="2" Height="30" Width="30"/>
+                        <ToggleButton x:Name="FourthClass" Style="{StaticResource RoundedToggleButtonStyle}" Content="4" Margin="2" Height="30" Width="30"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Дни недели:" VerticalAlignment="Center" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold" Margin="10 5 5 5"/>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Пн" Margin="2" Height="30" Width="50"/>
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Вт" Margin="2" Height="30" Width="50"/>
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Ср" Margin="2" Height="30" Width="50"/>
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Чт" Margin="2" Height="30" Width="50"/>
-                        <ToggleButton Style="{StaticResource RoundedToggleButtonStyle}" Content="Пт" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton x:Name="Monday" Style="{StaticResource RoundedToggleButtonStyle}" Content="Пн" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton x:Name="Tuesday" Style="{StaticResource RoundedToggleButtonStyle}" Content="Вт" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton x:Name="Wednesday" Style="{StaticResource RoundedToggleButtonStyle}" Content="Ср" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton x:Name="Thursday" Style="{StaticResource RoundedToggleButtonStyle}" Content="Чт" Margin="2" Height="30" Width="50"/>
+                        <ToggleButton x:Name="Friday" Style="{StaticResource RoundedToggleButtonStyle}" Content="Пт" Margin="2" Height="30" Width="50"/>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                    <Button Content="Отмена" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}" 
-                            Width="70" Margin="5"/>
                     <Button Content="Сохранить" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}" 
-                            Width="90" Margin="5"/>
+                            Width="90" Margin="5" Name="SaveChangesBttn" Click="SaveChangesBttn_Click"/>
                 </StackPanel>
             </DockPanel>
         </StackPanel>
@@ -99,32 +98,8 @@
                         Width="30" Height="30" Margin="5 0 20 0"/>
                 </StackPanel>
             </DockPanel>
-            <DataGrid x:Name="MondayGrid" Uid="mondayGrid"
-                      AutoGenerateColumns="False" 
-                      CanUserAddRows="False"
-                      CanUserDeleteRows="False"
-                      CanUserSortColumns="False"
-                      HeadersVisibility="Column">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Пара">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
-                                <Setter Property="Foreground" Value="DarkRed"/>
-                                <Setter Property="FontSize" Value="16"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Понедельник" Width="*"/>
-                    <DataGridTextColumn Header="Вторник" Width="*"/>
-                    <DataGridTextColumn Header="Среда" Width="*"/>
-                    <DataGridTextColumn Header="Четверг" Width="*"/>
-                    <DataGridTextColumn Header="Пятница" Width="*"/>
-                    <DataGridTextColumn Header="Суббота" Width="*"/>
-                    <DataGridTextColumn Header="Воскресенье" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
+
+            <sevices:ScheduleEditingUserControl Grid.Row="2" x:Name="ScheduleEditing" Height="235"/>
         </StackPanel>
     </Grid>
 </Page>

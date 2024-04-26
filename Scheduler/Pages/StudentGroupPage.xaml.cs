@@ -8,18 +8,19 @@ namespace Scheduler.Pages
 {
     public partial class StudentGroupPage : Page
     {
-        public StudentGroupPage(bool hideMenuBar = false)
+        public StudentGroupPage(bool isGettingStarted = false)
         {
             InitializeComponent();
-            StudentsGroupsListView.ItemsSource = SchedulerDbContext.dbContext.StudentGroups.ToList();
-            if (hideMenuBar)
+            if (isGettingStarted)
             {
-                MessageBox.Show("Для начала работы, внестие данные о группах студентов","Необходимые данные!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Для начала работы, внестие данные о группах студентов", "Необходимые данные!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 ((DockPanel)((MainWindow)Application.Current.MainWindow).FindName("MenuPanel")).Visibility = Visibility.Collapsed;
             }
+            else
+                StudentsGroupsListView.ItemsSource = SchedulerDbContext.dbContext.StudentGroups.ToList();
         }
 
-        private void AddNewGroupBttn_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void AddNewGroupBttn_Click(object sender, RoutedEventArgs e)
         {
             if (!String.IsNullOrEmpty(StudentGroupCodeTxtBox.Text))
             {

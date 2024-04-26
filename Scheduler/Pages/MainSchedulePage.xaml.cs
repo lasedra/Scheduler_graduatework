@@ -23,9 +23,6 @@ namespace Scheduler.Pages
         public MainSchedulePage()
         {
             InitializeComponent();
-
-            StudentGroupComboBox.ItemsSource = SchedulerDbContext.dbContext.StudentGroups.ToList();
-            StudentGroupComboBox.SelectedItem = StudentGroupComboBox.Items.GetItemAt(0);
         }
 
         private void BackOnTimelineBttn_Click(object sender, RoutedEventArgs e)
@@ -87,6 +84,8 @@ namespace Scheduler.Pages
             else
             {
                 schController = new();
+                StudentGroupComboBox.ItemsSource = SchedulerDbContext.dbContext.StudentGroups.ToList();
+                StudentGroupComboBox.SelectedItem = StudentGroupComboBox.Items.GetItemAt(0);
                 UpdateScheduleSource();
             }
         }

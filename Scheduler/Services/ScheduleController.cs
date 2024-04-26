@@ -55,7 +55,7 @@ namespace Scheduler.Services
             //return SchedulerDbContext.dbContext.DailyScheduleBodies.FromSqlInterpolated(select).ToList();
             #endregion
 
-            var quey = from dailySchedule in SchedulerDbContext.dbContext.DailyScheduleBodies
+            var query = from dailySchedule in SchedulerDbContext.dbContext.DailyScheduleBodies
                         join classesTiming in SchedulerDbContext.dbContext.ClassesTimingHeaders on dailySchedule.ClassesTimingHeaderId 
                             equals classesTiming.ClassesTimingHeaderId into timingGroup
                         from timing in timingGroup.DefaultIfEmpty()
@@ -84,7 +84,7 @@ namespace Scheduler.Services
                             Subject = SchedulerDbContext.dbContext.Subjects.First(c => c.SubjectId == dailySchedule.SubjectId),
                             AtCabinet = SchedulerDbContext.dbContext.Cabinets.First(c => c.Number == dailySchedule.CabinetNumber)
                         };
-            return quey.Where(c => c.DayOfWeek == dayOfWeek).ToList();
+            return query.Where(c => c.DayOfWeek == dayOfWeek).ToList();
         }
 
         public void CreatePivotScheduleIfHasNoAny()
@@ -235,7 +235,6 @@ namespace Scheduler.Services
         }
         public class DayTab
         {
-            /* TODO: Валидация здесь */
             public DateOnly OfDate { get; set; }
             public DayOfWeek DayOfWeek { get; set; }
             public string StudentGroupCode { get; set; }
@@ -247,7 +246,6 @@ namespace Scheduler.Services
             public Subject? Subject { get; set; }
             public Cabinet? AtCabinet { get; set; }
             public Employee? Tutor { get; set; }
-            /* TODO:  Расписания*/
         }
     }
 }

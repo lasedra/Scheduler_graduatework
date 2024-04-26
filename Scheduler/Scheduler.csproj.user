@@ -28,6 +28,9 @@
     <Compile Update="Pages\UserProfilePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Services\ScheduleEditingUserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Services\ScheduleUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\UserProfilePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Services\ScheduleEditingUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Services\ScheduleUserControl.xaml">

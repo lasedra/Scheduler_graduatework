@@ -87,3 +87,5 @@ C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\ScheduleEditingPage.baml
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\StudentGroupPage.g.cs
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\StudentGroupPage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Services\ScheduleEditingUserControl.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Services\ScheduleEditingUserControl.baml
