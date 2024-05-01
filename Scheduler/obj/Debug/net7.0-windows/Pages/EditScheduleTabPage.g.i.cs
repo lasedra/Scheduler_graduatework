@@ -109,7 +109,7 @@ namespace Scheduler.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Scheduler;component/pages/editscheduletabpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Scheduler;V1.0.0.0;component/pages/editscheduletabpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\EditScheduleTabPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

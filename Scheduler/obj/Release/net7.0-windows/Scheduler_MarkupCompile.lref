@@ -1,11 +1,10 @@
 ﻿C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Release\net7.0-windows\GeneratedInternalTypeHelper.g.cs
-FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\App.xaml;;
-FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Pages\AuthorisationPage.xaml;;
-FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Pages\EditScheduleTabPage.xaml;;
+
+FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\misc\ConnectionPickWindow.xaml;;
+FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\misc\EditScheduleTabPage.xaml;;
 FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Pages\MainSchedulePage.xaml;;
 FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Pages\RegistrationPage.xaml;;
 FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Pages\ScheduleEditingPage.xaml;;
 FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Pages\UserProfilePage.xaml;;
-FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Windows\ConnectionPickWindow.xaml;;
-FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Windows\MainWindow.xaml;;
+FC:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\UserControls\ScheduleEditingUserControl.xaml;;
 

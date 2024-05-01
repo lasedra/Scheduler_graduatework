@@ -5,43 +5,30 @@ namespace Scheduler.Models;
 
 public partial class SchedulerDbContext : DbContext
 {
-    public static IConfiguration AppConfig = null!;
-    public static SchedulerDbContext dbContext = null!;
-
-    public SchedulerDbContext(IConfiguration configuration)
-    {
-        AppConfig = configuration;
-    }
+    public static IConfiguration AppConfig { get; set; } = null!;
+    public static SchedulerDbContext DbContext { get; set; } = null!;
 
 
     public virtual DbSet<Cabinet> Cabinets { get; set; }
-
     public virtual DbSet<ClassesTimingBody> ClassesTimingBodies { get; set; }
-
     public virtual DbSet<ClassesTimingHeader> ClassesTimingHeaders { get; set; }
-
     public virtual DbSet<DailyScheduleBody> DailyScheduleBodies { get; set; }
-
     public virtual DbSet<DailyScheduleHeader> DailyScheduleHeaders { get; set; }
-
     public virtual DbSet<Employee> Employees { get; set; }
-
     public virtual DbSet<EventLog> EventLogs { get; set; }
-
     public virtual DbSet<StudentGroup> StudentGroups { get; set; }
-
     public virtual DbSet<Studying> Studyings { get; set; }
-
     public virtual DbSet<Subject> Subjects { get; set; }
-
     public virtual DbSet<Tution> Tutions { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-#warning Pick connection here
+        #region Pick connection here
         //ConnectionPickWindow connectionPickWindow = new ConnectionPickWindow();
         //connectionPickWindow.ShowDialog();
         //optionsBuilder.UseNpgsql(connectionPickWindow.ReturnString);
+        #endregion
         optionsBuilder.UseNpgsql(AppConfig.GetConnectionString("localhost"));
     }
 

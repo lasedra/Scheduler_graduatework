@@ -1,14 +1,12 @@
 ﻿using System.Windows;
-using System.Windows.Navigation;
+using System.Windows.Input;
 using Scheduler.Pages;
 
 namespace Scheduler
 {
     public partial class MainWindow : Window
     {
-
         public MainSchedulePage MainSchedulePage = new();
-
         public AuthorisationPage AuthorisationPage = new();
         public RegistrationPage RegistrationPage = new();
         public UserProfilePage UserProfilePage = new();
@@ -16,8 +14,12 @@ namespace Scheduler
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             PagesFrame.Navigate(AuthorisationPage);
         }
+
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -25,7 +27,7 @@ namespace Scheduler
                 PagesFrame.Navigate(MainSchedulePage);
         }
 
-        private void UserNamePanel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void UserNamePanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PagesFrame.Navigate(UserProfilePage);
         }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Scheduler.Models;
 using Scheduler.Services;
-using Scheduler.Windows;
 using System;
 using System.Linq;
 using System.Windows;
@@ -18,85 +17,82 @@ namespace Scheduler.Pages
 
     public partial class MainSchedulePage : Page
     {
-        ScheduleController schController = null!;
+        ScheduleController ScheduleController { get; set; } = null!;
 
         public MainSchedulePage()
         {
             InitializeComponent();
         }
-
-        private void BackOnTimelineBttn_Click(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            schController.CurrentWeek = new ScheduleController.TimePeriod(schController.CurrentWeek.WeekStart.AddDays(-7));
-            UpdateScheduleSource();
-        }
-
-        private void ForwardOnTimelineBttn_Click(object sender, RoutedEventArgs e)
-        {
-            if(ForwardOnTimelineBttn.Content == "+")
+            // Getting started check
+            if (!SchedulerDbContext.DbContext.StudentGroups.Any()) NavigationService.Navigate(new StudentGroupPage(true));
+            else
             {
-                var result = MessageBox.Show("Предупреждение", $"Вы уверены, что хотите создать новое расписание для группы {((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode}", 
-                        MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if(result == MessageBoxResult.Yes)
-                {
-                    schController.AddSchedule(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
-                    UpdateScheduleSource();
-                }
-            }
-            else if(ForwardOnTimelineBttn.Content == ">>")
-            {
-                schController.CurrentWeek = new ScheduleController.TimePeriod(schController.CurrentWeek.WeekStart.AddDays(7));
+                ScheduleController = new();
+                StudentGroupComboBox.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
                 UpdateScheduleSource();
             }
         }
 
         public void UpdateScheduleSource()
         {
-            ScheduleWeekSpanTB.Text = schController.CurrentWeek.GetWeekSpan();
+            DateOnly firstEverSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Min(c => c.OfDate);
+            DateOnly lastEverSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Max(c => c.OfDate);
 
-            DateOnly firstEverSked = SchedulerDbContext.dbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode)
-                                                                                      .Min(c => c.OfDate);
-            DateOnly lastEverSked = SchedulerDbContext.dbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode)
-                                                                                     .Max(c => c.OfDate);
-            BackOnTimelineBttn.Visibility = (schController.CurrentWeek.WeekStart == firstEverSked) ? Visibility.Hidden : Visibility.Visible;
-            if (schController.CurrentWeek.WeekStart.AddDays(4) == lastEverSked)
-            {
-                if (CurrentUser.Role == false)
-                    ForwardOnTimelineBttn.Content = "...";
-                else
-                    ForwardOnTimelineBttn.Content = "+";
-            }
+            //var selectedGroupCode = ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode;
+            //DateOnly selectedGroupFirstSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == selectedGroupCode).Min(c => c.OfDate);
+            //DateOnly selectedGroupLastSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == selectedGroupCode).Max(c => c.OfDate);
+
+            ScheduleWeekSpanTB.Text = ScheduleController.CurrentWeek.GetWeekSpan();
+
+            BackOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekStart == firstEverSchedule) ? Visibility.Hidden : Visibility.Visible;
+            if (CurrentUser.Role == true)
+                ForwardOnTimelineBttn.Content = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == lastEverSchedule) ? "+" : ">>";
             else
-                ForwardOnTimelineBttn.Content = ">>";
+                ForwardOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == lastEverSchedule) ? Visibility.Hidden : Visibility.Visible;
 
-            Schedule.MondayGrid.ItemsSource = schController.MondayTab;
-            Schedule.TuesdayGrid.ItemsSource = schController.TuesdayTab;
-            Schedule.WednesdayGrid.ItemsSource = schController.WednesdayTab;
-            Schedule.ThursdayGrid.ItemsSource = schController.ThursdayTab;
-            Schedule.FridayGrid.ItemsSource = schController.FridayTab;
+
+            Schedule.MondayGrid.ItemsSource = ScheduleController.MondayTab;
+            Schedule.TuesdayGrid.ItemsSource = ScheduleController.TuesdayTab;
+            Schedule.WednesdayGrid.ItemsSource = ScheduleController.WednesdayTab;
+            Schedule.ThursdayGrid.ItemsSource = ScheduleController.ThursdayTab;
+            Schedule.FridayGrid.ItemsSource = ScheduleController.FridayTab;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void BackOnTimelineBttn_Click(object sender, RoutedEventArgs e)
         {
-            // Getting started check
-            if (!SchedulerDbContext.dbContext.StudentGroups.Any())
-                NavigationService.Navigate(new StudentGroupPage(true));
-            else
+            ScheduleController.SetCurrentWeek(new TimePeriod(ScheduleController.CurrentWeek.WeekStart.AddDays(-7)));
+            UpdateScheduleSource();
+        }
+
+        private void ForwardOnTimelineBttn_Click(object sender, RoutedEventArgs e)
+        {
+            if(ForwardOnTimelineBttn.Content.ToString() == "+")
             {
-                schController = new();
-                StudentGroupComboBox.ItemsSource = SchedulerDbContext.dbContext.StudentGroups.ToList();
-                StudentGroupComboBox.SelectedItem = StudentGroupComboBox.Items.GetItemAt(0);
+                var result = MessageBox.Show(
+                    $"Вы уверены, что хотите создать новое расписание для группы {((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode}", 
+                    "Минуточку",
+                    MessageBoxButton.YesNo, 
+                    MessageBoxImage.Warning);
+
+                if(result == MessageBoxResult.Yes)
+                {
+                    ScheduleController.AddSchedule(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+                    UpdateScheduleSource();
+                }
+            }
+            else if(ForwardOnTimelineBttn.Content.ToString() == ">>")
+            {
+                ScheduleController.SetCurrentWeek(new TimePeriod(ScheduleController.CurrentWeek.WeekStart.AddDays(7)));
                 UpdateScheduleSource();
             }
         }
 
         private void StudentGroupComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(schController != null)
-            {
-                schController.CurrentGroupCode = ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode;
-                UpdateScheduleSource();
-            }
+            ScheduleController.SetCurrentGroupCode(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+            UpdateScheduleSource();
         }
     }
 }

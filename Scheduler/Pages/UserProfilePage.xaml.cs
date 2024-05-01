@@ -5,7 +5,6 @@ using System.Windows.Input;
 using System.Windows;
 using Scheduler.Models;
 using System.Linq;
-using System;
 
 namespace Scheduler.Pages
 {
@@ -15,13 +14,17 @@ namespace Scheduler.Pages
         {
             InitializeComponent();
         }
-        private void AccesNoSpaceInput(object sender, KeyEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Space)
-                e.Handled = true;
+            ProfileNameTextBlock.Text = CurrentUser.Name;
+            LoginTextBox.Text = CurrentUser.Login;
+            PhoneTextBox.Text = CurrentUser.PhoneNumber;
+            TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
+            EmailTextBox.Text = CurrentUser.EMail;
         }
 
-
+        private void AccesNoSpaceInput(object sender, KeyEventArgs e)
+            { if (e.Key == Key.Space) e.Handled = true; }
         private void PhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (PhoneTextBox.CaretIndex == 0 &&
@@ -34,9 +37,7 @@ namespace Scheduler.Pages
                 PhoneTextBox.Focus();
             }
             if (!char.IsDigit(e.Text, 0))
-            {
                 e.Handled = true;
-            }
         }
         private void TelegramIDTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -49,16 +50,6 @@ namespace Scheduler.Pages
             Regex regex = new Regex(@"[^@a-zA-Z0-9_\-\.]+");
             if (regex.IsMatch(e.Text))
                 e.Handled = true;
-        }
-
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            ProfileNameTextBlock.Text = CurrentUser.Name;
-            LoginTextBox.Text = CurrentUser.Login;
-            PhoneTextBox.Text = CurrentUser.PhoneNumber;
-            TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
-            EmailTextBox.Text = CurrentUser.EMail;
         }
 
 
@@ -78,8 +69,8 @@ namespace Scheduler.Pages
                 EditLoginBttn.Visibility = Visibility.Visible;
                 LoginDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.dbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).Login = LoginTextBox.Text.Trim();
-                SchedulerDbContext.dbContext.SaveChanges();
+                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).Login = LoginTextBox.Text.Trim();
+                SchedulerDbContext.DbContext.SaveChanges();
                 CurrentUser.Login = LoginTextBox.Text;
             }
         }
@@ -88,7 +79,6 @@ namespace Scheduler.Pages
             LoginTextBox.IsReadOnly = true;
             EditLoginBttn.Visibility = Visibility.Visible;
             LoginDecision.Visibility = Visibility.Collapsed;
-
             LoginTextBox.Text = CurrentUser.Login;
         }
 
@@ -108,8 +98,8 @@ namespace Scheduler.Pages
                 EditPhoneBttn.Visibility = Visibility.Visible;
                 PhoneDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.dbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).PhoneNumber = PhoneTextBox.Text.Trim();
-                SchedulerDbContext.dbContext.SaveChanges();
+                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).PhoneNumber = PhoneTextBox.Text.Trim();
+                SchedulerDbContext.DbContext.SaveChanges();
                 CurrentUser.PhoneNumber = PhoneTextBox.Text;
             }
         }
@@ -118,7 +108,6 @@ namespace Scheduler.Pages
             PhoneTextBox.IsReadOnly = true;
             EditPhoneBttn.Visibility = Visibility.Visible;
             PhoneDecision.Visibility = Visibility.Collapsed;
-
             PhoneTextBox.Text = CurrentUser.PhoneNumber;
         }
 
@@ -138,8 +127,8 @@ namespace Scheduler.Pages
                 EditTgLinkBttn.Visibility = Visibility.Visible;
                 TgLinkDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.dbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).TelegramId = TelegramIDTextBox.Text.Trim();
-                SchedulerDbContext.dbContext.SaveChanges();
+                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).TelegramId = TelegramIDTextBox.Text.Trim();
+                SchedulerDbContext.DbContext.SaveChanges();
                 CurrentUser.TelegramId = TelegramIDTextBox.Text;
             }
         }
@@ -148,7 +137,6 @@ namespace Scheduler.Pages
             TelegramIDTextBox.IsReadOnly = true;
             EditTgLinkBttn.Visibility = Visibility.Visible;
             TgLinkDecision.Visibility = Visibility.Collapsed;
-
             TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
         }
 
@@ -168,8 +156,8 @@ namespace Scheduler.Pages
                 EditEmailBttn.Visibility = Visibility.Visible;
                 EmailDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.dbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).EMail = EmailTextBox.Text.Trim();
-                SchedulerDbContext.dbContext.SaveChanges();
+                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).EMail = EmailTextBox.Text.Trim();
+                SchedulerDbContext.DbContext.SaveChanges();
                 CurrentUser.EMail = EmailTextBox.Text;
             }
         }
@@ -178,13 +166,10 @@ namespace Scheduler.Pages
             EmailTextBox.IsReadOnly = true;
             EditEmailBttn.Visibility = Visibility.Visible;
             EmailDecision.Visibility = Visibility.Collapsed;
-
             EmailTextBox.Text = CurrentUser.EMail;
         }
 
         private void LogOutBttn_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(((MainWindow)Application.Current.MainWindow).AuthorisationPage);
-        }
+            => NavigationService.Navigate(((MainWindow)Application.Current.MainWindow).AuthorisationPage);
     }
 }

@@ -10,7 +10,7 @@
     <Compile Update="Pages\AuthorisationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\EditScheduleTabPage.xaml.cs">
+    <Compile Update="misc\EditScheduleTabPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\MainSchedulePage.xaml.cs">
@@ -19,7 +19,7 @@
     <Compile Update="Pages\RegistrationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\ScheduleEditingPage.xaml.cs">
+    <Compile Update="Pages\EditingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\StudentGroupPage.xaml.cs">
@@ -28,24 +28,24 @@
     <Compile Update="Pages\UserProfilePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Services\ScheduleEditingUserControl.xaml.cs">
+    <Compile Update="UserControls\ScheduleEditingUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Services\ScheduleUserControl.xaml.cs">
+    <Compile Update="UserControls\ScheduleUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ConnectionPickWindow.xaml.cs">
+    <Compile Update="misc\ConnectionPickWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\EditScheduleTabPage.xaml">
+    <Page Update="misc\EditScheduleTabPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\ScheduleEditingPage.xaml">
+    <Page Update="Pages\EditingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\StudentGroupPage.xaml">
@@ -54,13 +54,13 @@
     <Page Update="Pages\UserProfilePage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Services\ScheduleEditingUserControl.xaml">
+    <Page Update="UserControls\ScheduleEditingUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Services\ScheduleUserControl.xaml">
+    <Page Update="UserControls\ScheduleUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ConnectionPickWindow.xaml">
+    <Page Update="misc\ConnectionPickWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\MainWindow.xaml">

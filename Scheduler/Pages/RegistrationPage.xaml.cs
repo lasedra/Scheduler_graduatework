@@ -1,6 +1,4 @@
 ﻿using Scheduler.Models;
-using System;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +20,7 @@ namespace Scheduler.Pages
         private void CreateAccountBttn_Click(object sender, RoutedEventArgs e)
         {
             NameTextBox.Text = NameTextBox.Text.Trim();
+
             if (string.IsNullOrEmpty(NameTextBox.Text))
                 MessageBox.Show("Поле \"Имя\" не должно быть пустым", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -39,30 +38,28 @@ namespace Scheduler.Pages
 
             else if (!Regex.IsMatch(PasswordTextBox.Text, @"^.{7}"))
                 MessageBox.Show("Неверный формат пароля", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
+
             else
             {
-                SchedulerDbContext.dbContext.Employees.Add(new Employee
+                SchedulerDbContext.DbContext.Employees.Add(new Employee
                 {
                     EmployeeId = default,
                     WorkingStatus = true,
                     Name = NameTextBox.Text.Trim(),
-                    Role = (bool)ManagerRadioBttn.IsChecked,
+                    Role = ManagerRadioBttn.IsChecked.GetValueOrDefault(),
                     Login = LoginTextBox.Text.Trim(),
                     Password = PasswordTextBox.Text.Trim(),
                     TelegramId = TelegramIDTextBox.Text.Trim(),
                     PhoneNumber = PhoneTextBox.Text.Trim(),
                     EMail = string.IsNullOrEmpty(EmailTextBox.Text.Trim()) ? null : EmailTextBox.Text.Trim(),
                 });
-                SchedulerDbContext.dbContext.SaveChanges();
-                MessageBox.Show("Новый аккаунт зарегистрирован", "Успешно", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                SchedulerDbContext.DbContext.SaveChanges();
+                MessageBox.Show("Новый аккаунт зарегистрирован", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
         private void AccesNoSpaceInput(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-                e.Handled = true;
-        }
+            { if (e.Key == Key.Space) e.Handled = true; }
 
 
         private void PhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -77,9 +74,7 @@ namespace Scheduler.Pages
                 PhoneTextBox.Focus();
             }
             if (!char.IsDigit(e.Text, 0))
-            {
                 e.Handled = true;
-            }
         }
         private void TelegramIDTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

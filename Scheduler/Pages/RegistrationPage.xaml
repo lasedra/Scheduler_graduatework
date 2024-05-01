@@ -3,69 +3,189 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Scheduler.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegistrationPage">
-
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="Auto">
+        <StackPanel VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    Width="Auto">
+            
             <DockPanel Margin="5 5 5 15">
-                <Image Source="/Resources/registerico.png" Margin="5" Height="50" Width="50"/>
-                <TextBlock Text="Новый пользователь" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
-                               Foreground="{StaticResource Text gray}" FontSize="18" FontWeight="Bold"/>
+                
+                <Image Source="/Resources/registerico.png" 
+                       Height="50" Width="50"
+                       Margin="5"/>
+                
+                <TextBlock Text="Новый пользователь" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           Margin="5"
+                           Foreground="{StaticResource Text gray}" 
+                           FontSize="18" 
+                           FontWeight="Bold"/>
+                
             </DockPanel>
+            
             <StackPanel Width="350">
+                
                 <DockPanel>
-                    <TextBlock Text="Имя:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
-                    <TextBox Name="NameTextBox" Width="220" HorizontalAlignment="Right"
-                             VerticalAlignment="Center" Margin="5"/>
+                    
+                    <TextBlock Text="Имя:" 
+                               VerticalAlignment="Center" 
+                               Margin="5" 
+                               Foreground="{StaticResource Text gray}" 
+                               FontSize="14" 
+                               FontWeight="Bold"/>
+                    
+                    <TextBox Name="NameTextBox" 
+                             Width="220" 
+                             HorizontalAlignment="Right"
+                             VerticalAlignment="Center" 
+                             Margin="5"/>
+                    
                 </DockPanel>
+                
                 <DockPanel>
-                    <TextBlock Text="Тел. номер:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
-                    <TextBox Name="PhoneTextBox" Width="220" HorizontalAlignment="Right" 
-                             PreviewTextInput="PhoneTextBox_PreviewTextInput" PreviewKeyDown="AccesNoSpaceInput"
-                             VerticalAlignment="Center" Margin="5"/>
+                    
+                    <TextBlock Text="Тел. номер:" 
+                               VerticalAlignment="Center" 
+                               Margin="5" 
+                               Foreground="{StaticResource Text gray}" 
+                               FontSize="14" 
+                               FontWeight="Bold"/>
+
+                    <TextBox Name="PhoneTextBox" 
+                             PreviewTextInput="PhoneTextBox_PreviewTextInput" 
+                             PreviewKeyDown="AccesNoSpaceInput"
+                             Width="220" 
+                             HorizontalAlignment="Right" 
+                             VerticalAlignment="Center" 
+                             Margin="5"/>
+                    
                 </DockPanel>
+                
                 <DockPanel>
-                    <TextBlock Text="Telegram link:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
-                    <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
-                        <TextBlock Text="@" Margin="0 0 5 0" VerticalAlignment="Center" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
-                        <TextBox Name="TelegramIDTextBox" Width="200"
-                             PreviewTextInput="TelegramIDTextBox_PreviewTextInput" PreviewKeyDown="AccesNoSpaceInput"
-                             VerticalAlignment="Center"/>
+                    
+                    <TextBlock Text="Telegram link:" 
+                               VerticalAlignment="Center" 
+                               Margin="5" 
+                               Foreground="{StaticResource Text gray}" 
+                               FontSize="14" 
+                               FontWeight="Bold"/>
+                    
+                    <StackPanel Orientation="Horizontal" 
+                                Margin="5" 
+                                HorizontalAlignment="Right">
+                        
+                        <TextBlock Text="@" 
+                                   Margin="0 0 5 0" 
+                                   VerticalAlignment="Center" 
+                                   Foreground="{StaticResource Text gray}" 
+                                   FontSize="14" 
+                                   FontWeight="Bold"/>
+
+                        <TextBox Name="TelegramIDTextBox" 
+                                 PreviewTextInput="TelegramIDTextBox_PreviewTextInput" 
+                                 PreviewKeyDown="AccesNoSpaceInput"
+                                 Width="200"
+                                 VerticalAlignment="Center"/>
+                        
                     </StackPanel>
                     
                 </DockPanel>
+                
                 <DockPanel>
-                    <TextBlock Text="E-mail:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
-                    <TextBox Name="EmailTextBox" Width="220" HorizontalAlignment="Right"
-                             PreviewKeyDown="AccesNoSpaceInput" PreviewTextInput="EmailTextBox_PreviewTextInput"
-                             VerticalAlignment="Center" Margin="5"/>
+                    
+                    <TextBlock Text="E-mail:" 
+                               VerticalAlignment="Center" 
+                               Margin="5" 
+                               Foreground="{StaticResource Text gray}" 
+                               FontSize="14" 
+                               FontWeight="Bold"/>
+
+                    <TextBox Name="EmailTextBox" 
+                             PreviewKeyDown="AccesNoSpaceInput" 
+                             PreviewTextInput="EmailTextBox_PreviewTextInput"
+                             Width="220" 
+                             HorizontalAlignment="Right"
+                             VerticalAlignment="Center" 
+                             Margin="5"/>
+                    
                 </DockPanel>
+                
                 <DockPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center">
+
                         <RadioButton Name="ManagerRadioBttn"
-                            Content="Менеджер" Margin="5" VerticalContentAlignment="Center" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
-                        <RadioButton Name="TutorRadioBttn" IsChecked="True"
-                             Content="Преподаватель" Margin="5" VerticalContentAlignment="Center" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
+                                     IsChecked="False"
+                                     Content="Менеджер" 
+                                     Margin="5" 
+                                     VerticalContentAlignment="Center" 
+                                     Foreground="{StaticResource Text gray}" 
+                                     FontSize="14" 
+                                     FontWeight="Bold"/>
+                        
+                        <RadioButton Name="TutorRadioBttn" 
+                                     IsChecked="True"
+                                     Content="Преподаватель" 
+                                     Margin="5" 
+                                     VerticalContentAlignment="Center" 
+                                     Foreground="{StaticResource Text gray}" 
+                                     FontSize="14" 
+                                     FontWeight="Bold"/>
+                        
                     </StackPanel>
+                    
                 </DockPanel>
+                
                 <DockPanel>
-                    <TextBlock Text="Логин:" VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
-                    <TextBox Name="LoginTextBox" Width="220" HorizontalAlignment="Right"
+                    
+                    <TextBlock Text="Логин:" 
+                               VerticalAlignment="Center" 
+                               Margin="5" 
+                               Foreground="{StaticResource Text gray}" 
+                               FontSize="14" 
+                               FontWeight="Bold"/>
+
+                    <TextBox Name="LoginTextBox"
                              PreviewKeyDown="AccesNoSpaceInput"
-                             VerticalAlignment="Center" Margin="5"/>
+                             Width="220" 
+                             HorizontalAlignment="Right"
+                             VerticalAlignment="Center" 
+                             Margin="5"/>
+                    
                 </DockPanel>
+                
                 <DockPanel>
-                    <TextBlock Text="Пароль: " VerticalAlignment="Center" Margin="5" Foreground="{StaticResource Text gray}" FontSize="14" FontWeight="Bold"/>
-                    <TextBox Name="PasswordTextBox" Width="220" HorizontalAlignment="Right"
+                    
+                    <TextBlock Text="Пароль: " 
+                               VerticalAlignment="Center" 
+                               Margin="5" 
+                               Foreground="{StaticResource Text gray}" 
+                               FontSize="14" 
+                               FontWeight="Bold"/>
+
+                    <TextBox Name="PasswordTextBox" 
                              PreviewKeyDown="AccesNoSpaceInput"
-                             VerticalAlignment="Center" Margin="5"/>
+                             Width="220" 
+                             HorizontalAlignment="Right"
+                             VerticalAlignment="Center" 
+                             Margin="5"/>
+                    
                 </DockPanel>
-                <Button Height="30" Margin="5 10 5 5" Content="Создать аккаунт" Style="{StaticResource RoundedButtonStyle}" Background="{StaticResource Light red}"
-                    Name="CreateAccountBttn" Click="CreateAccountBttn_Click"/>
+
+                <Button Name="CreateAccountBttn" Click="CreateAccountBttn_Click"
+                        Content="Создать аккаунт" 
+                        Height="30" 
+                        Margin="5 10 5 5" 
+                        Style="{StaticResource RoundedButtonStyle}" 
+                        Background="{StaticResource Light red}"/>
+                
             </StackPanel>
+            
         </StackPanel>
     </Grid>
 </Page>
