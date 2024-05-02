@@ -35,16 +35,7 @@ namespace Scheduler.Services
 
         public ScheduleController()
         {
-            DateOnly lastSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders
-                .Max(c => c.OfDate);
-            SetCurrentWeek(new TimePeriod(lastSchedule));
-
-            List<StudentGroup> studentGroups = SchedulerDbContext.DbContext.DailyScheduleHeaders
-                .Where(header => header.OfDate == lastSchedule)
-                .Select(header => header.StudentGroupCodeNavigation)
-                .ToList();
-            SetCurrentGroupCode(studentGroups.First().StudentGroupCode);
-
+            SetCurrentGroupCode(SchedulerDbContext.DbContext.StudentGroups.First().StudentGroupCode);
             CreatePivotScheduleIfHasNoAny();
         }
 
@@ -237,12 +228,16 @@ namespace Scheduler.Services
         public void SetCurrentWeek(TimePeriod timePeriod)
         {
             CurrentWeek = timePeriod;
+
             SetDayTabs();
         }
 
         public void SetCurrentGroupCode(string studentGroupCode)
         {
             CurrentGroupCode = studentGroupCode;
+            DateOnly thisGroupLastSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == studentGroupCode).Max(c => c.OfDate);
+            CurrentWeek = new TimePeriod(thisGroupLastSchedule);
+
             SetDayTabs();
         }
 

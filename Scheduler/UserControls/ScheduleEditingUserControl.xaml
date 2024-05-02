@@ -58,8 +58,8 @@
                    HorizontalAlignment="Center"/>
 
 
-            <TextBlock Text="Пары" Foreground="{StaticResource Light red}"
-                   FontSize="16" 
+            <TextBlock Text="ПАРЫ" Foreground="{StaticResource Light red}"
+                   FontSize="18" 
                    FontWeight="Bold"
                    Grid.Column="0" 
                    Grid.Row="0" 
@@ -107,17 +107,75 @@
                    HorizontalAlignment="Center"/>
             <!--#endregion-->
 
+            <!--<ItemsControl ItemsSource="{Binding YourItemsSource}" Grid.Column="1" Grid.Row="1">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource Light gray}"
+                                BorderBrush="{StaticResource Dark gray}"
+                                BorderThickness="1"
+                                Margin="5">
+                            <Border.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Удалить" Command="{Binding DeleteCommand}" />
+                                </ContextMenu>
+                            </Border.ContextMenu>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                                <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                                <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.Items>
+                    <Border Grid.Column="1" Grid.Row="1">
+                        <TextBlock Text="kdfnjk"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="2">
+                        <TextBlock Text="kdfnjk"/>
+                    </Border>
+                </ItemsControl.Items>
 
-            <ListViewItem x:Name="Monday_1" 
-                      Grid.Column="1" 
-                      Grid.Row="1"
-                      Background="{StaticResource Light gray}"
-                      Margin="5">
+            </ItemsControl>-->
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+
+
+            <ListViewItem x:Name="Monday_1"
+                          Grid.Column="1" 
+                          Grid.Row="1"
+                          Background="{StaticResource Light gray}"
+                          Foreground="{StaticResource Text dark gray}"
+                          FontSize="12"
+                          FontWeight="DemiBold"
+                          VerticalContentAlignment="Center" 
+                          HorizontalContentAlignment="Center"
+                          Margin="5">
+
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -132,12 +190,17 @@
               Grid.Column="1" 
               Grid.Row="2"
               Background="{StaticResource Light gray}"
+              Foreground="{StaticResource Text dark gray}"
+              FontSize="12"
+              FontWeight="DemiBold"
+              VerticalContentAlignment="Center" 
+              HorizontalContentAlignment="Center"
               Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -152,12 +215,17 @@
               Grid.Column="1" 
               Grid.Row="3"
               Background="{StaticResource Light gray}"
+              Foreground="{StaticResource Text dark gray}"
+              FontSize="12"
+              FontWeight="DemiBold"
+              VerticalContentAlignment="Center" 
+              HorizontalContentAlignment="Center"
               Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -172,12 +240,17 @@
               Grid.Column="1" 
               Grid.Row="4"
               Background="{StaticResource Light gray}"
+              Foreground="{StaticResource Text dark gray}"
+              FontSize="12"
+              FontWeight="DemiBold"
+              VerticalContentAlignment="Center" 
+              HorizontalContentAlignment="Center"
               Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -190,15 +263,20 @@
 
 
             <ListViewItem x:Name="Tuesday_1" 
-                      Grid.Column="2" 
-                      Grid.Row="1"
-                      Background="{StaticResource Light gray}"
-                      Margin="5">
+                          Grid.Column="2" 
+                          Grid.Row="1"
+                          Background="{StaticResource Light gray}"
+                          Foreground="{StaticResource Text dark gray}"
+                          FontSize="12"
+                          FontWeight="DemiBold"
+                          VerticalContentAlignment="Center" 
+                          HorizontalContentAlignment="Center"
+                          Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -213,12 +291,17 @@
               Grid.Column="2" 
               Grid.Row="2"
               Background="{StaticResource Light gray}"
+              Foreground="{StaticResource Text dark gray}"
+              FontSize="12"
+              FontWeight="DemiBold"
+              VerticalContentAlignment="Center" 
+              HorizontalContentAlignment="Center"
               Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -230,15 +313,20 @@
             </ListViewItem>
 
             <ListViewItem x:Name="Tuesday_3" 
-                      Grid.Column="2" 
-                      Grid.Row="3"
-                      Background="{StaticResource Light gray}"
-                      Margin="5">
+  Grid.Column="2" 
+  Grid.Row="3"
+  Background="{StaticResource Light gray}"
+  Foreground="{StaticResource Text dark gray}"
+  FontSize="12"
+  FontWeight="DemiBold"
+  VerticalContentAlignment="Center" 
+  HorizontalContentAlignment="Center"
+  Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -250,15 +338,20 @@
             </ListViewItem>
 
             <ListViewItem x:Name="Tuesday_4" 
-              Grid.Column="2" 
-              Grid.Row="4"
-              Background="{StaticResource Light gray}"
-              Margin="5">
+  Grid.Column="2" 
+  Grid.Row="4"
+  Background="{StaticResource Light gray}"
+  Foreground="{StaticResource Text dark gray}"
+  FontSize="12"
+  FontWeight="DemiBold"
+  VerticalContentAlignment="Center" 
+  HorizontalContentAlignment="Center"
+  Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -271,15 +364,20 @@
 
 
             <ListViewItem x:Name="Wednesday_1" 
-              Grid.Column="3" 
-              Grid.Row="1"
-              Background="{StaticResource Light gray}"
-              Margin="5">
+Grid.Column="3" 
+Grid.Row="1"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -291,15 +389,20 @@
             </ListViewItem>
 
             <ListViewItem x:Name="Wednesday_2" 
-      Grid.Column="3" 
-      Grid.Row="2"
-      Background="{StaticResource Light gray}"
-      Margin="5">
+Grid.Column="3" 
+Grid.Row="2"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -311,15 +414,20 @@
             </ListViewItem>
 
             <ListViewItem x:Name="Wednesday_3" 
-              Grid.Column="3" 
-              Grid.Row="3"
-              Background="{StaticResource Light gray}"
-              Margin="5">
+Grid.Column="3" 
+Grid.Row="3"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -331,15 +439,20 @@
             </ListViewItem>
 
             <ListViewItem x:Name="Wednesday_4" 
-      Grid.Column="3" 
-      Grid.Row="4"
-      Background="{StaticResource Light gray}"
-      Margin="5">
+Grid.Column="3" 
+Grid.Row="4"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -352,15 +465,20 @@
 
 
             <ListViewItem x:Name="Thursday_1" 
-              Grid.Column="4" 
-              Grid.Row="1"
-              Background="{StaticResource Light gray}"
-              Margin="5">
+Grid.Column="4" 
+Grid.Row="1"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -372,15 +490,20 @@
             </ListViewItem>
 
             <ListViewItem x:Name="Thursday_2" 
-      Grid.Column="4" 
-      Grid.Row="2"
-      Background="{StaticResource Light gray}"
-      Margin="5">
+Grid.Column="4" 
+Grid.Row="2"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -392,15 +515,20 @@
             </ListViewItem>
 
             <ListViewItem x:Name="Thursday_3" 
-              Grid.Column="4" 
-              Grid.Row="3"
-              Background="{StaticResource Light gray}"
-              Margin="5">
+Grid.Column="4" 
+Grid.Row="3"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -412,15 +540,20 @@
             </ListViewItem>
 
             <ListViewItem x:Name="Thursday_4" 
-      Grid.Column="4" 
-      Grid.Row="4"
-      Background="{StaticResource Light gray}"
-      Margin="5">
+Grid.Column="4" 
+Grid.Row="4"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -431,17 +564,22 @@
 
             </ListViewItem>
 
-
+            
             <ListViewItem x:Name="Friday_1" 
-        Grid.Column="5" 
-        Grid.Row="1"
-        Background="{StaticResource Light gray}"
-        Margin="5">
+Grid.Column="5" 
+Grid.Row="1"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -456,12 +594,17 @@
 Grid.Column="5" 
 Grid.Row="2"
 Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
 Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -473,15 +616,20 @@ Margin="5">
             </ListViewItem>
 
             <ListViewItem x:Name="Friday_3" 
-        Grid.Column="5" 
-        Grid.Row="3"
-        Background="{StaticResource Light gray}"
-        Margin="5">
+Grid.Column="5" 
+Grid.Row="3"
+Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
+Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -496,12 +644,17 @@ Margin="5">
 Grid.Column="5" 
 Grid.Row="4"
 Background="{StaticResource Light gray}"
+Foreground="{StaticResource Text dark gray}"
+FontSize="12"
+FontWeight="DemiBold"
+VerticalContentAlignment="Center" 
+HorizontalContentAlignment="Center"
 Margin="5">
 
-                <StackPanel>
-                    <TextBlock Text="{Binding Tutor.Name}"/>
-                    <TextBlock Text="{Binding Subject.Name}"/>
-                    <TextBlock Text="{Binding AtCabinet.Number}"/>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Tutor.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding Subject.Name}" HorizontalAlignment="Center" Margin="1"/>
+                    <TextBlock Text="{Binding AtCabinet.Number}" HorizontalAlignment="Center" Margin="1"/>
                 </StackPanel>
 
                 <ListViewItem.ContextMenu>
@@ -511,8 +664,8 @@ Margin="5">
                 </ListViewItem.ContextMenu>
 
             </ListViewItem>
+
         </Grid>
-        
-        
+
     </Grid>
 </UserControl>

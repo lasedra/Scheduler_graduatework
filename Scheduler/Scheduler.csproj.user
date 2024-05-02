@@ -28,6 +28,9 @@
     <Compile Update="Pages\UserProfilePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\LessonCell.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\ScheduleEditingUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -52,6 +55,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\UserProfilePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\LessonCell.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\ScheduleEditingUserControl.xaml">

@@ -43,7 +43,7 @@
                         HorizontalAlignment="Right">
                 
                 <Button x:Name="BackOnTimelineBttn" Click="BackOnTimelineBttn_Click"
-                        Content="&#xAB;" 
+                        Content="◀️"
                         Style="{StaticResource RoundedButtonStyle}" 
                         Background="{StaticResource Light red}"
                         Width="30" Height="30" 
@@ -57,7 +57,7 @@
                            Margin="5"/>
                 
                 <Button x:Name="ForwardOnTimelineBttn" Click="ForwardOnTimelineBttn_Click" 
-                        Content="&#xBB;"
+                        Content="▶️"
                         Style="{StaticResource RoundedButtonStyle}" 
                         Background="{StaticResource Light red}"
                         Width="30" Height="30" 

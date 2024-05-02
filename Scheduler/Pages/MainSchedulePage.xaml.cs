@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Scheduler.Models;
+﻿using Scheduler.Models;
 using Scheduler.Services;
 using System;
 using System.Linq;
@@ -31,26 +30,28 @@ namespace Scheduler.Pages
             {
                 ScheduleController = new();
                 StudentGroupComboBox.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
+                StudentGroupComboBox.SelectedItem = SchedulerDbContext.DbContext.StudentGroups.First(c => c.StudentGroupCode == ScheduleController.CurrentGroupCode);
                 UpdateScheduleSource();
             }
         }
 
         public void UpdateScheduleSource()
         {
-            DateOnly firstEverSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Min(c => c.OfDate);
-            DateOnly lastEverSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Max(c => c.OfDate);
-
-            //var selectedGroupCode = ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode;
-            //DateOnly selectedGroupFirstSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == selectedGroupCode).Min(c => c.OfDate);
-            //DateOnly selectedGroupLastSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == selectedGroupCode).Max(c => c.OfDate);
+            var selectedGroupCode = ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode;
+            DateOnly selectedGroupFirstSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders
+                .Where(c => c.StudentGroupCode == selectedGroupCode)
+                .Min(c => c.OfDate);
+            DateOnly selectedGroupLastSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders
+                .Where(c => c.StudentGroupCode == selectedGroupCode)
+                .Max(c => c.OfDate);
 
             ScheduleWeekSpanTB.Text = ScheduleController.CurrentWeek.GetWeekSpan();
 
-            BackOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekStart == firstEverSchedule) ? Visibility.Hidden : Visibility.Visible;
+            BackOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekStart == selectedGroupFirstSchedule) ? Visibility.Hidden : Visibility.Visible;
             if (CurrentUser.Role == true)
-                ForwardOnTimelineBttn.Content = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == lastEverSchedule) ? "+" : ">>";
+                ForwardOnTimelineBttn.Content = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? "➕" : "▶️";
             else
-                ForwardOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == lastEverSchedule) ? Visibility.Hidden : Visibility.Visible;
+                ForwardOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? Visibility.Hidden : Visibility.Visible;
 
 
             Schedule.MondayGrid.ItemsSource = ScheduleController.MondayTab;
@@ -68,7 +69,7 @@ namespace Scheduler.Pages
 
         private void ForwardOnTimelineBttn_Click(object sender, RoutedEventArgs e)
         {
-            if(ForwardOnTimelineBttn.Content.ToString() == "+")
+            if(ForwardOnTimelineBttn.Content.ToString() == "➕")
             {
                 var result = MessageBox.Show(
                     $"Вы уверены, что хотите создать новое расписание для группы {((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode}", 
@@ -82,7 +83,7 @@ namespace Scheduler.Pages
                     UpdateScheduleSource();
                 }
             }
-            else if(ForwardOnTimelineBttn.Content.ToString() == ">>")
+            else if(ForwardOnTimelineBttn.Content.ToString() == "▶️")
             {
                 ScheduleController.SetCurrentWeek(new TimePeriod(ScheduleController.CurrentWeek.WeekStart.AddDays(7)));
                 UpdateScheduleSource();

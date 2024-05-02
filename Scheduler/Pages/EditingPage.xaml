@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:sevices="clr-namespace:Scheduler.Services"
+      xmlns:usercontrols="clr-namespace:Scheduler.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="800"
       Title="ScheduleEditingPage"
@@ -11,7 +11,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="180"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -209,33 +209,153 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" 
-HorizontalAlignment="Center">
+                    HorizontalAlignment="Center">
 
-            <Button x:Name="BackOnTimelineBttn" 
-Content="&#xAB;"
-Style="{StaticResource RoundedButtonStyle}" 
-Background="{StaticResource Light red}"
-Width="30" Height="30" 
-Margin="5"/>
+            <Button x:Name="BackOnTimelineBttn"
+                    Click="BackOnTimelineBttn_Click"
+                    Content="◀️"
+                    Style="{StaticResource RoundedButtonStyle}" 
+                    Background="{StaticResource Light red}"
+                    Width="30" Height="30" 
+                    Margin="5"/>
 
             <TextBlock Name="ScheduleWeekSpanTB"
-   Foreground="{StaticResource Text gray}" 
-   FontSize="14" 
-   FontWeight="Bold" 
-   VerticalAlignment="Center" 
-   Margin="5"/>
+                       Foreground="{StaticResource Text gray}" 
+                       FontSize="14" 
+                       FontWeight="Bold" 
+                       VerticalAlignment="Center" 
+                       Margin="5"/>
 
-            <Button x:Name="ForwardOnTimelineBttn" 
-Content="&#xBB;"
-Style="{StaticResource RoundedButtonStyle}" 
-Background="{StaticResource Light red}"
-Width="30" Height="30"
-Margin="5"/>
+            <Button x:Name="ForwardOnTimelineBttn"
+                    Click="ForwardOnTimelineBttn_Click"
+                    Content="▶️"
+                    Style="{StaticResource RoundedButtonStyle}" 
+                    Background="{StaticResource Light red}"
+                    Width="30" Height="30"
+                    Margin="5"/>
 
         </StackPanel>
 
-        <sevices:ScheduleEditingUserControl x:Name="ScheduleEditingView"
-                                            Grid.Row="2"/>
+        <Grid Grid.Row="2"
+              Margin="10" 
+              Background="{StaticResource Mid gray}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region Headers&Rows-->
+            <TextBlock Text="1" Foreground="{StaticResource Text gray}" 
+           Grid.Column="0" 
+           Grid.Row="1" 
+           FontSize="18" 
+           FontWeight="Bold"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="2" Foreground="{StaticResource Text gray}" 
+           Grid.Column="0" 
+           Grid.Row="2" 
+           FontSize="18" 
+           FontWeight="Bold"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="3" Foreground="{StaticResource Text gray}" 
+           Grid.Column="0" 
+           Grid.Row="3" 
+           FontSize="18" 
+           FontWeight="Bold"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="4" Foreground="{StaticResource Text gray}" 
+           Grid.Column="0" 
+           Grid.Row="4" 
+           FontSize="18" 
+           FontWeight="Bold"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"/>
+
+
+            <TextBlock Text="ПАРЫ" Foreground="{StaticResource Light red}"
+           FontSize="18" 
+           FontWeight="Bold"
+           Grid.Column="0" 
+           Grid.Row="0" 
+           VerticalAlignment="Center" 
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Понедельник" Foreground="{StaticResource Text gray}"
+           FontSize="16" 
+           FontWeight="Bold"
+           Grid.Column="1" 
+           Grid.Row="0" 
+           VerticalAlignment="Center" 
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Вторник" Foreground="{StaticResource Text gray}"
+           FontSize="16" 
+           FontWeight="Bold"
+           Grid.Column="2" 
+           Grid.Row="0" 
+           VerticalAlignment="Center" 
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Среда" Foreground="{StaticResource Text gray}"
+           FontSize="16" 
+           FontWeight="Bold"
+           Grid.Column="3" 
+           Grid.Row="0"
+           VerticalAlignment="Center" 
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Четверг" Foreground="{StaticResource Text gray}"
+           FontSize="16" 
+           FontWeight="Bold"
+           Grid.Column="4" 
+           Grid.Row="0"
+           VerticalAlignment="Center" 
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Четверг" Foreground="{StaticResource Text gray}"
+           FontSize="16" 
+           FontWeight="Bold"
+           Grid.Column="5" 
+           Grid.Row="0"
+           VerticalAlignment="Center" 
+           HorizontalAlignment="Center"/>
+            <!--#endregion-->
+
+            <usercontrols:LessonCell x:Name="Monday1"
+                Grid.Column="1" 
+                Grid.Row="1"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Monday2"
+                Grid.Column="1" 
+                Grid.Row="2"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Monday3"
+                Grid.Column="1" 
+                Grid.Row="3"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Monday4"
+                Grid.Column="1" 
+                Grid.Row="4"
+                DeleteCellBttnClick="DeleteCell"/>
+
+        </Grid>
         
     </Grid>
 </Page>

@@ -1,5 +1,7 @@
 ﻿using Scheduler.Models;
 using Scheduler.Services;
+using Scheduler.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -12,6 +14,7 @@ namespace Scheduler.Pages
     {
         //TODO: Каникулы
         //TODO: Зависимость ПРЕДМЕТ-ПРЕПОДАВАТЕЛЬ-ГРУППА
+        //TODO: Удаление ячейки
 
         ScheduleController scheduleController {  get; set; } = new ScheduleController();
 
@@ -21,10 +24,12 @@ namespace Scheduler.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            TutorComboBox.ItemsSource = SchedulerDbContext.DbContext.Employees.Where(c => c.Role == false).ToList();
             StudentGroupComboBox.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
+            StudentGroupComboBox.SelectedItem = StudentGroupComboBox.SelectedItem = SchedulerDbContext.DbContext.StudentGroups.First(c => c.StudentGroupCode == scheduleController.CurrentGroupCode);
+
+            TutorComboBox.ItemsSource = SchedulerDbContext.DbContext.Employees.Where(c => c.Role == false).ToList();
             CabinetComboBox.ItemsSource = SchedulerDbContext.DbContext.Cabinets.ToList();
-            UpdateScheduleEditingView(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+            UpdateScheduleEditingView();
         }
 
         private void TutorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -103,13 +108,13 @@ namespace Scheduler.Pages
                 {
                     EditScheduleCell(checkedClasses, checkedDays, weekToEdit);
                     MessageBox.Show("Расписание успешно изменено!");
-                    UpdateScheduleEditingView(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+                    UpdateScheduleEditingView();
                 }
                 else if (anyToRewrite && rewriteDecision)
                 {
                     EditScheduleCell(checkedClasses, checkedDays, weekToEdit);
                     MessageBox.Show("Расписание успешно изменено!");
-                    UpdateScheduleEditingView(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+                    UpdateScheduleEditingView();
                 }
             }
         }
@@ -132,37 +137,84 @@ namespace Scheduler.Pages
             }
         }
 
-        private void UpdateScheduleEditingView(string studentGroupCode)
+        private void UpdateScheduleEditingView()
         {
-            scheduleController = new ScheduleController();
+            var selectedGroupCode = ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode;
+            DateOnly selectedGroupFirstSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders
+                .Where(c => c.StudentGroupCode == selectedGroupCode)
+                .Min(c => c.OfDate);
+            DateOnly selectedGroupLastSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders
+                .Where(c => c.StudentGroupCode == selectedGroupCode)
+                .Max(c => c.OfDate);
 
-            ScheduleEditingView.Monday_1.DataContext = scheduleController.MondayTab.First(c => c.ClassNumber == 1);
-            ScheduleEditingView.Monday_2.DataContext = scheduleController.MondayTab.First(c => c.ClassNumber == 2);
-            ScheduleEditingView.Monday_3.DataContext = scheduleController.MondayTab.First(c => c.ClassNumber == 3);
-            ScheduleEditingView.Monday_4.DataContext = scheduleController.MondayTab.First(c => c.ClassNumber == 4);
+            ScheduleWeekSpanTB.Text = scheduleController.CurrentWeek.GetWeekSpan();
 
-            ScheduleEditingView.Tuesday_1.DataContext = scheduleController.TuesdayTab.First(c => c.ClassNumber == 1);
-            ScheduleEditingView.Tuesday_2.DataContext = scheduleController.TuesdayTab.First(c => c.ClassNumber == 2);
-            ScheduleEditingView.Tuesday_3.DataContext = scheduleController.TuesdayTab.First(c => c.ClassNumber == 3);
-            ScheduleEditingView.Tuesday_4.DataContext = scheduleController.TuesdayTab.First(c => c.ClassNumber == 4);
+            BackOnTimelineBttn.Visibility = (scheduleController.CurrentWeek.WeekStart == selectedGroupFirstSchedule) ? Visibility.Hidden : Visibility.Visible;
+            if (CurrentUser.Role == true)
+                ForwardOnTimelineBttn.Content = (scheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? "➕" : "▶️";
+            else
+                ForwardOnTimelineBttn.Visibility = (scheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? Visibility.Hidden : Visibility.Visible;
 
-            ScheduleEditingView.Wednesday_1.DataContext = scheduleController.WednesdayTab.First(c => c.ClassNumber == 1);
-            ScheduleEditingView.Wednesday_2.DataContext = scheduleController.WednesdayTab.First(c => c.ClassNumber == 2);
-            ScheduleEditingView.Wednesday_3.DataContext = scheduleController.WednesdayTab.First(c => c.ClassNumber == 3);
-            ScheduleEditingView.Wednesday_4.DataContext = scheduleController.WednesdayTab.First(c => c.ClassNumber == 4);
-
-            ScheduleEditingView.Thursday_1.DataContext = scheduleController.ThursdayTab.First(c => c.ClassNumber == 1);
-            ScheduleEditingView.Thursday_2.DataContext = scheduleController.ThursdayTab.First(c => c.ClassNumber == 2);
-            ScheduleEditingView.Thursday_3.DataContext = scheduleController.ThursdayTab.First(c => c.ClassNumber == 3);
-            ScheduleEditingView.Thursday_4.DataContext = scheduleController.ThursdayTab.First(c => c.ClassNumber == 4);
-
-            ScheduleEditingView.Friday_1.DataContext = scheduleController.FridayTab.First(c => c.ClassNumber == 1);
-            ScheduleEditingView.Friday_2.DataContext = scheduleController.FridayTab.First(c => c.ClassNumber == 2);
-            ScheduleEditingView.Friday_3.DataContext = scheduleController.FridayTab.First(c => c.ClassNumber == 3);
-            ScheduleEditingView.Friday_4.DataContext = scheduleController.FridayTab.First(c => c.ClassNumber == 4);
+            Monday1.DataContext = scheduleController.MondayTab.First(c => c.ClassNumber == 1);
+            Monday2.DataContext = scheduleController.MondayTab.First(c => c.ClassNumber == 2);
+            Monday3.DataContext = scheduleController.MondayTab.First(c => c.ClassNumber == 3);
+            Monday4.DataContext = scheduleController.MondayTab.First(c => c.ClassNumber == 4);
         }
 
         private void StudentGroupComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => UpdateScheduleEditingView(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+        {
+            scheduleController.SetCurrentGroupCode(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+            UpdateScheduleEditingView();
+        }
+
+        private void BackOnTimelineBttn_Click(object sender, RoutedEventArgs e)
+        {
+            scheduleController.SetCurrentWeek(new TimePeriod(scheduleController.CurrentWeek.WeekStart.AddDays(-7)));
+            UpdateScheduleEditingView();
+        }
+
+        private void ForwardOnTimelineBttn_Click(object sender, RoutedEventArgs e)
+        {
+            if (ForwardOnTimelineBttn.Content.ToString() == "➕")
+            {
+                var result = MessageBox.Show(
+                    $"Вы уверены, что хотите создать новое расписание для группы {((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode}",
+                    "Минуточку",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    scheduleController.AddSchedule(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+                    UpdateScheduleEditingView();
+                }
+            }
+            else if (ForwardOnTimelineBttn.Content.ToString() == "▶️")
+            {
+                scheduleController.SetCurrentWeek(new TimePeriod(scheduleController.CurrentWeek.WeekStart.AddDays(7)));
+                UpdateScheduleEditingView();
+            }
+        }
+
+        private void DeleteCell(object sender, RoutedEventArgs e)
+        {
+            List<DailyScheduleBody> weekToEdit = SchedulerDbContext.DbContext.DailyScheduleBodies
+                    .Where(c => c.OfDate >= scheduleController.CurrentWeek.WeekStart &&
+                           c.OfDate <= scheduleController.CurrentWeek.WeekEnd &&
+                           c.StudentGroupCode == ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode).ToList();
+
+            string cellName = ((LessonCell)sender).Name;
+            DayOfWeek dayToEdit = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), cellName.Remove(cellName.Length - 1), true);
+            int classToEdit = Convert.ToInt32(cellName.ElementAt(cellName.Length - 1).ToString());
+
+            DailyScheduleBody cellToRemove = weekToEdit.First(c => c.OfDate.DayOfWeek == dayToEdit && c.ClassNumber == classToEdit);
+            cellToRemove.Employee = null;
+            cellToRemove.Subject = null;
+            cellToRemove.CabinetNumber = null;
+            SchedulerDbContext.DbContext.SaveChanges();
+
+            scheduleController = new();
+            UpdateScheduleEditingView();
+        }
     }
 }
