@@ -33,10 +33,13 @@ namespace Scheduler.Services
         public List<DayTab> FridayTab { get; set; } = null!;
         public List<DayTab>? SaturdayTab { get; set; }
 
+
         public ScheduleController()
         {
-            SetCurrentGroupCode(SchedulerDbContext.DbContext.StudentGroups.First().StudentGroupCode);
             CreatePivotScheduleIfHasNoAny();
+            SetCurrentWeek(new TimePeriod(DateOnly.FromDateTime(DateTime.Now)));
+            SetCurrentGroupCode(SchedulerDbContext.DbContext.StudentGroups.First().StudentGroupCode);
+            SetDayTabs();
         }
 
 
@@ -170,12 +173,16 @@ namespace Scheduler.Services
 
         public void CreatePivotScheduleIfHasNoAny()
         {
-            if (!SchedulerDbContext.DbContext.DailyScheduleHeaders.Any(c => c.OfDate > CurrentWeek.SchoolyearStart))
+            if (!SchedulerDbContext.DbContext.DailyScheduleHeaders.Any())
             {
                 List<StudentGroup> groups = SchedulerDbContext.DbContext.StudentGroups.ToList();
+                SetCurrentWeek(new TimePeriod(DateOnly.FromDateTime(DateTime.Now)));
+                SetCurrentGroupCode(groups.First().StudentGroupCode);
 
                 foreach (StudentGroup group in groups)
                     CreatePivotSchedule(CurrentWeek.WeekStart, group.StudentGroupCode);
+
+                SetDayTabs();
 
                 MessageBox.Show("Для каждой группы создан шаблон расписания на текущую неделю", "Поздравляю!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -219,29 +226,20 @@ namespace Scheduler.Services
         {
             DateOnly nextWeek = CurrentWeek.WeekStart.AddDays(7);
             CreatePivotSchedule(nextWeek, studentGroupCode);
-
-            CurrentWeek = new TimePeriod(SchedulerDbContext.DbContext.DailyScheduleHeaders.Max(c => c.OfDate));
-            CurrentGroupCode = studentGroupCode;
             MessageBox.Show("Расписание на следующую неделю успешно создано!", "Поздравляю!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void SetCurrentWeek(TimePeriod timePeriod)
         {
             CurrentWeek = timePeriod;
-
-            SetDayTabs();
         }
 
         public void SetCurrentGroupCode(string studentGroupCode)
         {
             CurrentGroupCode = studentGroupCode;
-            DateOnly thisGroupLastSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == studentGroupCode).Max(c => c.OfDate);
-            CurrentWeek = new TimePeriod(thisGroupLastSchedule);
-
-            SetDayTabs();
         }
 
-        private void SetDayTabs()
+        public void SetDayTabs()
         {
             MondayTab = GetCurrentWeekDayTab(CurrentGroupCode, DayOfWeek.Monday);
             TuesdayTab = GetCurrentWeekDayTab(CurrentGroupCode, DayOfWeek.Tuesday);

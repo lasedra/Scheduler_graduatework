@@ -10,9 +10,6 @@
     <Compile Update="Pages\AuthorisationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="misc\EditScheduleTabPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Pages\MainSchedulePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,9 +28,6 @@
     <Compile Update="UserControls\LessonCell.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\ScheduleEditingUserControl.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UserControls\ScheduleUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -42,9 +36,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="misc\EditScheduleTabPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -58,9 +49,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\LessonCell.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UserControls\ScheduleEditingUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\ScheduleUserControl.xaml">

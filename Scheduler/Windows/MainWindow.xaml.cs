@@ -36,5 +36,10 @@ namespace Scheduler
         {
             PagesFrame.Navigate(new StudentGroupPage());
         }
+
+        private void TutionPageBttn_Click(object sender, RoutedEventArgs e)
+        {
+            PagesFrame.Navigate(RegistrationPage);
+        }
     }
 }

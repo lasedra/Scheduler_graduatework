@@ -16,23 +16,6 @@ namespace Scheduler.Services
             InitializeComponent();
         }
 
-        private void EditTabBttn_Click(object sender, RoutedEventArgs e)
-        {
-            StackPanel senderStackPanel = (StackPanel)((Button)sender).Parent;
-            UIElement[] grids = new[] { MondayGrid, TuesdayGrid, WednesdayGrid, ThursdayGrid, FridayGrid };
-            List<DayTab> sourceDayTab = new List<DayTab>();
-
-            foreach (UIElement grid in grids)
-            {
-                if (senderStackPanel.Children.Contains(grid))
-                {
-                    sourceDayTab = (List<DayTab>)((DataGrid)grid).ItemsSource;
-                    break;
-                }
-            }
-            NavigationService.GetNavigationService(this).Navigate(new EditScheduleTabPage(sourceDayTab));
-        }
-
         private void ScheduleEditingBttn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GetNavigationService(this).Navigate(new EditingPage());

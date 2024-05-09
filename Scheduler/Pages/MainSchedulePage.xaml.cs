@@ -25,7 +25,8 @@ namespace Scheduler.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             // Getting started check
-            if (!SchedulerDbContext.DbContext.StudentGroups.Any()) NavigationService.Navigate(new StudentGroupPage(true));
+            if (!SchedulerDbContext.DbContext.StudentGroups.Any()) 
+                NavigationService.Navigate(new StudentGroupPage(true));
             else
             {
                 ScheduleController = new();
@@ -37,6 +38,7 @@ namespace Scheduler.Pages
 
         public void UpdateScheduleSource()
         {
+            ScheduleController.SetDayTabs();
             var selectedGroupCode = ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode;
             DateOnly selectedGroupFirstSchedule = SchedulerDbContext.DbContext.DailyScheduleHeaders
                 .Where(c => c.StudentGroupCode == selectedGroupCode)
@@ -54,11 +56,11 @@ namespace Scheduler.Pages
                 ForwardOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? Visibility.Hidden : Visibility.Visible;
 
 
-            Schedule.MondayGrid.ItemsSource = ScheduleController.MondayTab;
-            Schedule.TuesdayGrid.ItemsSource = ScheduleController.TuesdayTab;
-            Schedule.WednesdayGrid.ItemsSource = ScheduleController.WednesdayTab;
-            Schedule.ThursdayGrid.ItemsSource = ScheduleController.ThursdayTab;
-            Schedule.FridayGrid.ItemsSource = ScheduleController.FridayTab;
+            Schedule.MondayGrid.ItemsSource = ScheduleController.MondayTab.OrderBy(c => c.TimeSlot);
+            Schedule.TuesdayGrid.ItemsSource = ScheduleController.TuesdayTab.OrderBy(c => c.TimeSlot);
+            Schedule.WednesdayGrid.ItemsSource = ScheduleController.WednesdayTab.OrderBy(c => c.TimeSlot);
+            Schedule.ThursdayGrid.ItemsSource = ScheduleController.ThursdayTab.OrderBy(c => c.TimeSlot);
+            Schedule.FridayGrid.ItemsSource = ScheduleController.FridayTab.OrderBy(c => c.TimeSlot);
         }
 
         private void BackOnTimelineBttn_Click(object sender, RoutedEventArgs e)
@@ -80,6 +82,7 @@ namespace Scheduler.Pages
                 if(result == MessageBoxResult.Yes)
                 {
                     ScheduleController.AddSchedule(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+                    ScheduleController.SetCurrentWeek(new TimePeriod(ScheduleController.CurrentWeek.WeekStart.AddDays(7)));
                     UpdateScheduleSource();
                 }
             }
@@ -93,6 +96,9 @@ namespace Scheduler.Pages
         private void StudentGroupComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ScheduleController.SetCurrentGroupCode(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+            ScheduleController.SetCurrentWeek(new TimePeriod(SchedulerDbContext.DbContext.DailyScheduleHeaders
+                .Where(c => c.StudentGroupCode == ScheduleController.CurrentGroupCode)
+                .Max(c => c.OfDate)));
             UpdateScheduleSource();
         }
     }

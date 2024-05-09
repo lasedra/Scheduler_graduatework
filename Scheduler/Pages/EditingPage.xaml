@@ -329,7 +329,7 @@
            VerticalAlignment="Center" 
            HorizontalAlignment="Center"/>
 
-            <TextBlock Text="Четверг" Foreground="{StaticResource Text gray}"
+            <TextBlock Text="Пятница" Foreground="{StaticResource Text gray}"
            FontSize="16" 
            FontWeight="Bold"
            Grid.Column="5" 
@@ -352,6 +352,74 @@
                 DeleteCellBttnClick="DeleteCell"/>
             <usercontrols:LessonCell x:Name="Monday4"
                 Grid.Column="1" 
+                Grid.Row="4"
+                DeleteCellBttnClick="DeleteCell"/>
+
+            <usercontrols:LessonCell x:Name="Tuesday1"
+                Grid.Column="2" 
+                Grid.Row="1"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Tuesday2"
+                Grid.Column="2" 
+                Grid.Row="2"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Tuesday3"
+                Grid.Column="2" 
+                Grid.Row="3"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Tuesday4"
+                Grid.Column="2" 
+                Grid.Row="4"
+                DeleteCellBttnClick="DeleteCell"/>
+
+            <usercontrols:LessonCell x:Name="Wednesday1"
+                Grid.Column="3" 
+                Grid.Row="1"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Wednesday2"
+                Grid.Column="3" 
+                Grid.Row="2"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Wednesday3"
+                Grid.Column="3" 
+                Grid.Row="3"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Wednesday4"
+                Grid.Column="3" 
+                Grid.Row="4"
+                DeleteCellBttnClick="DeleteCell"/>
+
+            <usercontrols:LessonCell x:Name="Thursday1"
+                Grid.Column="4" 
+                Grid.Row="1"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Thursday2"
+                Grid.Column="4" 
+                Grid.Row="2"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Thursday3"
+                Grid.Column="4" 
+                Grid.Row="3"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Thursday4"
+                Grid.Column="4" 
+                Grid.Row="4"
+                DeleteCellBttnClick="DeleteCell"/>
+
+            <usercontrols:LessonCell x:Name="Friday1"
+                Grid.Column="5" 
+                Grid.Row="1"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Friday2"
+                Grid.Column="5" 
+                Grid.Row="2"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Friday3"
+                Grid.Column="5" 
+                Grid.Row="3"
+                DeleteCellBttnClick="DeleteCell"/>
+            <usercontrols:LessonCell x:Name="Friday4"
+                Grid.Column="5" 
                 Grid.Row="4"
                 DeleteCellBttnClick="DeleteCell"/>
 

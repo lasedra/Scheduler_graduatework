@@ -31,8 +31,9 @@
 
             <DockPanel HorizontalAlignment="Center" 
                        LastChildFill="False">
-                
-                <Button Content="Журнал преподавания"
+
+                <Button Name="TutionPageBttn" Click="TutionPageBttn_Click"
+                        Content="Журнал преподавания"
                         Background="{StaticResource Mid red}" 
                         Foreground="White" 
                         FontWeight="SemiBold" 

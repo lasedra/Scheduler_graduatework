@@ -1,4 +1,5 @@
 ﻿using Scheduler.Models;
+using Scheduler.Services;
 using System;
 using System.Linq;
 using System.Windows;
@@ -37,6 +38,10 @@ namespace Scheduler.Pages
                     StudentGroupCode = StudentGroupCodeTxtBox.Text.Trim(),
                     Specialization = !String.IsNullOrEmpty(SpecializationTxtBox.Text.Trim()) ? SpecializationTxtBox.Text.Trim() : null
                 });
+                SchedulerDbContext.DbContext.SaveChanges();
+
+                ScheduleController scheduleController = new();
+                scheduleController.CreatePivotSchedule(scheduleController.CurrentWeek.WeekStart, StudentGroupCodeTxtBox.Text.Trim());
                 SchedulerDbContext.DbContext.SaveChanges();
 
                 StudentGroupCodeTxtBox.Text = "";
