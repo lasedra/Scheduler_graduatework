@@ -32,6 +32,12 @@ namespace Scheduler.Pages
             UpdateScheduleEditingView();
         }
 
+        private void StudentGroupComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            scheduleController.SetCurrentGroupCode(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+            UpdateScheduleEditingView();
+        }
+
         private void TutorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SubjectComboBox.IsEnabled = true;
@@ -40,12 +46,6 @@ namespace Scheduler.Pages
                                                 .Select(tution => tution.Subject)
                                                 .Distinct()
                                                 .ToList();
-        }
-
-        private void StudentGroupComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            scheduleController.SetCurrentGroupCode(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
-            UpdateScheduleEditingView();
         }
 
         private void SaveChangesBttn_Click(object sender, RoutedEventArgs e)
@@ -84,7 +84,6 @@ namespace Scheduler.Pages
             else if (CabinetComboBox.SelectedItem == null) 
                 MessageBox.Show("Выберите аудиторию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             #endregion
-
             else
             {
                 List<DailyScheduleBody> weekToEdit = SchedulerDbContext.DbContext.DailyScheduleBodies

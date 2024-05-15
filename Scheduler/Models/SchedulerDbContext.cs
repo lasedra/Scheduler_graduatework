@@ -14,7 +14,7 @@ public partial class SchedulerDbContext : DbContext
     public virtual DbSet<ClassesTimingHeader> ClassesTimingHeaders { get; set; }
     public virtual DbSet<DailyScheduleBody> DailyScheduleBodies { get; set; }
     public virtual DbSet<DailyScheduleHeader> DailyScheduleHeaders { get; set; }
-    public virtual DbSet<Employee> Employees { get; set; }
+    public virtual DbSet<Employee> Employees { get; set; } // Телефон должен быть набором цифр
     public virtual DbSet<EventLog> EventLogs { get; set; }
     public virtual DbSet<StudentGroup> StudentGroups { get; set; }
     public virtual DbSet<Studying> Studyings { get; set; }
@@ -124,6 +124,8 @@ public partial class SchedulerDbContext : DbContext
 
             entity.HasIndex(e => e.Login, "Employee_Login_key").IsUnique();
 
+            entity.HasIndex(e => e.PhoneNumber, "employee_phone_number_key").IsUnique();
+
             entity.Property(e => e.EmployeeId)
                 .HasDefaultValueSql("gen_random_uuid()")
                 .HasColumnName("Employee_ID");
@@ -136,9 +138,7 @@ public partial class SchedulerDbContext : DbContext
             entity.Property(e => e.PhoneNumber)
                 .HasColumnType("character varying")
                 .HasColumnName("Phone_Number");
-            entity.Property(e => e.TelegramId)
-                .HasColumnType("character varying")
-                .HasColumnName("Telegram_ID");
+            entity.Property(e => e.TelegramConfirmed).HasColumnName("TelegramConfirmed?");
         });
 
         modelBuilder.Entity<EventLog>(entity =>

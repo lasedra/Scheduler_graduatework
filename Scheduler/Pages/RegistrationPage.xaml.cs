@@ -49,7 +49,7 @@ namespace Scheduler.Pages
                     Role = ManagerRadioBttn.IsChecked.GetValueOrDefault(),
                     Login = LoginTextBox.Text.Trim(),
                     Password = PasswordTextBox.Text.Trim(),
-                    TelegramId = TelegramIDTextBox.Text.Trim(),
+                    //TelegramId = TelegramIDTextBox.Text.Trim(),
                     PhoneNumber = PhoneTextBox.Text.Trim(),
                     EMail = string.IsNullOrEmpty(EmailTextBox.Text.Trim()) ? null : EmailTextBox.Text.Trim(),
                 });

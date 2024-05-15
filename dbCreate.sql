@@ -16,9 +16,9 @@ Create table "Employee"
 	"Role" Boolean NOT NULL,
 	"Login" Varchar NOT NULL UNIQUE,
 	"Password" Varchar NOT NULL,
-	"Telegram_ID" Varchar NOT NULL,
-	"Phone_Number" Varchar NOT NULL,
+	"Phone_Number" Varchar NOT NULL UNIQUE,
 	"E-mail" Varchar,
+	"TelegramConfirmed?" Boolean NOT NULL,
  primary key ("Employee_ID")
 );
 

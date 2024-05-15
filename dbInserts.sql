@@ -26,6 +26,9 @@ insert into "Subject" values
 
 insert into "Tution" values 
 ((select "Subject_ID" from "Subject" where "Name" = 'Математика'), 
+(select "Employee_ID" from "Employee" where "Login" = 'admin'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Математика'), 
 (select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i'),
 '2020-01-01', null),
 ((select "Subject_ID" from "Subject" where "Name" = 'Английский Язык'), 

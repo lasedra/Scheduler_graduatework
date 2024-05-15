@@ -19,7 +19,7 @@ namespace Scheduler.Pages
             ProfileNameTextBlock.Text = CurrentUser.Name;
             LoginTextBox.Text = CurrentUser.Login;
             PhoneTextBox.Text = CurrentUser.PhoneNumber;
-            TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
+            //TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
             EmailTextBox.Text = CurrentUser.EMail;
         }
 
@@ -127,9 +127,9 @@ namespace Scheduler.Pages
                 EditTgLinkBttn.Visibility = Visibility.Visible;
                 TgLinkDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).TelegramId = TelegramIDTextBox.Text.Trim();
+                //SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).TelegramId = TelegramIDTextBox.Text.Trim();
                 SchedulerDbContext.DbContext.SaveChanges();
-                CurrentUser.TelegramId = TelegramIDTextBox.Text;
+                //CurrentUser.TelegramId = TelegramIDTextBox.Text;
             }
         }
         private void TgLinkDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -137,7 +137,7 @@ namespace Scheduler.Pages
             TelegramIDTextBox.IsReadOnly = true;
             EditTgLinkBttn.Visibility = Visibility.Visible;
             TgLinkDecision.Visibility = Visibility.Collapsed;
-            TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
+            //TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
         }
 
         private void EditEmailBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

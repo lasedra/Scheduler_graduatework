@@ -1,5 +1,5 @@
 insert into "Employee" values
-(default, true, 'Admin', true, 'admin', 'admin01', '@admin', '+7 000 000-00-00', 'admin@mail.ru');
+(default, true, 'Admin', true, 'admin', 'admin01', '@patternedup', '+79776736876', 'admin@mail.ru');
 
 insert into "ClassesTiming_header" values 
 (default, 'Основное');
