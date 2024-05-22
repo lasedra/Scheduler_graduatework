@@ -8,11 +8,6 @@ using System.Windows.Controls;
 namespace Scheduler.Pages
 {
     // TODO: Таблица Studying при GettingStarted
-    /* TODO: Миграции */
-    /* TODO: Использовать хеширование */
-    /* TODO: Функционал:
-                1) Оповещения МУП-а о внесении изменений в расписание
-                2) Логгирование*/
 
     public partial class MainSchedulePage : Page
     {

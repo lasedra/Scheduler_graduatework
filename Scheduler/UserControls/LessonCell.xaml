@@ -6,15 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="200">
     <Grid>
-        <Border Background="{StaticResource Light gray}"
+        <Border Background="{StaticResource Mid gray}"
                 Margin="5"
                 Padding="5 15 5 5">
-
-            <Border.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Удалить" />
-                </ContextMenu>
-            </Border.ContextMenu>
 
             <StackPanel VerticalAlignment="Center" 
                         HorizontalAlignment="Center">
@@ -23,8 +17,7 @@
                            Text="{Binding Tutor.Name}"
                            HorizontalAlignment="Center" 
                            Margin="1"
-                           Background="{StaticResource Light gray}"
-                           Foreground="{StaticResource Text dark gray}"
+                           Foreground="{StaticResource Text gray}"
                            FontSize="12"
                            FontWeight="DemiBold"/>
 
@@ -32,8 +25,7 @@
                            Text="{Binding Subject.Name}"
                            HorizontalAlignment="Center" 
                            Margin="1"
-                           Background="{StaticResource Light gray}"
-                           Foreground="{StaticResource Text dark gray}"
+                           Foreground="{StaticResource Text gray}"
                            FontSize="12"
                            FontWeight="DemiBold"/>
 
@@ -41,8 +33,7 @@
                            Text="{Binding AtCabinet.Number}"
                            HorizontalAlignment="Center" 
                            Margin="1"
-                           Background="{StaticResource Light gray}"
-                           Foreground="{StaticResource Text dark gray}"
+                           Foreground="{StaticResource Text gray}"
                            FontSize="12"
                            FontWeight="DemiBold"/>
 

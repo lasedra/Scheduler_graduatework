@@ -12,13 +12,13 @@ Create table "Employee"
 (
 	"Employee_ID" uuid default gen_random_uuid() NOT NULL,
 	"WorkingStatus" Boolean NOT NULL,
-	"Name" Varchar NOT NULL,
+	"IsTelegramConfirmed" Boolean NOT NULL,
 	"Role" Boolean NOT NULL,
+	"Name" Varchar NOT NULL,
 	"Login" Varchar NOT NULL UNIQUE,
 	"Password" Varchar NOT NULL,
 	"Phone_Number" Varchar NOT NULL UNIQUE,
 	"E-mail" Varchar,
-	"TelegramConfirmed?" Boolean NOT NULL,
  primary key ("Employee_ID")
 );
 
@@ -26,7 +26,6 @@ Create table "Subject"
 (
 	"Subject_ID" uuid default gen_random_uuid() NOT NULL,
 	"Name" Varchar NOT NULL UNIQUE,
-	"ClassesNumber" Integer,
  primary key ("Subject_ID")
 );
 
@@ -98,25 +97,3 @@ Create table "DailySchedule_body"
  foreign key ("StudentGroupCode", "OfDate") references "DailySchedule_header" ("StudentGroupCode", "OfDate"),
  foreign key ("ClassNumber", "ClassesTiming_header_ID") references "ClassesTiming_body" ("ClassNumber", "ClassesTiming_header_ID")
 );
-
-		/* УНИВЕРСАЛЬНЫЙ СЕЛЕКТ */
-SELECT
-    "DailySchedule_body"."OfDate" AS "Of date",
-	to_char("DailySchedule_body"."OfDate", 'Day') AS "Day of week",
-    "DailySchedule_body"."StudentGroupCode" AS "Student group",
-	"ClassesTiming_header"."Name" as "Timing name",
-    "DailySchedule_body"."ClassNumber" AS "Class number",
-	"Employee"."Name" as "Tutor",
-	"Subject"."Name" as "Subject",
-	"DailySchedule_body"."CabinetNumber" as "At cabinet"
-FROM "DailySchedule_body"
-    LEFT JOIN "ClassesTiming_header" ON "DailySchedule_body"."ClassesTiming_header_ID" = "ClassesTiming_header"."ClassesTiming_header_ID"
-	LEFT JOIN "Employee" ON "DailySchedule_body"."Employee_ID" = "Employee"."Employee_ID"
-    LEFT JOIN "Subject" ON "DailySchedule_body"."Subject_ID" = "Subject"."Subject_ID"
-WHERE
-	"OfDate" BETWEEN '2022-07-09' AND '2022-07-09'
-	AND
-	"StudentGroupCode" = '1312';
-
-SELECT * FROM "Employee" WHERE "Employee"."Employee_ID" = 
-	(SELECT "Employee_ID" FROM "Tution" WHERE )

@@ -19,13 +19,11 @@ namespace Scheduler.Pages
             ProfileNameTextBlock.Text = CurrentUser.Name;
             LoginTextBox.Text = CurrentUser.Login;
             PhoneTextBox.Text = CurrentUser.PhoneNumber;
-            //TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
             EmailTextBox.Text = CurrentUser.EMail;
         }
 
-        private void AccesNoSpaceInput(object sender, KeyEventArgs e)
-            { if (e.Key == Key.Space) e.Handled = true; }
-        private void PhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+
+        public void PhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (PhoneTextBox.CaretIndex == 0 &&
                 e.Text == "7" &&
@@ -39,30 +37,22 @@ namespace Scheduler.Pages
             if (!char.IsDigit(e.Text, 0))
                 e.Handled = true;
         }
-        private void TelegramIDTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        public void EmailTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex(@"[^a-zA-Z0-9_]+");
-            if (regex.IsMatch(e.Text))
-                e.Handled = true;
-        }
-        private void EmailTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex(@"[^@a-zA-Z0-9_\-\.]+");
-            if (regex.IsMatch(e.Text))
+            if (!InputRegExps.EmailLocaleRegEx().IsMatch(e.Text))
                 e.Handled = true;
         }
 
-
-        private void EditLoginBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void EditLoginBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             LoginTextBox.IsReadOnly = false;
             EditLoginBttn.Visibility = Visibility.Collapsed;
             LoginDecision.Visibility = Visibility.Visible;
         }
-        private void LoginAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void LoginAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!Regex.IsMatch(LoginTextBox.Text, @"^.{5}"))
-                MessageBox.Show("Неверный формат логина", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (string.IsNullOrEmpty(LoginTextBox.Text))
+                MessageBox.Show("Введите логин", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 LoginTextBox.IsReadOnly = true;
@@ -74,7 +64,7 @@ namespace Scheduler.Pages
                 CurrentUser.Login = LoginTextBox.Text;
             }
         }
-        private void LoginDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void LoginDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             LoginTextBox.IsReadOnly = true;
             EditLoginBttn.Visibility = Visibility.Visible;
@@ -82,15 +72,15 @@ namespace Scheduler.Pages
             LoginTextBox.Text = CurrentUser.Login;
         }
 
-        private void EditPhoneBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void EditPhoneBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PhoneTextBox.IsReadOnly = false;
             EditPhoneBttn.Visibility = Visibility.Collapsed;
             PhoneDecision.Visibility = Visibility.Visible;
         }
-        private void PhoneAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void PhoneAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!Regex.IsMatch(PhoneTextBox.Text, @"^(\+)?\d{11}$"))
+            if (!!InputRegExps.PhoneRegEx().IsMatch(PhoneTextBox.Text))
                 MessageBox.Show("Неверный формат тел. номера", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
@@ -103,7 +93,7 @@ namespace Scheduler.Pages
                 CurrentUser.PhoneNumber = PhoneTextBox.Text;
             }
         }
-        private void PhoneDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void PhoneDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PhoneTextBox.IsReadOnly = true;
             EditPhoneBttn.Visibility = Visibility.Visible;
@@ -111,42 +101,13 @@ namespace Scheduler.Pages
             PhoneTextBox.Text = CurrentUser.PhoneNumber;
         }
 
-        private void EditTgLinkBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            TelegramIDTextBox.IsReadOnly = false;
-            EditTgLinkBttn.Visibility = Visibility.Collapsed;
-            TgLinkDecision.Visibility = Visibility.Visible;
-        }
-        private void TgLinkAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!Regex.IsMatch(TelegramIDTextBox.Text, @"^.{5}"))
-                MessageBox.Show("Неверный формат Telegram link", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
-            else
-            {
-                TelegramIDTextBox.IsReadOnly = true;
-                EditTgLinkBttn.Visibility = Visibility.Visible;
-                TgLinkDecision.Visibility = Visibility.Collapsed;
-
-                //SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == CurrentUser.EmployeeId).TelegramId = TelegramIDTextBox.Text.Trim();
-                SchedulerDbContext.DbContext.SaveChanges();
-                //CurrentUser.TelegramId = TelegramIDTextBox.Text;
-            }
-        }
-        private void TgLinkDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            TelegramIDTextBox.IsReadOnly = true;
-            EditTgLinkBttn.Visibility = Visibility.Visible;
-            TgLinkDecision.Visibility = Visibility.Collapsed;
-            //TelegramIDTextBox.Text = CurrentUser.TelegramId.Replace("@", "");
-        }
-
-        private void EditEmailBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void EditEmailBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             EmailTextBox.IsReadOnly = false;
             EditEmailBttn.Visibility = Visibility.Collapsed;
             EmailDecision.Visibility = Visibility.Visible;
         }
-        private void EmailAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void EmailAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!string.IsNullOrEmpty(EmailTextBox.Text) && !Regex.IsMatch(EmailTextBox.Text, @"^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$"))
                 MessageBox.Show("Неверный формат эл.Почты", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -161,7 +122,7 @@ namespace Scheduler.Pages
                 CurrentUser.EMail = EmailTextBox.Text;
             }
         }
-        private void EmailDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void EmailDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             EmailTextBox.IsReadOnly = true;
             EditEmailBttn.Visibility = Visibility.Visible;
@@ -169,7 +130,9 @@ namespace Scheduler.Pages
             EmailTextBox.Text = CurrentUser.EMail;
         }
 
-        private void LogOutBttn_Click(object sender, RoutedEventArgs e)
+        public void LogOutBttn_Click(object sender, RoutedEventArgs e)
             => NavigationService.Navigate(((MainWindow)Application.Current.MainWindow).AuthorisationPage);
+        private void AccesNoSpaceInput(object sender, KeyEventArgs e)
+        { if (e.Key == Key.Space) e.Handled = true; }
     }
 }

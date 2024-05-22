@@ -237,8 +237,7 @@
         </StackPanel>
 
         <Grid Grid.Row="2"
-              Margin="10" 
-              Background="{StaticResource Mid gray}">
+              Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>

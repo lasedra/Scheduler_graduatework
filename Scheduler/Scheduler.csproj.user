@@ -31,9 +31,6 @@
     <Compile Update="UserControls\ScheduleUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="misc\ConnectionPickWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\RegistrationPage.xaml">
@@ -52,9 +49,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\ScheduleUserControl.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="misc\ConnectionPickWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\MainWindow.xaml">

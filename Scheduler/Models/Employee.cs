@@ -9,9 +9,11 @@ public partial class Employee
 
     public bool WorkingStatus { get; set; }
 
-    public string Name { get; set; } = null!;
+    public bool IsTelegramConfirmed { get; set; }
 
     public bool Role { get; set; }
+
+    public string Name { get; set; } = null!;
 
     public string Login { get; set; } = null!;
 
@@ -20,8 +22,6 @@ public partial class Employee
     public string PhoneNumber { get; set; } = null!;
 
     public string? EMail { get; set; }
-
-    public bool TelegramConfirmed { get; set; }
 
     public virtual ICollection<DailyScheduleBody> DailyScheduleBodies { get; set; } = new List<DailyScheduleBody>();
 

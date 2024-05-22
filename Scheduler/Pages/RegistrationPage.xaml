@@ -45,9 +45,9 @@
                              Margin="5"/>
                     
                 </DockPanel>
-                
+
                 <DockPanel>
-                    
+
                     <TextBlock Text="Тел. номер:" 
                                VerticalAlignment="Center" 
                                Margin="5" 
@@ -62,39 +62,9 @@
                              HorizontalAlignment="Right" 
                              VerticalAlignment="Center" 
                              Margin="5"/>
-                    
-                </DockPanel>
-                
-                <DockPanel>
-                    
-                    <TextBlock Text="Telegram link:" 
-                               VerticalAlignment="Center" 
-                               Margin="5" 
-                               Foreground="{StaticResource Text gray}" 
-                               FontSize="14" 
-                               FontWeight="Bold"/>
-                    
-                    <StackPanel Orientation="Horizontal" 
-                                Margin="5" 
-                                HorizontalAlignment="Right">
-                        
-                        <TextBlock Text="@" 
-                                   Margin="0 0 5 0" 
-                                   VerticalAlignment="Center" 
-                                   Foreground="{StaticResource Text gray}" 
-                                   FontSize="14" 
-                                   FontWeight="Bold"/>
 
-                        <TextBox Name="TelegramIDTextBox" 
-                                 PreviewTextInput="TelegramIDTextBox_PreviewTextInput" 
-                                 PreviewKeyDown="AccesNoSpaceInput"
-                                 Width="200"
-                                 VerticalAlignment="Center"/>
-                        
-                    </StackPanel>
-                    
                 </DockPanel>
-                
+
                 <DockPanel>
                     
                     <TextBlock Text="E-mail:" 

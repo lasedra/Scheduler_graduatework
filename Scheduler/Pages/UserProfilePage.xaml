@@ -63,7 +63,7 @@
                                  Width="220" 
                                  Margin="5" 
                                  Style="{StaticResource ReadOnlyTextBoxStyle}"/>
-                        
+
                         <Image Name="EditLoginBttn" MouseLeftButtonDown="EditLoginBttn_MouseLeftButtonDown" 
                                Source="/Resources/editico.png" 
                                Height="20" Width="20" 
@@ -87,20 +87,20 @@
                     </StackPanel>
                     
                 </DockPanel>
-                
+
                 <DockPanel>
-                    
+
                     <TextBlock Text="Тел. номер:" 
                                VerticalAlignment="Center" 
                                Margin="5" 
                                Foreground="{StaticResource Text gray}" 
                                FontSize="14" 
                                FontWeight="Bold"/>
-                    
+
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Right" 
                                 VerticalAlignment="Center">
-                        
+
                         <TextBox Name="PhoneTextBox" 
                                  PreviewTextInput="PhoneTextBox_PreviewTextInput" 
                                  PreviewKeyDown="AccesNoSpaceInput"
@@ -115,7 +115,7 @@
                                Source="/Resources/editico.png" 
                                Height="20" Width="20"
                                Margin="0 0 5 0"/>
-                        
+
                         <StackPanel Name="PhoneDecision" 
                                     Visibility="Collapsed" 
                                     Orientation="Horizontal" 
@@ -130,74 +130,13 @@
                                    MouseLeftButtonDown="PhoneDeclineBttn_MouseLeftButtonDown"
                                    Source="/Resources/declineico.png" 
                                    Height="20" Width="20"/>
-                            
+
                         </StackPanel>
-                        
+
                     </StackPanel>
-                    
+
                 </DockPanel>
-                
-                <DockPanel>
-                    
-                    <TextBlock Text="Telegram link:" 
-                               VerticalAlignment="Center" 
-                               Margin="5" 
-                               Foreground="{StaticResource Text gray}" 
-                               FontSize="14" 
-                               FontWeight="Bold"/>
-                    
-                    <StackPanel Orientation="Horizontal" 
-                                Margin="5" 
-                                HorizontalAlignment="Right">
-                        
-                        <StackPanel Orientation="Horizontal" 
-                                    HorizontalAlignment="Right" 
-                                    VerticalAlignment="Center">
-                            
-                            <TextBlock Text="@" 
-                                       Margin="0 0 5 0" 
-                                       VerticalAlignment="Center" 
-                                       Foreground="{StaticResource Text gray}" 
-                                       FontSize="14" 
-                                       FontWeight="Bold"/>
 
-                            <TextBox Name="TelegramIDTextBox" 
-                                     IsReadOnly="True" 
-                                     PreviewTextInput="TelegramIDTextBox_PreviewTextInput" 
-                                     PreviewKeyDown="AccesNoSpaceInput"
-                                     Width="200" 
-                                     Margin="0 0 5 0"
-                                     VerticalAlignment="Center" 
-                                     Style="{StaticResource ReadOnlyTextBoxStyle}"/>
-
-                            <Image Name="EditTgLinkBttn" 
-                                   MouseLeftButtonDown="EditTgLinkBttn_MouseLeftButtonDown"
-                                   Source="/Resources/editico.png" 
-                                   Height="20" Width="20" />
-                            
-                            <StackPanel Name="TgLinkDecision" 
-                                        Visibility="Collapsed" 
-                                        Orientation="Horizontal" 
-                                        Margin="0 0 5 0">
-
-                                <Image Name="TgLinkAcceptBttn" 
-                                       MouseLeftButtonDown="TgLinkAcceptBttn_MouseLeftButtonDown"
-                                       Source="/Resources/acceptico.png" 
-                                       Height="20" Width="20"/>
-
-                                <Image Name="TgLinkDeclineBttn" 
-                                       MouseLeftButtonDown="TgLinkDeclineBttn_MouseLeftButtonDown"
-                                       Source="/Resources/declineico.png" 
-                                       Height="20" Width="20"/>
-                                
-                            </StackPanel>
-                            
-                        </StackPanel>
-                        
-                    </StackPanel>
-                    
-                </DockPanel>
-                
                 <DockPanel>
                     
                     <TextBlock Text="E-mail:" 

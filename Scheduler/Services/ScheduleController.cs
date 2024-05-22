@@ -183,8 +183,6 @@ namespace Scheduler.Services
                     CreatePivotSchedule(CurrentWeek.WeekStart, group.StudentGroupCode);
 
                 SetDayTabs();
-
-                MessageBox.Show("Для каждой группы создан шаблон расписания на текущую неделю", "Поздравляю!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

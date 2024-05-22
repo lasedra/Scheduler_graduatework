@@ -1,87 +1,160 @@
 -- Active: 1697616242142@@127.0.0.1@5432@SchedulerDB
 insert into "Employee" values
-(default, true, 'Иванов Иван Иванович', false, 'ivanov_i-i', 'vanya123', '@ivanov_ivan', '+7 910 536-73-85', 'ivanovivan@mail.ru'),
-(default, true, 'Петрова Ирина Сергеевна', true, 'petrova_irina', '579irishka', '@irina505', '+7 980 517-72-54', null),
-(default, true, 'Подколодный Иван Георгиевич', false, 'podkolod_ig', 'ivan1882', '@ivan_podkolodny', '+7 980 645-23-77', 'podkolodny_ivan@mail.ru'),
-(default, true, 'Фомичев Семён Герасимович', false, 'semen_fomi4ev', 's3m3n', '@fomichevS', '+7 910 335-63-60', null),
-(default, true, 'Яхненко Любовь Леонидовна', true, '9xnenko_lubov', 'luba_<3', '@Lubov_', '+7 977 475-53-30', 'lubovYahnenko@gmail.com'),
-(default, false, 'Югова Карина Антоновна', false, 'k-yugova', 'south_K', '@karinayugova42', '+7 910 885-76-19', 'karina_yugova@yandex.com'),
-(default, false, 'Чернышёв Евгений Павлович', true, 'e-chernishev', 'jeka_cherny', '@chernishevevgeny', '+7 977 534-92-14', null);
+(default, true, true, true, 'admin', 'admin', 'il_admin', '+79776736876', 'praktikasuppport@mail.ru'),
+(default, true, false, false, 'Мурзина Татьяна Витальевна', 'murzina_login', 'murzina_password', 'murzina_phone', null),
+(default, true, false, false, 'Сидорина Владислава Евгеньевна', 'sidorina_login', 'sidorina_password', 'sidorina_phone', null),
+(default, true, false, false, 'Кириллин Николай Владимирович', 'kirillin_login', 'kirillin_password', 'kirillin_phone', null),
+(default, true, false, false, 'Шапошникова Кира Александровна', 'shaposhnikova_login', 'shaposhnikova_password', 'shaposhnikova_phone', null),
+(default, true, false, false, 'Саибназарова Парвина Хусниддиновна', 'saibnazarova_login', 'saibnazarova_password', 'saibnazarova_phone', null),
+(default, true, false, false, 'Тебина Ольга Вячеславовна', 'tebina_login', 'tebina_password', 'tebina_phone', null),
+(default, true, false, false, 'Федорченко Дмитрий Евгеньевич', 'fedor4enko_login', 'fedor4enko_password', 'fedor4enko_phone', null),
+(default, true, false, false, 'Кузнецова Виктория Александровна', 'kuznetsova_login', 'kuznetsova_password', 'kuznetsova_phone', null),
+(default, true, false, false, 'Адамейко Алина Сергеевна', 'adameyko_login', 'adameyko_password', 'adameyko_phone', null),
+(default, true, false, false, 'Истомин Владимир Константинович', 'istomin_login', 'istomin_password', 'istomin_phone', null);
 
-insert into "StudentGroup" values
-('B4212', 'Информационные технологии'),
-('C2311', 'Иностранные языки'),
-('ПШ2020', 'Компьютерная грамотность');
 
 insert into "Subject" values 
-(default, 'Математика', 56),
-(default, 'Русский Язык', 42),
-(default, 'Английский Язык', 35),
-(default, 'История', 26),
-(default, 'Обществознание', 20),
-(default, 'Информатика', 50),
-(default, 'Физика', 25),
-(default, 'Биология', 29),
-(default, 'Физическая культура', 40);
+(default, 'Химия'),
+(default, 'Биология'),
+(default, 'ОБЖ'),
+(default, 'Физическая культура'),
+(default, 'Интернет-маркетинг'),
+(default, 'Математика'),
+(default, 'Физика'),
+(default, 'Русский язык'),
+(default, 'Литература'),
+(default, 'История'),
+(default, 'Обществознание'),
+(default, 'Философия'),
+(default, 'Информатика'),
+(default, 'Введение в специальность'),
+(default, 'Индивидуальный проект'),
+(default, 'Введение в язык программирования Python'),
+(default, 'Основы информационных технологий'),
+(default, 'Конфигурирование Windows 10'),
+(default, 'География'),
+(default, 'История искусства'),
+(default, 'Введение в профессию'),
+(default, 'Основы графического редактора Adobe Photoshop'),
+(default, 'Основы графического редактора Adobe Illustrator'),
+(default, 'Дизайн-мышление'),
+(default, 'Навигационный и экологический дизайн'),
+(default, 'Английский язык');
 
-insert into "Tution" values 
-((select "Subject_ID" from "Subject" where "Name" = 'Математика'), 
-(select "Employee_ID" from "Employee" where "Login" = 'admin'),
+
+insert into "Tution" values
+((select "Subject_ID" from "Subject" where "Name" = 'Химия'), 
+(select "Employee_ID" from "Employee" where "Login" = 'murzina_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Биология'), 
+(select "Employee_ID" from "Employee" where "Login" = 'murzina_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'ОБЖ'), 
+(select "Employee_ID" from "Employee" where "Login" = 'murzina_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Физическая культура'), 
+(select "Employee_ID" from "Employee" where "Login" = 'sidorina_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Интернет-маркетинг'), 
+(select "Employee_ID" from "Employee" where "Login" = 'kirillin_login'),
 '2020-01-01', null),
 ((select "Subject_ID" from "Subject" where "Name" = 'Математика'), 
-(select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i'),
+(select "Employee_ID" from "Employee" where "Login" = 'shaposhnikova_login'),
 '2020-01-01', null),
-((select "Subject_ID" from "Subject" where "Name" = 'Английский Язык'), 
-(select "Employee_ID" from "Employee" where "Login" = 'ivanov_i-i'),
+((select "Subject_ID" from "Subject" where "Name" = 'Физика'), 
+(select "Employee_ID" from "Employee" where "Login" = 'shaposhnikova_login'),
 '2020-01-01', null),
-((select "Subject_ID" from "Subject" where "Name" = 'Русский Язык'), 
-(select "Employee_ID" from "Employee" where "Login" = 'petrova_irina'),
+((select "Subject_ID" from "Subject" where "Name" = 'Русский язык'), 
+(select "Employee_ID" from "Employee" where "Login" = 'saibnazarova_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Литература'), 
+(select "Employee_ID" from "Employee" where "Login" = 'saibnazarova_login'),
 '2020-01-01', null),
 ((select "Subject_ID" from "Subject" where "Name" = 'История'), 
-(select "Employee_ID" from "Employee" where "Login" = 'podkolod_ig'),
-'2019-11-15', null),
+(select "Employee_ID" from "Employee" where "Login" = 'tebina_login'),
+'2020-01-01', null),
 ((select "Subject_ID" from "Subject" where "Name" = 'Обществознание'), 
-(select "Employee_ID" from "Employee" where "Login" = 'podkolod_ig'),
+(select "Employee_ID" from "Employee" where "Login" = 'tebina_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Философия'), 
+(select "Employee_ID" from "Employee" where "Login" = 'tebina_login'),
 '2020-01-01', null),
 ((select "Subject_ID" from "Subject" where "Name" = 'Информатика'), 
-(select "Employee_ID" from "Employee" where "Login" = 'semen_fomi4ev'),
-'2019-10-12', null),
-((select "Subject_ID" from "Subject" where "Name" = 'Физика'), 
-(select "Employee_ID" from "Employee" where "Login" = 'k-yugova'),
-'2019-03-20', '2019-10-10'),
-((select "Subject_ID" from "Subject" where "Name" = 'Физика'), 
-(select "Employee_ID" from "Employee" where "Login" = '9xnenko_lubov'),
-'2019-11-01', null),
-((select "Subject_ID" from "Subject" where "Name" = 'Физическая культура'), 
-(select "Employee_ID" from "Employee" where "Login" = 'semen_fomi4ev'),
+(select "Employee_ID" from "Employee" where "Login" = 'fedor4enko_login'),
 '2020-01-01', null),
-((select "Subject_ID" from "Subject" where "Name" = 'Физическая культура'), 
-(select "Employee_ID" from "Employee" where "Login" = 'e-chernishev'),
-'2019-02-01', '2019-07-05');
+((select "Subject_ID" from "Subject" where "Name" = 'Введение в специальность'), 
+(select "Employee_ID" from "Employee" where "Login" = 'fedor4enko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Индивидуальный проект'), 
+(select "Employee_ID" from "Employee" where "Login" = 'fedor4enko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Введение в язык программирования Python'), 
+(select "Employee_ID" from "Employee" where "Login" = 'fedor4enko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Основы информационных технологий'), 
+(select "Employee_ID" from "Employee" where "Login" = 'fedor4enko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Конфигурирование Windows 10'), 
+(select "Employee_ID" from "Employee" where "Login" = 'fedor4enko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'География'), 
+(select "Employee_ID" from "Employee" where "Login" = 'kuznetsova_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'История искусства'), 
+(select "Employee_ID" from "Employee" where "Login" = 'adameyko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Индивидуальный проект'), 
+(select "Employee_ID" from "Employee" where "Login" = 'adameyko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Введение в профессию'), 
+(select "Employee_ID" from "Employee" where "Login" = 'adameyko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Основы графического редактора Adobe Photoshop'), 
+(select "Employee_ID" from "Employee" where "Login" = 'adameyko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Основы графического редактора Adobe Illustrator'), 
+(select "Employee_ID" from "Employee" where "Login" = 'adameyko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Дизайн-мышление'), 
+(select "Employee_ID" from "Employee" where "Login" = 'adameyko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Навигационный и экологический дизайн'), 
+(select "Employee_ID" from "Employee" where "Login" = 'adameyko_login'),
+'2020-01-01', null),
+((select "Subject_ID" from "Subject" where "Name" = 'Английский язык'), 
+(select "Employee_ID" from "Employee" where "Login" = 'istomin_login'),
+'2020-01-01', null);
+
+
+insert into "StudentGroup" values
+('9/1-ГД-23/2', 'Графический дизайн'),
+('9/1-РПО-23/1', 'Информационные системы и программирование');
+
 
 insert into "Studying" values
-('B4212', (select "Subject_ID" from "Subject" where "Name" = 'Информатика')),
-('B4212', (select "Subject_ID" from "Subject" where "Name" = 'Математика')),
-('B4212', (select "Subject_ID" from "Subject" where "Name" = 'Английский Язык')),
-('B4212', (select "Subject_ID" from "Subject" where "Name" = 'Физика')),
-('C2311', (select "Subject_ID" from "Subject" where "Name" = 'Английский Язык')),
-('C2311', (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык')),
-('C2311', (select "Subject_ID" from "Subject" where "Name" = 'История')),
-('C2311', (select "Subject_ID" from "Subject" where "Name" = 'Обществознание')),
-('ПШ2020', (select "Subject_ID" from "Subject" where "Name" = 'Информатика')),
-('ПШ2020', (select "Subject_ID" from "Subject" where "Name" = 'Биология')),
-('ПШ2020', (select "Subject_ID" from "Subject" where "Name" = 'Физическая культура')),
-('ПШ2020', (select "Subject_ID" from "Subject" where "Name" = 'Русский Язык'));
+('9/1-ГД-23/2', (select "Subject_ID" from "Subject" where "Name" = 'Дизайн-мышление')),
+('9/1-РПО-23/1', (select "Subject_ID" from "Subject" where "Name" = 'Информатика'));
+
 
 insert into "Cabinet" values
-(701, null),
 (702, 'Purple'),
 (703, 'Blue'),
-(705, 'Orange');
+(705, 'Orange'),
+(708, 'Red');
 
-insert into "ClassesTiming_header" values 
+
+insert into "ClassesTiming_header" values
+(default, 'Основное'),
 (default, 'Сокращённое');
 insert into "ClassesTiming_body" values
+((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'), 
+1, '9:00', '10:30'),
+((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'), 
+2, '10:40', '12:10'),
+((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'), 
+3, '13:00', '14:30'),
+((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'), 
+4, '14:40', '16:10'),
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Сокращённое'), 
 1, '9:00', '10:00'),
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Сокращённое'), 
@@ -90,51 +163,3 @@ insert into "ClassesTiming_body" values
 3, '11:20', '12:20'),
 ((select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Сокращённое'), 
 4, '12:30', '13:30');
-
-
-/*------------------------------------------------Расписание на 2022-09-01 (pivot example)------------------------------------------------------------*/
-insert into "DailySchedule_header" values
-('1312', '2022-07-09'),
-('1311', '2022-07-09');
-insert into "DailySchedule_body" values
-                        /* Первый урок */
-('1312', '2022-07-09',
-    1, 
-    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-    null, null, null),
-                        /* Второй урок */
-('1312', '2022-07-09',
-    2, 
-    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-    null, null, null),
-                        /* Третий урок */
-('1312', '2022-07-09',
-    3, 
-    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-    null, null, null),
-                        /* Четвёртый урок */
-('1312', '2022-07-09',
-    4, 
-    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-    null, null, null);
-insert into "DailySchedule_body" values
-                        /* Первый урок */
-('1311', '2022-07-09',
-    1, 
-    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-    null, null, null),
-                        /* Второй урок */
-('1311', '2022-07-09',
-    2, 
-    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-    null, null, null),
-                        /* Третий урок */
-('1311', '2022-07-09',
-    3, 
-    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-    null, null, null),
-                        /* Четвёртый урок */
-('1311', '2022-07-09',
-    4, 
-    (select "ClassesTiming_header_ID" from "ClassesTiming_header" where "Name" = 'Основное'),
-    null, null, null);

@@ -12,9 +12,8 @@ namespace Scheduler.Pages
 {
     public partial class EditingPage : Page
     {
-        //TODO: Каникулы
+        //TODO: Каникулы и звонки
         //TODO: Зависимость ПРЕДМЕТ-ПРЕПОДАВАТЕЛЬ-ГРУППА
-        //TODO: Удаление ячейки
 
         ScheduleController scheduleController {  get; set; } = new ScheduleController();
 
