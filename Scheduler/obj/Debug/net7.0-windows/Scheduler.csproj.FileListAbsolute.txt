@@ -85,3 +85,5 @@ C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\EditingPage.baml
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\LessonCell.baml
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\LessonCell.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Xceed.Document.NET5.dll
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Xceed.Words.NET5.dll

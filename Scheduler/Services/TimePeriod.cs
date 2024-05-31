@@ -47,7 +47,7 @@ namespace Scheduler.Services
         }
 
         public string GetWeekSpan()
-        { return $"{WeekStart:dd.MM.yyyy}  -  {WeekEnd:dd.MM.yyyy}"; }
+        { return $"{WeekStart:dd.MM.yyyy} – {WeekEnd:dd.MM.yyyy}"; }
         public string GetSchoolyearSpan()
         { return $"{SchoolyearStart.Year}-{SchoolyearEnd.Year}"; }
     }

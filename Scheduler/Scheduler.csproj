@@ -18,6 +18,7 @@
     <None Remove="Resources\loginico.png" />
     <None Remove="Resources\profileico.png" />
     <None Remove="Resources\registerico.png" />
+    <None Remove="Resources\schedule.doc-template.docx" />
     <None Remove="Resources\userico.png" />
     <None Remove="Resources\winico.ico" />
     <None Remove="Resources\_.png" />
@@ -51,6 +52,9 @@
     <Resource Include="Resources\registerico.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <EmbeddedResource Include="Resources\schedule.doc-template.docx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Resource Include="Resources\userico.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -60,6 +64,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DocX" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.16">
       <PrivateAssets>all</PrivateAssets>

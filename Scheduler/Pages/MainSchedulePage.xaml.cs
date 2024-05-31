@@ -2,6 +2,7 @@
 using Scheduler.Services;
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,7 +12,7 @@ namespace Scheduler.Pages
 
     public partial class MainSchedulePage : Page
     {
-        ScheduleController ScheduleController { get; set; } = null!;
+        public ScheduleController ScheduleController { get; set; } = null!;
 
         public MainSchedulePage()
         {

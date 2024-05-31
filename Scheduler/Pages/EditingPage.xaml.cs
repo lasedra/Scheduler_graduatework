@@ -24,7 +24,7 @@ namespace Scheduler.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             StudentGroupComboBox.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
-            StudentGroupComboBox.SelectedItem = StudentGroupComboBox.SelectedItem = SchedulerDbContext.DbContext.StudentGroups.First(c => c.StudentGroupCode == scheduleController.CurrentGroupCode);
+            StudentGroupComboBox.SelectedItem = SchedulerDbContext.DbContext.StudentGroups.First(c => c.StudentGroupCode == scheduleController.CurrentGroupCode);
 
             TutorComboBox.ItemsSource = SchedulerDbContext.DbContext.Employees.Where(c => c.Role == false).ToList();
             CabinetComboBox.ItemsSource = SchedulerDbContext.DbContext.Cabinets.ToList();

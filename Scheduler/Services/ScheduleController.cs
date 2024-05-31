@@ -245,5 +245,17 @@ namespace Scheduler.Services
             ThursdayTab = GetCurrentWeekDayTab(CurrentGroupCode, DayOfWeek.Thursday);
             FridayTab = GetCurrentWeekDayTab(CurrentGroupCode, DayOfWeek.Friday);
         }
+
+        public List<List<DayTab>> GetDayTabs()
+        {
+            return new List<List<DayTab>>
+            {
+                MondayTab,
+                TuesdayTab,
+                WednesdayTab,
+                ThursdayTab,
+                FridayTab
+            };
+        }
     }
 }
