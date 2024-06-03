@@ -13,7 +13,6 @@ namespace Scheduler.Pages
     public partial class EditingPage : Page
     {
         //TODO: Каникулы и звонки
-        //TODO: Зависимость ПРЕДМЕТ-ПРЕПОДАВАТЕЛЬ-ГРУППА
 
         ScheduleController scheduleController {  get; set; } = new ScheduleController();
 
@@ -31,20 +30,39 @@ namespace Scheduler.Pages
             UpdateScheduleEditingView();
         }
 
+        private List<Subject> SelectAllowedSubjects()
+        {
+            List<Subject> tutionSubjects = SchedulerDbContext.DbContext.Tutions
+                                                .Where(tution => tution.EmployeeId == ((Employee)TutorComboBox.SelectedItem).EmployeeId && tution.EndDate == null)
+                                                .Select(tution => tution.Subject)
+                                                .Distinct()
+                                                .ToList();
+            List<Subject> studyingSubjects = SchedulerDbContext.DbContext.Studyings
+                                                .Where(studying => studying.StudentGroupCode == ((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode)
+                                                .Select(studying => studying.Subject)
+                                                .Distinct()
+                                                .ToList();
+            List<Subject> allowedSubjects = studyingSubjects.Intersect(tutionSubjects).ToList();
+            return allowedSubjects;
+        }
+
         private void StudentGroupComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             scheduleController.SetCurrentGroupCode(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+            scheduleController.SetCurrentWeek(new TimePeriod(SchedulerDbContext.DbContext.DailyScheduleHeaders
+                .Where(c => c.StudentGroupCode == scheduleController.CurrentGroupCode)
+                .Max(c => c.OfDate)));
+
+            if (TutorComboBox.SelectedItem != null)
+                SubjectComboBox.ItemsSource = SelectAllowedSubjects();
+
             UpdateScheduleEditingView();
         }
 
         private void TutorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SubjectComboBox.IsEnabled = true;
-            SubjectComboBox.ItemsSource = SchedulerDbContext.DbContext.Tutions
-                                                .Where(tution => tution.EmployeeId == ((Employee)TutorComboBox.SelectedItem).EmployeeId && tution.EndDate == null)
-                                                .Select(tution => tution.Subject)
-                                                .Distinct()
-                                                .ToList();
+            SubjectComboBox.ItemsSource = SelectAllowedSubjects();
         }
 
         private void SaveChangesBttn_Click(object sender, RoutedEventArgs e)
@@ -150,6 +168,7 @@ namespace Scheduler.Pages
                 .Max(c => c.OfDate);
 
             ScheduleWeekSpanTB.Text = scheduleController.CurrentWeek.GetWeekSpan();
+
             BackOnTimelineBttn.Visibility = (scheduleController.CurrentWeek.WeekStart == selectedGroupFirstSchedule) ? Visibility.Hidden : Visibility.Visible;
             if (CurrentUser.Role == true)
                 ForwardOnTimelineBttn.Content = (scheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? "➕" : "▶️";

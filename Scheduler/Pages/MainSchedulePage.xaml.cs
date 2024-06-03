@@ -2,7 +2,6 @@
 using Scheduler.Services;
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -43,6 +42,11 @@ namespace Scheduler.Pages
                 .Where(c => c.StudentGroupCode == selectedGroupCode)
                 .Max(c => c.OfDate);
 
+            if (ScheduleController.CurrentWeek.WeekStart > selectedGroupLastSchedule)
+            {
+                ScheduleController.SetCurrentWeek(new TimePeriod(selectedGroupLastSchedule.AddDays(-4)));
+                ScheduleController.SetDayTabs();
+            }
             ScheduleWeekSpanTB.Text = ScheduleController.CurrentWeek.GetWeekSpan();
 
             BackOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekStart == selectedGroupFirstSchedule) ? Visibility.Hidden : Visibility.Visible;

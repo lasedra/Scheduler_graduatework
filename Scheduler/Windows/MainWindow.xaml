@@ -42,7 +42,8 @@
                         Height="35" Width="180" 
                         Margin="10"/>
                 
-                <Button Content="Кабинеты" 
+                <Button x:Name="CabinetPageBttn" Click="CabinetPageBttn_Click"
+                        Content="Кабинеты"
                         Background="{StaticResource Mid red}" 
                         Foreground="White" 
                         FontWeight="SemiBold" 

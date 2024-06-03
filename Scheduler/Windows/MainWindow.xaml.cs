@@ -49,6 +49,11 @@ namespace Scheduler
             PagesFrame.Navigate(RegistrationPage);
         }
 
+        private void CabinetPageBttn_Click(object sender, RoutedEventArgs e)
+        {
+            PagesFrame.Navigate(new CabinetPage());
+        }
+
 
         public static void StartDbWatcher()
         {
@@ -75,5 +80,6 @@ namespace Scheduler
 
             }).Start();
         }
+
     }
 }

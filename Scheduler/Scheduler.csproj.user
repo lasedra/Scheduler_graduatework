@@ -10,6 +10,9 @@
     <Compile Update="Pages\AuthorisationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\CabinetPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\MainSchedulePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -33,6 +36,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Pages\CabinetPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
