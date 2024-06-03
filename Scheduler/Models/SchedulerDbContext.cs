@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Scheduler.Models;
 
 public partial class SchedulerDbContext : DbContext
 {
-    public static IConfiguration AppConfig { get; set; } = null!;
-    public static SchedulerDbContext DbContext { get; set; } = null!;
+    public static IConfiguration AppConfig = null!;
+    public static SchedulerDbContext DbContext = null!;
 
     public virtual DbSet<Cabinet> Cabinets { get; set; }
 
@@ -31,7 +33,7 @@ public partial class SchedulerDbContext : DbContext
     public virtual DbSet<Tution> Tutions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(AppConfig.GetConnectionString("localhost"));
+        => optionsBuilder.UseNpgsql("Server=localhost;Database=SchedulerDB;UserName=postgres;Password=password");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -161,6 +163,7 @@ public partial class SchedulerDbContext : DbContext
 
             entity.Property(e => e.StudentGroupCode).HasColumnType("character varying");
             entity.Property(e => e.Specialization).HasColumnType("character varying");
+
         });
 
         modelBuilder.Entity<Studying>(entity =>

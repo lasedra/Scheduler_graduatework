@@ -30,8 +30,7 @@ namespace Scheduler
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            if(PagesFrame.Content != MainSchedulePage)
-                PagesFrame.Navigate(MainSchedulePage);
+            PagesFrame.Navigate(new MainSchedulePage());
         }
 
         private void UserNamePanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

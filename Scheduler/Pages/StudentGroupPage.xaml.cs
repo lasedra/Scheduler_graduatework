@@ -32,17 +32,19 @@ namespace Scheduler.Pages
 
             StudentsGroupsListView.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
             StudentsGroupsListView.SelectedIndex = 0;
-            UpdateStudyingListView();
 
             AddStudyingRowComboBox.ItemsSource = SchedulerDbContext.DbContext.Subjects.ToList();
         }
 
         private void UpdateStudyingListView()
         {
-            List<Studying> studyingList = SchedulerDbContext.DbContext.Studyings.Include(c => c.Subject).Where(c => c.StudentGroupCode == ((StudentGroup)StudentsGroupsListView.SelectedItem).StudentGroupCode).ToList();
-            if (studyingList.Count <= 0)
-                studyingList = new List<Studying>() { new() { Subject = new() { Name = "(Отсутствуют)" } } };
-            StudyingListView.ItemsSource = studyingList;
+            if(StudentsGroupsListView.SelectedItem != null)
+            {
+                List<Studying> studyingList = SchedulerDbContext.DbContext.Studyings.Include(c => c.Subject).Where(c => c.StudentGroupCode == ((StudentGroup)StudentsGroupsListView.SelectedItem).StudentGroupCode).ToList();
+                if (studyingList.Count <= 0)
+                    studyingList = new List<Studying>() { new() { Subject = new() { Name = "(Отсутствуют)" } } };
+                StudyingListView.ItemsSource = studyingList;
+            }
         }
 
         private void StudentsGroupsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,50 +54,101 @@ namespace Scheduler.Pages
 
         private void AddNewGroupBttn_Click(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(StudentGroupCodeTxtBox.Text))
+            try
             {
-                SchedulerDbContext.DbContext.StudentGroups.Add(new StudentGroup
+                if (!string.IsNullOrEmpty(StudentGroupCodeTxtBox.Text))
                 {
-                    StudentGroupCode = StudentGroupCodeTxtBox.Text.Trim(),
-                    Specialization = !String.IsNullOrEmpty(SpecializationTxtBox.Text.Trim()) ? SpecializationTxtBox.Text.Trim() : null
-                });
-                SchedulerDbContext.DbContext.SaveChanges();
+                    if (SchedulerDbContext.DbContext.StudentGroups.Any(c => c.StudentGroupCode == StudentGroupCodeTxtBox.Text.Trim()))
+                        throw new Exception("Такая группа уже существует!");
+                    else
+                    {
+                        SchedulerDbContext.DbContext.StudentGroups.Add(new StudentGroup
+                        {
+                            StudentGroupCode = StudentGroupCodeTxtBox.Text.Trim(),
+                            Specialization = !String.IsNullOrEmpty(SpecializationTxtBox.Text.Trim()) ? SpecializationTxtBox.Text.Trim() : null
+                        });
+                        SchedulerDbContext.DbContext.SaveChanges();
 
-                ScheduleController scheduleController = new();
-                scheduleController.CreatePivotSchedule(scheduleController.CurrentWeek.WeekStart, StudentGroupCodeTxtBox.Text.Trim());
-                SchedulerDbContext.DbContext.SaveChanges();
+                        ScheduleController scheduleController = new();
+                        scheduleController.CreatePivotSchedule(scheduleController.CurrentWeek.WeekStart, StudentGroupCodeTxtBox.Text.Trim());
+                        SchedulerDbContext.DbContext.SaveChanges();
 
-                StudentGroupCodeTxtBox.Text = string.Empty;
-                SpecializationTxtBox.Text = string.Empty;
-                StudentsGroupsListView.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
+                        StudentGroupCodeTxtBox.Text = string.Empty;
+                        SpecializationTxtBox.Text = string.Empty;
+                        StudentsGroupsListView.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
+                    }
+                }
             }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void AddStudyingRowBttn_Click(object sender, RoutedEventArgs e)
         {
-            if(AddStudyingRowComboBox.SelectedItem != null &&
-                StudentsGroupsListView.SelectedItem != null)
+            try
             {
-                SchedulerDbContext.DbContext.Studyings.Add(new Studying()
+                if (AddStudyingRowComboBox.SelectedItem != null &&
+               StudentsGroupsListView.SelectedItem != null)
                 {
-                    StudentGroupCode = ((StudentGroup)StudentsGroupsListView.SelectedItem).StudentGroupCode,
-                    SubjectId = ((Subject)AddStudyingRowComboBox.SelectedItem).SubjectId
-                });
-                SchedulerDbContext.DbContext.SaveChanges();
+                    if (SchedulerDbContext.DbContext.Studyings.Any(c => c.SubjectId == ((Subject)AddStudyingRowComboBox.SelectedItem).SubjectId))
+                    {
+                        AddStudyingRowComboBox.SelectedItem = null;
+                        UpdateStudyingListView();
+                        throw new Exception("Дисциплина уже внесена в список!");
+                    }
+                    SchedulerDbContext.DbContext.Studyings.Add(new Studying()
+                    {
+                        StudentGroupCode = ((StudentGroup)StudentsGroupsListView.SelectedItem).StudentGroupCode,
+                        SubjectId = ((Subject)AddStudyingRowComboBox.SelectedItem).SubjectId
+                    });
+                    SchedulerDbContext.DbContext.SaveChanges();
 
-                AddStudyingRowComboBox.SelectedItem = null;
-                UpdateStudyingListView();
+                    AddStudyingRowComboBox.SelectedItem = null;
+                    UpdateStudyingListView();
+                }
             }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void DeleteGroupBttn_Click(object sender, RoutedEventArgs e)
         {
+            if(!string.IsNullOrEmpty(StudentGroupCodeTxtBox.Text) &&
+                !string.IsNullOrEmpty(SpecializationTxtBox.Text))
+            {
+                var result = MessageBox.Show(
+                    $"Вы уверены, что хотите удалить из базы группу {((StudentGroup)StudentsGroupsListView.SelectedItem).StudentGroupCode} ?" +
+                    $"\nЭто приведёт к удалению всей зависимой информации.",
+                    "Минуточку",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
 
+                if (result == MessageBoxResult.Yes) 
+                {
+                    StudentGroup groupToRemove = SchedulerDbContext.DbContext.StudentGroups.First(c => c.StudentGroupCode == StudentGroupCodeTxtBox.Text.Trim());
+
+                    List<DailyScheduleBody> dshBodiesToRemove =  SchedulerDbContext.DbContext.DailyScheduleBodies.Where(c => c.StudentGroupCode == groupToRemove.StudentGroupCode).ToList();
+                    SchedulerDbContext.DbContext.DailyScheduleBodies.RemoveRange(dshBodiesToRemove);
+                    SchedulerDbContext.DbContext.SaveChanges();
+
+                    List<DailyScheduleHeader> dshHeadersToRemove = SchedulerDbContext.DbContext.DailyScheduleHeaders.Where(c => c.StudentGroupCode == groupToRemove.StudentGroupCode).ToList();
+                    SchedulerDbContext.DbContext.DailyScheduleHeaders.RemoveRange(dshHeadersToRemove);
+                    SchedulerDbContext.DbContext.SaveChanges();
+
+                    List<Studying> studyingsToRemove = SchedulerDbContext.DbContext.Studyings.Where(c => c.StudentGroupCode == groupToRemove.StudentGroupCode).ToList();
+                    SchedulerDbContext.DbContext.Studyings.RemoveRange(studyingsToRemove);
+                    SchedulerDbContext.DbContext.SaveChanges();
+
+                    SchedulerDbContext.DbContext.StudentGroups.Remove(groupToRemove);
+                    SchedulerDbContext.DbContext.SaveChanges();
+
+                    StudentsGroupsListView.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
+                    MessageBox.Show("Группа успешно удалена!");
+                }
+            }
         }
 
         private void EditGroupBttn_Click(object sender, RoutedEventArgs e)
         {
-
+            //СЮДА ТРИГГЕР НА ИЗМЕНЕНИЕ
         }
 
         private void CancelEditRowBttn_Click(object sender, RoutedEventArgs e)
