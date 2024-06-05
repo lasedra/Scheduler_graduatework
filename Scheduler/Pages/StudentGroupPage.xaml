@@ -74,8 +74,8 @@
 				<StackPanel VerticalAlignment="Bottom"
 							Grid.Column="0"
 							Grid.Row="1">
-
 					<DockPanel Margin="5">
+						
 						<TextBlock Text="Код группы:" 
 								   Foreground="{StaticResource Text gray}" 
 								   FontSize="14" 
@@ -85,8 +85,10 @@
 						<TextBox x:Name="StudentGroupCodeTxtBox" 
 								 Margin="5"
 								 DockPanel.Dock="Right"/>
+						
 					</DockPanel>
 					<DockPanel Margin="5">
+						
 						<TextBlock Text="Специализация:" 
 								   Foreground="{StaticResource Text gray}" 
 								   FontSize="14" 
@@ -96,9 +98,11 @@
 						<TextBox x:Name="SpecializationTxtBox" 
 								 DockPanel.Dock="Right" 
 								 Margin="5"/>
+						
 					</DockPanel>
 
-					<Button x:Name="AddNewGroupBttn" Click="AddNewGroupBttn_Click" 
+					<Button x:Name="AddNewGroupBttn" 
+							Click="AddNewGroupBttn_Click" 
 							Content="Добавить группу" 
 							Margin="10" 
 							Height="30" 
@@ -141,7 +145,6 @@
 								Style="{StaticResource RoundedButtonStyle}" 
 								Background="{StaticResource Light red}"/>
 					</StackPanel>
-
 
 				</StackPanel>
 

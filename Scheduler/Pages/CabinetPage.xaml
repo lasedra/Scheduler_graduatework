@@ -8,79 +8,144 @@
 	  d:DesignHeight="450" d:DesignWidth="800"
 	  Title="CabinetPage"
       Loaded="Page_Loaded">
-
 	<Grid>
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
+		<Border BorderBrush="{StaticResource Light gray}"
+				Background="{StaticResource Mid gray}"
+				BorderThickness="3"
+				CornerRadius="5"
+				Margin="350 70 350 70">
+			<Grid Margin="5" SizeChanged="Grid_SizeChanged">
+				<Grid.RowDefinitions>
+					<RowDefinition x:Name="FirstRow"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
 
-			<StackPanel HorizontalAlignment="Stretch"
-						Grid.Column="0"
-						VerticalAlignment="Stretch"
-						Margin="5">
+				<StackPanel Grid.Row="0"
+							Margin="10">
 
-				<TextBlock Text="Кабинет" 
-							Foreground="{StaticResource Text gray}" 
-							FontSize="14" 
-							FontWeight="Bold" 
-							Margin="5"/>
-
-				<ListView x:Name="CabinetListView">
-					<ListView.ItemTemplate>
-						<DataTemplate>
-							<StackPanel Orientation="Horizontal">
-								<TextBlock Text="{Binding Number}" Margin="5"/>
-								<TextBlock Text="—" Margin="5"/>
-								<TextBlock Text="{Binding Name}" Margin="5"/>
-							</StackPanel>
-						</DataTemplate>
-					</ListView.ItemTemplate>
-				</ListView>
-
-			</StackPanel>
-
-			<StackPanel Grid.Row="1"
-						HorizontalAlignment="Stretch"
-						Grid.Column="0"
-						VerticalAlignment="Top"
-						Margin="5">
-
-				<DockPanel Margin="5">
-					<TextBlock Text="Номер:" 
+					<TextBlock Text="Кабинет" 
 							   Foreground="{StaticResource Text gray}" 
 							   FontSize="14" 
 							   FontWeight="Bold" 
 							   Margin="5"/>
 
-					<TextBox x:Name="NumberTxtBox" 
-							 Margin="5" 
-							 DockPanel.Dock="Right"/>
-				</DockPanel>
+					<ListView x:Name="CabinetListView"
+							  SelectionChanged="CabinetListView_SelectionChanged"
+							  SelectionMode="Single">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<DockPanel>
+									
+									<Button x:Name="EditCabinetBttn"
+											Click="EditCabinetBttn_Click"
+											DockPanel.Dock="Left"
+											Margin="5" 
+											Height="25"
+											Width="30"
+											Style="{StaticResource RoundedButtonStyle}" 
+											Background="{StaticResource Dark red}">
+										<Image Source="/Resources/editico.png" Margin="2" />
+									</Button>
 
-				<DockPanel Margin="5">
-					<TextBlock Text="Наименование*:" 
-							   Foreground="{StaticResource Text gray}" 
-							   FontSize="14" 
-							   FontWeight="Bold" 
-							   Margin="5"/>
+									<TextBlock Text="{Binding Number}" 
+											   Margin="5"
+											   VerticalAlignment="Center"/>
+									
+									<TextBlock Text="—" 
+											   Margin="5"
+											   VerticalAlignment="Center"/>
+									
+									<TextBlock Text="{Binding Name}" 
+											   Margin="5"
+											   VerticalAlignment="Center"/>
+									
+								</DockPanel>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
 
-					<TextBox x:Name="NameTxtBox" 
-							DockPanel.Dock="Right" 
-							Margin="5"/>
-				</DockPanel>
+				</StackPanel>
 
-				<Button x:Name="AddCabinetBttn" Click="AddCabinetBttn_Click"
-						Content="Добавить кабинет" 
-						Margin="10" 
-						Height="30" 
-						Padding="5" 
-						Style="{StaticResource RoundedButtonStyle}" 
-						Background="{StaticResource Light red}"/>
+				<StackPanel VerticalAlignment="Bottom"
+							Grid.Row="1">
+					<DockPanel Margin="5">
+						
+						<TextBlock Text="Номер:" 
+								   Foreground="{StaticResource Text gray}" 
+								   FontSize="14" 
+								   FontWeight="Bold" 
+								   Margin="5"/>
 
-			</StackPanel>
+						<TextBox x:Name="NumberTxtBox" 
+								 Margin="5" 
+								 DockPanel.Dock="Right"/>
+						
+					</DockPanel>
+					<DockPanel Margin="5">
+						
+						<TextBlock Text="Наименование*:" 
+								   Foreground="{StaticResource Text gray}" 
+								   FontSize="14" 
+								   FontWeight="Bold" 
+								   Margin="5"/>
 
-		</Grid>
+						<TextBox x:Name="NameTxtBox" 
+								 DockPanel.Dock="Right" 
+								 Margin="5"/>
+						
+					</DockPanel>
+
+					<Button x:Name="AddCabinetBttn" 
+							Click="AddCabinetBttn_Click"
+							Content="Добавить кабинет" 
+							Margin="10" 
+							Height="30" 
+							Padding="5" 
+							Style="{StaticResource RoundedButtonStyle}" 
+							Background="{StaticResource Light red}"/>
+
+					<StackPanel x:Name="EditCabinetStackPanel"
+								Visibility="Collapsed">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+
+							<Button x:Name="CommitEditCabinetBttn"
+									Click="CommitEditCabinetBttn_Click"
+									Content="Изменить"
+									Grid.Column="0"
+									Margin="5" 
+									Height="30"
+									Style="{StaticResource RoundedButtonStyle}" 
+									Background="{StaticResource Light red}"/>
+
+							<Button x:Name="DeleteCabinetBttn"
+									Click="DeleteCabinetBttn_Click"
+									Grid.Column="1"
+									Content="Удалить" 
+									Margin="5" 
+									Height="30"
+									Style="{StaticResource RoundedButtonStyle}" 
+									Background="{StaticResource Dark red}"
+									Foreground="White"/>
+							
+						</Grid>
+
+						<Button x:Name="CancelEditCabinetBttn"
+								Click="CancelEditCabinetBttn_Click"
+								Content="Отмена" 
+								Margin="5" 
+								Height="30"
+								Style="{StaticResource RoundedButtonStyle}" 
+								Background="{StaticResource Light red}"/>
+						
+					</StackPanel>
+
+				</StackPanel>
+
+			</Grid>
+		</Border>
 	</Grid>
 </Page>

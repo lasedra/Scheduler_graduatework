@@ -20,181 +20,178 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    
-    <Grid>
-        <StackPanel VerticalAlignment="Center" 
-                    HorizontalAlignment="Center">
-            
-            <DockPanel Margin="5 5 5 15">
-                
-                <Image Source="/Resources/profileico.png" 
-                       Margin="5" 
-                       Height="50" Width="50"/>
-                
-                <TextBlock Name="ProfileNameTextBlock" 
-                           HorizontalAlignment="Center" 
-                           VerticalAlignment="Center" 
-                           Margin="5"
-                           Foreground="{StaticResource Text gray}" 
-                           FontSize="18" 
-                           FontWeight="Bold"/>
-                
-            </DockPanel>
 
-            <StackPanel Width="400">
-                
-                <DockPanel>
-                    
-                    <TextBlock Text="Логин:" 
-                               VerticalAlignment="Center" 
-                               Margin="5" 
-                               Foreground="{StaticResource Text gray}" 
-                               FontSize="14" 
-                               FontWeight="Bold"/>
-                    
-                    <StackPanel Orientation="Horizontal" 
-                                HorizontalAlignment="Right" 
-                                VerticalAlignment="Center">
-                        
-                        <TextBox Name="LoginTextBox" 
-                                 IsReadOnly="True" 
-                                 VerticalAlignment="Center"
-                                 Width="220" 
-                                 Margin="5" 
-                                 Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+	<Grid Margin="400 70 400 70">
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
 
-                        <Image Name="EditLoginBttn" MouseLeftButtonDown="EditLoginBttn_MouseLeftButtonDown" 
-                               Source="/Resources/editico.png" 
-                               Height="20" Width="20" 
-                               Margin="0 0 5 0"/>
-                        
-                        <StackPanel Name="LoginDecision" 
-                                    Visibility="Collapsed" 
-                                    Orientation="Horizontal" 
-                                    Margin="0 0 5 0">
+		<DockPanel Margin="5"
+				   HorizontalAlignment="Center" 
+				   VerticalAlignment="Bottom" 
+				   Grid.Row="0">
 
-                            <Image Name="LoginAcceptBttn" MouseLeftButtonDown="LoginAcceptBttn_MouseLeftButtonDown"
-                                   Source="/Resources/acceptico.png" 
-                                   Height="20" Width="20"/>
+			<Image Source="/Resources/profileico.png" 
+                   Margin="5" 
+                   Height="50" 
+				   Width="50"/>
 
-                            <Image Name="LoginDeclineBttn" MouseLeftButtonDown="LoginDeclineBttn_MouseLeftButtonDown"
-                                   Source="/Resources/declineico.png" 
-                                   Height="20" Width="20" />
-                            
-                        </StackPanel>
-                        
-                    </StackPanel>
-                    
-                </DockPanel>
+			<TextBlock Name="ProfileNameTextBlock"
+					   VerticalAlignment="Center"
+                       Margin="5"
+                       Foreground="{StaticResource Text gray}" 
+                       FontSize="18" 
+                       FontWeight="Bold"/>
 
-                <DockPanel>
+		</DockPanel>
 
-                    <TextBlock Text="Тел. номер:" 
-                               VerticalAlignment="Center" 
-                               Margin="5" 
-                               Foreground="{StaticResource Text gray}" 
-                               FontSize="14" 
-                               FontWeight="Bold"/>
+		<StackPanel Grid.Row="1">
 
-                    <StackPanel Orientation="Horizontal" 
-                                HorizontalAlignment="Right" 
-                                VerticalAlignment="Center">
+			<DockPanel Grid.Row="0">
 
-                        <TextBox Name="PhoneTextBox" 
-                                 PreviewTextInput="PhoneTextBox_PreviewTextInput" 
-                                 PreviewKeyDown="AccesNoSpaceInput"
-                                 IsReadOnly="True" 
-                                 Width="220" 
-                                 VerticalAlignment="Center"
-                                 Margin="5" 
-                                 Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+				<TextBlock Text="Логин:" 
+               VerticalAlignment="Center"
+               Margin="5" 
+               Foreground="{StaticResource Text gray}" 
+               FontSize="14" 
+               FontWeight="Bold" 
+               DockPanel.Dock="Left"/>
 
-                        <Image Name="EditPhoneBttn" 
-                               MouseLeftButtonDown="EditPhoneBttn_MouseLeftButtonDown"
-                               Source="/Resources/editico.png" 
-                               Height="20" Width="20"
-                               Margin="0 0 5 0"/>
+				<Image Name="EditLoginBttn" 
+           MouseLeftButtonDown="EditLoginBttn_MouseLeftButtonDown" 
+           Source="/Resources/editico.png" 
+           Height="20" Width="20" 
+           Margin="0 0 5 0" 
+           DockPanel.Dock="Right"/>
 
-                        <StackPanel Name="PhoneDecision" 
-                                    Visibility="Collapsed" 
-                                    Orientation="Horizontal" 
-                                    Margin="0 0 5 0">
+				<StackPanel Name="LoginDecision" 
+                Visibility="Collapsed" 
+                Orientation="Horizontal" 
+                Margin="0 0 5 0" 
+                DockPanel.Dock="Right">
 
-                            <Image Name="PhoneAcceptBttn" 
-                                   MouseLeftButtonDown="PhoneAcceptBttn_MouseLeftButtonDown"
-                                   Source="/Resources/acceptico.png" 
-                                   Height="20" Width="20"/>
+					<Image Name="LoginAcceptBttn" 
+               MouseLeftButtonDown="LoginAcceptBttn_MouseLeftButtonDown"
+               Source="/Resources/acceptico.png" 
+               Height="20" Width="20"/>
 
-                            <Image Name="PhoneDeclineBttn" 
-                                   MouseLeftButtonDown="PhoneDeclineBttn_MouseLeftButtonDown"
-                                   Source="/Resources/declineico.png" 
-                                   Height="20" Width="20"/>
+					<Image Name="LoginDeclineBttn" 
+               MouseLeftButtonDown="LoginDeclineBttn_MouseLeftButtonDown"
+               Source="/Resources/declineico.png" 
+               Height="20" Width="20" />
 
-                        </StackPanel>
+				</StackPanel>
 
-                    </StackPanel>
+				<TextBox Name="LoginTextBox" 
+             IsReadOnly="True" 
+             VerticalAlignment="Center"
+             Margin="5" 
+             Style="{StaticResource ReadOnlyTextBoxStyle}"/>
 
-                </DockPanel>
+			</DockPanel>
 
-                <DockPanel>
-                    
-                    <TextBlock Text="E-mail:" 
-                               VerticalAlignment="Center" 
-                               Margin="5" 
-                               Foreground="{StaticResource Text gray}" 
-                               FontSize="14" 
-                               FontWeight="Bold"/>
-                    
-                    <StackPanel Orientation="Horizontal" 
-                                HorizontalAlignment="Right" 
-                                VerticalAlignment="Center">
+			<DockPanel Grid.Row="1">
 
-                        <TextBox Name="EmailTextBox" 
-                                 IsReadOnly="True"
-                                 PreviewKeyDown="AccesNoSpaceInput" 
-                                 PreviewTextInput="EmailTextBox_PreviewTextInput"
-                                 Width="220" 
-                                 VerticalAlignment="Center" 
-                                 Margin="5" 
-                                 Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+				<TextBlock Text="Тел. номер:" 
+               VerticalAlignment="Center" 
+               Margin="5" 
+               Foreground="{StaticResource Text gray}" 
+               FontSize="14" 
+               FontWeight="Bold" 
+               DockPanel.Dock="Left"/>
 
-                        <Image Name="EditEmailBttn" 
-                               MouseLeftButtonDown="EditEmailBttn_MouseLeftButtonDown"
-                               Source="/Resources/editico.png" 
-                               Height="20" 
-                               Margin="0 0 5 0" 
-                               Width="20"/>
-                        
-                        <StackPanel Name="EmailDecision" 
-                                    Visibility="Collapsed" 
-                                    Orientation="Horizontal" 
-                                    Margin="0 0 5 0">
+				<Image Name="EditPhoneBttn" 
+           MouseLeftButtonDown="EditPhoneBttn_MouseLeftButtonDown"
+           Source="/Resources/editico.png" 
+           Height="20" Width="20"
+           Margin="0 0 5 0"
+           DockPanel.Dock="Right"/>
 
-                            <Image Name="EmailAcceptBttn" 
-                                   MouseLeftButtonDown="EmailAcceptBttn_MouseLeftButtonDown"
-                                   Source="/Resources/acceptico.png" 
-                                   Height="20" Width="20"/>
+				<StackPanel Name="PhoneDecision" 
+                Visibility="Collapsed" 
+                Orientation="Horizontal" 
+                Margin="0 0 5 0" 
+                DockPanel.Dock="Right">
 
-                            <Image Name="EmailDeclineBttn" 
-                                   MouseLeftButtonDown="EmailDeclineBttn_MouseLeftButtonDown"
-                                   Source="/Resources/declineico.png" 
-                                   Height="20" Width="20"/>
-                            
-                        </StackPanel>
-                        
-                    </StackPanel>
-                    
-                </DockPanel>
+					<Image Name="PhoneAcceptBttn" 
+               MouseLeftButtonDown="PhoneAcceptBttn_MouseLeftButtonDown"
+               Source="/Resources/acceptico.png" 
+               Height="20" Width="20"/>
 
-                <Button Name="LogOutBttn" Click="LogOutBttn_Click"
-                        Content="Выйти из аккаунта" 
-                        Height="30" 
-                        Margin="5 10 5 5" 
-                        Style="{StaticResource RoundedButtonStyle}" 
-                        Background="{StaticResource Light red}"/>
-                
-            </StackPanel>
-            
-        </StackPanel>
-    </Grid>
+					<Image Name="PhoneDeclineBttn" 
+               MouseLeftButtonDown="PhoneDeclineBttn_MouseLeftButtonDown"
+               Source="/Resources/declineico.png" 
+               Height="20" Width="20"/>
+
+				</StackPanel>
+
+				<TextBox Name="PhoneTextBox" 
+             PreviewTextInput="PhoneTextBox_PreviewTextInput" 
+             PreviewKeyDown="AccesNoSpaceInput"
+             IsReadOnly="True"
+             VerticalAlignment="Center"
+             Margin="5" 
+             Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+
+			</DockPanel>
+
+			<DockPanel Grid.Row="2">
+
+				<TextBlock Text="E-mail:" 
+               VerticalAlignment="Center" 
+               Margin="5" 
+               Foreground="{StaticResource Text gray}" 
+               FontSize="14" 
+               FontWeight="Bold" 
+               DockPanel.Dock="Left"/>
+
+				<Image Name="EditEmailBttn" 
+           MouseLeftButtonDown="EditEmailBttn_MouseLeftButtonDown"
+           Source="/Resources/editico.png" 
+           Height="20" 
+           Margin="0 0 5 0" 
+           Width="20" 
+           DockPanel.Dock="Right"/>
+
+				<StackPanel Name="EmailDecision" 
+                Visibility="Collapsed" 
+                Orientation="Horizontal" 
+                Margin="0 0 5 0" 
+                DockPanel.Dock="Right">
+
+					<Image Name="EmailAcceptBttn" 
+               MouseLeftButtonDown="EmailAcceptBttn_MouseLeftButtonDown"
+               Source="/Resources/acceptico.png" 
+               Height="20" Width="20"/>
+
+					<Image Name="EmailDeclineBttn" 
+               MouseLeftButtonDown="EmailDeclineBttn_MouseLeftButtonDown"
+               Source="/Resources/declineico.png" 
+               Height="20" Width="20"/>
+
+				</StackPanel>
+
+				<TextBox Name="EmailTextBox" 
+             IsReadOnly="True"
+             PreviewKeyDown="AccesNoSpaceInput" 
+             PreviewTextInput="EmailTextBox_PreviewTextInput"
+             VerticalAlignment="Center" 
+             Margin="5" 
+             Style="{StaticResource ReadOnlyTextBoxStyle}"/>
+
+			</DockPanel>
+
+			<Button Name="LogOutBttn" 
+		            Click="LogOutBttn_Click"
+		            Grid.Row="3"
+                    Content="Выйти из аккаунта" 
+                    Height="30" 
+                    Margin="5 15 5 5" 
+                    Style="{StaticResource RoundedButtonStyle}" 
+                    Background="{StaticResource Light red}"/>
+
+		</StackPanel>
+
+	</Grid>
 </Page>

@@ -48,14 +48,34 @@ namespace Scheduler.Pages
             }
         }
 
-        private void StudentsGroupsListView_SelectionChanged(object sender, SelectionChangedEventArgs e) => UpdateStudyingListView();
+        private void StudentsGroupsListView_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        {
+            AddNewGroupBttn.Visibility = Visibility.Visible;
+            EditGroupRowStackPanel.Visibility = Visibility.Collapsed;
+            StudentGroupCodeTxtBox.Text = string.Empty;
+            SpecializationTxtBox.Text = string.Empty;
+            UpdateStudyingListView();
+        }
+
+        private T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+            if (parentObject == null)
+                return null;
+
+            T parent = parentObject as T;
+            if (parent != null)
+                return parent;
+            else
+                return FindParent<T>(parentObject);
+        }
 
 
         private void AddNewGroupBttn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (!string.IsNullOrEmpty(StudentGroupCodeTxtBox.Text.Trim()))
+                if (!string.IsNullOrEmpty(StudentGroupCodeTxtBox.Text))
                 {
                     if (SchedulerDbContext.DbContext.StudentGroups.Any(c => c.StudentGroupCode == StudentGroupCodeTxtBox.Text.Trim()))
                         throw new Exception("Такая группа уже существует!");
@@ -248,20 +268,6 @@ namespace Scheduler.Pages
                 UpdateStudyingListView();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
-        }
-
-
-        private T FindParent<T>(DependencyObject child) where T : DependencyObject
-        {
-            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
-            if (parentObject == null) 
-                return null;
-
-            T parent = parentObject as T;
-            if (parent != null)
-                return parent;
-            else
-                return FindParent<T>(parentObject);
         }
     }
 }
