@@ -84,7 +84,7 @@ namespace Scheduler.UserControls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Scheduler;component/usercontrols/lessoncell.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Scheduler;V1.0.0.0;component/usercontrols/lessoncell.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\UserControls\LessonCell.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -44,7 +44,7 @@ namespace Scheduler.Services
                     foreach (List<ScheduleController.DayTab> dayTab in dayTabs)
                     {
                         int lessonCounter = 1;
-                        for (int i = 1; i <= 7; i += 2) // Строки в таблицах документа
+                        for (int i = 1; i <= 4; i += 1) // Строки в таблицах документа
                         {
                             Subject? subject = dayTab.First(c => c.ClassNumber == lessonCounter).Subject;
                             Employee? tutor = dayTab.First(c => c.ClassNumber == lessonCounter).Tutor;

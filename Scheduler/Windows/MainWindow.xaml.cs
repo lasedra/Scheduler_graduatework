@@ -45,7 +45,7 @@ namespace Scheduler
 
         private void TutionPageBttn_Click(object sender, RoutedEventArgs e)
         {
-            PagesFrame.Navigate(RegistrationPage);
+            PagesFrame.Navigate(new TutorAndSubjectPage());
         }
 
         private void CabinetPageBttn_Click(object sender, RoutedEventArgs e)
