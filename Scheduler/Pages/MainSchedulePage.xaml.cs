@@ -21,7 +21,7 @@ namespace Scheduler.Pages
         {
             // Getting started check
             if (!SchedulerDbContext.DbContext.StudentGroups.Any()) 
-                NavigationService.Navigate(new StudentGroupPage(true));
+                NavigationService.Navigate(new StudentGroupPage());
             else
             {
                 ScheduleController = new();

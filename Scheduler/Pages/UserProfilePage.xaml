@@ -23,8 +23,7 @@
     
     <Grid>
         <StackPanel VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" 
-                    Width="Auto">
+                    HorizontalAlignment="Center">
             
             <DockPanel Margin="5 5 5 15">
                 

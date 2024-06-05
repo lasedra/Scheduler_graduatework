@@ -1,29 +1,11 @@
-C:\Users\.eski\source\repos\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.exe
-C:\Users\.eski\source\repos\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.deps.json
-C:\Users\.eski\source\repos\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.runtimeconfig.json
-C:\Users\.eski\source\repos\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.dll
-C:\Users\.eski\source\repos\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.pdb
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.csproj.AssemblyReference.cache
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\MainWindow.g.cs
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\App.g.cs
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler_MarkupCompile.cache
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler_MarkupCompile.lref
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\MainWindow.baml
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.g.resources
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.AssemblyInfoInputs.cache
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.AssemblyInfo.cs
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.csproj.CoreCompileInputs.cache
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.dll
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\refint\Scheduler.dll
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.pdb
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.genruntimeconfig.cache
-C:\Users\.eski\source\repos\Scheduler\Scheduler\obj\Debug\net7.0-windows\ref\Scheduler.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.exe
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\appconfig.json
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.deps.json
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.runtimeconfig.json
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Scheduler.pdb
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Xceed.Document.NET5.dll
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Xceed.Words.NET5.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Humanizer.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -49,43 +31,40 @@ C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Npgsql.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.csproj.AssemblyReference.cache
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\AuthorisationPage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\RegistrationPage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\StudentGroupPage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\UserProfilePage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\LessonCell.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\ScheduleUserControl.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Windows\MainWindow.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\App.baml
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\AuthorisationPage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\CabinetPage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\EditingPage.g.cs
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\MainSchedulePage.g.cs
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\RegistrationPage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\StudentGroupPage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\UserProfilePage.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\LessonCell.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\ScheduleUserControl.g.cs
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Windows\MainWindow.g.cs
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\App.g.cs
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler_MarkupCompile.cache
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler_MarkupCompile.lref
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\App.baml
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\AuthorisationPage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\CabinetPage.baml
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\EditingPage.baml
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\MainSchedulePage.baml
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\RegistrationPage.baml
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Windows\MainWindow.baml
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.g.resources
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.AssemblyInfoInputs.cache
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.AssemblyInfo.cs
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.csproj.CoreCompileInputs.cache
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.sourcelink.json
+C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.csproj.Up2Date
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\refint\Scheduler.dll
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.pdb
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.genruntimeconfig.cache
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\ref\Scheduler.dll
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\UserProfilePage.g.cs
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\UserProfilePage.baml
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\GeneratedInternalTypeHelper.g.cs
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.sourcelink.json
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Scheduler.csproj.Up2Date
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\appconfig.json
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\StudentGroupPage.g.cs
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\StudentGroupPage.baml
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\ScheduleUserControl.baml
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\ScheduleUserControl.g.cs
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\EditingPage.g.cs
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\EditingPage.baml
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\LessonCell.baml
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\UserControls\LessonCell.g.cs
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Xceed.Document.NET5.dll
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\bin\Debug\net7.0-windows\Xceed.Words.NET5.dll
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\CabinetPage.g.cs
-C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\obj\Debug\net7.0-windows\Pages\CabinetPage.baml
