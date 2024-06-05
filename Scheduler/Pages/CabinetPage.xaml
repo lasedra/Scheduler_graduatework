@@ -17,7 +17,7 @@
 			<Grid Margin="5" SizeChanged="Grid_SizeChanged">
 				<Grid.RowDefinitions>
 					<RowDefinition x:Name="FirstRow"/>
-					<RowDefinition/>
+					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 
 				<StackPanel Grid.Row="0"
@@ -31,7 +31,8 @@
 
 					<ListView x:Name="CabinetListView"
 							  SelectionChanged="CabinetListView_SelectionChanged"
-							  SelectionMode="Single">
+							  SelectionMode="Single"
+							  SelectedIndex="0">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<DockPanel>

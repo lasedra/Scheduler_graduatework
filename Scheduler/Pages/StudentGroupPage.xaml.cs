@@ -125,8 +125,6 @@ namespace Scheduler.Pages
                             .Where(c => c.StudentGroupCode == groupToRemove.StudentGroupCode)
                             .ExecuteDelete();
 
-                        SchedulerDbContext.DbContext.SaveChanges();
-
                         StudentsGroupsListView.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
                         AddNewGroupBttn.Visibility = Visibility.Visible;
                         EditGroupRowStackPanel.Visibility = Visibility.Collapsed;
@@ -179,8 +177,6 @@ namespace Scheduler.Pages
                                 .ExecuteUpdate(c =>
                                     c.SetProperty(c => c.StudentGroupCode, newGroupCode));
 
-                            SchedulerDbContext.DbContext.SaveChanges();
-
                             StudentsGroupsListView.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
                             AddNewGroupBttn.Visibility = Visibility.Visible;
                             EditGroupRowStackPanel.Visibility = Visibility.Collapsed;
@@ -191,11 +187,12 @@ namespace Scheduler.Pages
                     if (groupToEdit.Specialization != newGroupSpecialization)
                     {
                         SchedulerDbContext.DbContext.StudentGroups
-                        .Where(c => c.StudentGroupCode == groupToEdit.StudentGroupCode)
-                        .ExecuteUpdate(c =>
-                            c.SetProperty(c => c.Specialization, newGroupSpecialization));
+                            .Where(c => c.StudentGroupCode == groupToEdit.StudentGroupCode)
+                            .ExecuteUpdate(c =>
+                                c.SetProperty(c => c.Specialization, newGroupSpecialization));
 
-                        SchedulerDbContext.DbContext.SaveChanges();
+                        // Сохранение и подгрузка изменений не ключевых полей
+                        SchedulerDbContext.DbContext.ChangeTracker.Clear();
 
                         StudentsGroupsListView.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
                         AddNewGroupBttn.Visibility = Visibility.Visible;

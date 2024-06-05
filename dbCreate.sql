@@ -94,7 +94,8 @@ Create table "DailySchedule_body"
 	"ClassesTiming_header_ID" uuid NOT NULL,
 	"Employee_ID" uuid references "Employee" ("Employee_ID"),
 	"Subject_ID" uuid references "Subject" ("Subject_ID"),
-	"CabinetNumber" Varchar references "Cabinet" ("Number"),
+	"CabinetNumber" Varchar references "Cabinet" ("Number")
+		ON UPDATE CASCADE,
  primary key ("StudentGroupCode","OfDate","ClassNumber"),
  foreign key ("StudentGroupCode", "OfDate") references "DailySchedule_header" ("StudentGroupCode", "OfDate") 
  	ON UPDATE CASCADE ON DELETE CASCADE,
