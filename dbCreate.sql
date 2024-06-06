@@ -38,7 +38,8 @@ Create table "StudentGroup"
 
 Create table "Tution"
 (
-	"Subject_ID" uuid references "Subject" ("Subject_ID") NOT NULL,
+	"Subject_ID" uuid references "Subject" ("Subject_ID") 
+		ON DELETE CASCADE NOT NULL,
 	"Employee_ID" uuid references "Employee" ("Employee_ID") 
 		ON DELETE CASCADE NOT NULL,
 	"StartDate" Date NOT NULL,
@@ -50,7 +51,8 @@ Create table "Studying"
 (
 	"StudentGroupCode" Varchar references "StudentGroup" ("StudentGroupCode") 
 		ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
-	"Subject_ID" uuid references "Subject" ("Subject_ID") NOT NULL,
+	"Subject_ID" uuid references "Subject" ("Subject_ID") 
+		ON DELETE CASCADE NOT NULL,
 	"StartDate" Date,
 	"EndDate" Date,
 primary key ("Subject_ID", "StudentGroupCode")
@@ -93,8 +95,7 @@ Create table "DailySchedule_body"
 		"OfDate" Date NOT NULL,
 	"ClassNumber" Integer NOT NULL,
 	"ClassesTiming_header_ID" uuid NOT NULL,
-	"Employee_ID" uuid references "Employee" ("Employee_ID")
-		ON UPDATE CASCADE,
+	"Employee_ID" uuid references "Employee" ("Employee_ID"),
 	"Subject_ID" uuid references "Subject" ("Subject_ID"),
 	"CabinetNumber" Varchar references "Cabinet" ("Number")
 		ON UPDATE CASCADE,

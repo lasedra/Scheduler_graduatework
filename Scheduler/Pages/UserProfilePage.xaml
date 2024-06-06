@@ -187,23 +187,21 @@
 
 					<RadioButton Name="ManagerRadioBttn"
 								 Checked="ManagerRadioBttn_Checked"
-                     IsChecked="False"
-                     Content="Менеджер" 
-                     Margin="5" 
-                     VerticalContentAlignment="Center" 
-                     Foreground="{StaticResource Text gray}" 
-                     FontSize="14" 
-                     FontWeight="Bold"/>
+                                 Content="Менеджер" 
+                                 Margin="5" 
+                                 VerticalContentAlignment="Center" 
+                                 Foreground="{StaticResource Text gray}" 
+                                 FontSize="14" 
+                                 FontWeight="Bold"/>
 
 					<RadioButton Name="TutorRadioBttn"
 								 Checked="TutorRadioBttn_Checked"
-                     IsChecked="True"
-                     Content="Преподаватель" 
-                     Margin="5" 
-                     VerticalContentAlignment="Center" 
-                     Foreground="{StaticResource Text gray}" 
-                     FontSize="14" 
-                     FontWeight="Bold"/>
+                                 Content="Преподаватель" 
+                                 Margin="5" 
+                                 VerticalContentAlignment="Center" 
+                                 Foreground="{StaticResource Text gray}" 
+                                 FontSize="14" 
+                                 FontWeight="Bold"/>
 
 				</StackPanel>
 

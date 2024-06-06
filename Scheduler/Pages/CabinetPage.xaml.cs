@@ -113,7 +113,6 @@ namespace Scheduler.Pages
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
-
         }
 
         private void EditCabinetBttn_Click(object sender, RoutedEventArgs e)

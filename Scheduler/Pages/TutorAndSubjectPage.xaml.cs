@@ -112,7 +112,7 @@ namespace Scheduler.Pages
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
-
+#warning
         private void DeleteTutionBttn_Click(object sender, RoutedEventArgs e)
         {
             try

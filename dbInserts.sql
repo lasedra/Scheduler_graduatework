@@ -1,6 +1,6 @@
 -- Active: 1697616242142@@127.0.0.1@5432@SchedulerDB
 insert into "Employee" values
-(default, true, true, true, 'admin', 'admin', 'il_admin', '+79776736876', 'praktikasuppport@mail.ru'),
+(default, true, true, true, 'Козицкий Илья Сергеевич', 'admin', 'admin', '+79776736876', 'praktikasuppport@mail.ru'),
 (default, true, false, false, 'Мурзина Татьяна Витальевна', 'murzina_login', 'murzina_password', 'murzina_phone', null),
 (default, true, false, false, 'Сидорина Владислава Евгеньевна', 'sidorina_login', 'sidorina_password', 'sidorina_phone', null),
 (default, true, false, false, 'Кириллин Николай Владимирович', 'kirillin_login', 'kirillin_password', 'kirillin_phone', null),

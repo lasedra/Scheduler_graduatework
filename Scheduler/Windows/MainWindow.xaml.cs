@@ -12,10 +12,7 @@ namespace Scheduler
 {
     public partial class MainWindow : Window
     {
-        public MainSchedulePage MainSchedulePage = new();
         public AuthorisationPage AuthorisationPage = new();
-        public RegistrationPage RegistrationPage = new();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -25,33 +22,6 @@ namespace Scheduler
             PagesFrame.Navigate(AuthorisationPage);
             StartDbWatcher();
         }
-
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            PagesFrame.Navigate(new MainSchedulePage());
-        }
-
-        private void UserNamePanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            PagesFrame.Navigate(new UserProfilePage(SchedulerDbContext.CurrentUser));
-        }
-
-        private void StudentGroupPageBttn_Click(object sender, RoutedEventArgs e)
-        {
-            PagesFrame.Navigate(new StudentGroupPage());
-        }
-
-        private void TutionPageBttn_Click(object sender, RoutedEventArgs e)
-        {
-            PagesFrame.Navigate(new TutorAndSubjectPage());
-        }
-
-        private void CabinetPageBttn_Click(object sender, RoutedEventArgs e)
-        {
-            PagesFrame.Navigate(new CabinetPage());
-        }
-
 
         public static void StartDbWatcher()
         {
@@ -79,5 +49,33 @@ namespace Scheduler
             }).Start();
         }
 
+
+        private void UserNamePanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PagesFrame.Navigate(new UserProfilePage(SchedulerDbContext.CurrentUser));
+        }
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            PagesFrame.Navigate(new MainSchedulePage());
+        }
+        private void StudentGroupPageBttn_Click(object sender, RoutedEventArgs e)
+        {
+            PagesFrame.Navigate(new StudentGroupPage());
+        }
+        private void TutionPageBttn_Click(object sender, RoutedEventArgs e)
+        {
+            PagesFrame.Navigate(new TutorAndSubjectPage());
+        }
+        private void CabinetPageBttn_Click(object sender, RoutedEventArgs e)
+        {
+            PagesFrame.Navigate(new CabinetPage());
+        }
+        private void SubjectPageBttn_Click(object sender, RoutedEventArgs e)
+        {
+            PagesFrame.Navigate(new SubjectPage());
+        }
+
+
+        
     }
 }

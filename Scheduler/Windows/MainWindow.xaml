@@ -65,7 +65,9 @@
                         Height="35" Width="80" 
                         Margin="10"/>
 
-                <Button Content="Предметы" 
+                <Button Name="SubjectPageBttn"
+					    Content="Предметы"
+						Click="SubjectPageBttn_Click"
                         Background="{StaticResource Mid red}" 
                         Foreground="White" 
                         FontWeight="SemiBold" 

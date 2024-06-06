@@ -50,7 +50,7 @@ namespace Scheduler.Pages
 
                         ((TextBlock)CurrentMainWindow.FindName("UserNameTextBlock")).Text = SchedulerDbContext.CurrentUser.Name;
                         ((DockPanel)CurrentMainWindow.FindName("MenuPanel")).Visibility = Visibility.Visible;
-                        NavigationService.Navigate(CurrentMainWindow.MainSchedulePage);
+                        NavigationService.Navigate(new MainSchedulePage());
                     }
                     else
                         throw new Exception("Аккаунт не найден. \nНеверные учётные данные или пользователь не зарегистрирован.");

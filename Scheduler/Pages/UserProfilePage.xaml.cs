@@ -25,13 +25,24 @@ namespace Scheduler.Pages
             ProfileNameTextBlock.Text = User.Name;
             NameTextBox.Text = User.Name;
             LoginTextBox.Text = User.Login;
+
+            if(User.Role){
+                ManagerRadioBttn.IsChecked = true;
+                TutorRadioBttn.IsChecked = false;
+            }else{
+                ManagerRadioBttn.IsChecked = false;
+                TutorRadioBttn.IsChecked = true; }
+
             PasswordTextBox.Text = User.Password;
-            EditRolePanel.Visibility = (SchedulerDbContext.CurrentUser.EmployeeId == User.EmployeeId) ? Visibility.Collapsed : Visibility.Visible;
             PhoneTextBox.Text = User.PhoneNumber;
             EmailTextBox.Text = User.EMail;
 
-            DeleteUserBttn.Visibility = (SchedulerDbContext.CurrentUser.EmployeeId == User.EmployeeId) ? Visibility.Collapsed : Visibility.Visible;
-            LogOutBttn.Visibility = (SchedulerDbContext.CurrentUser.EmployeeId == User.EmployeeId) ? Visibility.Visible : Visibility.Collapsed;
+            if (SchedulerDbContext.CurrentUser.EmployeeId == User.EmployeeId)
+            {
+                EditRolePanel.Visibility = Visibility.Collapsed;
+                DeleteUserBttn.Visibility = Visibility.Collapsed;
+                LogOutBttn.Visibility = Visibility.Visible;
+            }
         }
 
 

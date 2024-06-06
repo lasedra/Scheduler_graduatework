@@ -51,7 +51,9 @@ namespace Scheduler.Pages
                         PhoneNumber = PhoneTextBox.Text.Trim(),
                         EMail = string.IsNullOrEmpty(EmailTextBox.Text.Trim()) ? null : EmailTextBox.Text.Trim(),
                     });
+
                     SchedulerDbContext.DbContext.SaveChanges();
+                    NavigationService.Navigate(new TutorAndSubjectPage());
                     MessageBox.Show("Новый пользователь зарегистрирован", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
             }
