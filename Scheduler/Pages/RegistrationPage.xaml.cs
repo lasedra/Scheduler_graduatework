@@ -1,7 +1,6 @@
 ﻿using Scheduler.Models;
 using Scheduler.Services;
 using System;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -29,7 +28,7 @@ namespace Scheduler.Pages
                 else if (!InputRegExps.PhoneRegEx().IsMatch(PhoneTextBox.Text))
                     throw new Exception("Неверный формат тел. номера");
 
-                else if (!string.IsNullOrEmpty(EmailTextBox.Text) && !!InputRegExps.EmailRegEx().IsMatch(EmailTextBox.Text))
+                else if (!string.IsNullOrEmpty(EmailTextBox.Text) && !InputRegExps.EmailRegEx().IsMatch(EmailTextBox.Text))
                     throw new Exception("Неверный формат эл.Почты");
 
                 else if (string.IsNullOrEmpty(LoginTextBox.Text))
@@ -80,7 +79,7 @@ namespace Scheduler.Pages
         }
         private void EmailTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!InputRegExps.EmailLocaleRegEx().IsMatch(e.Text))
+            if (InputRegExps.EmailLocaleRegEx().IsMatch(e.Text))
                 e.Handled = true;
         }
     }

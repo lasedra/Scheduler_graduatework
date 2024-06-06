@@ -25,7 +25,7 @@ namespace Scheduler.Pages
             StudentGroupComboBox.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
             StudentGroupComboBox.SelectedItem = SchedulerDbContext.DbContext.StudentGroups.First(c => c.StudentGroupCode == scheduleController.CurrentGroupCode);
 
-            TutorComboBox.ItemsSource = SchedulerDbContext.DbContext.Employees.Where(c => c.Role == false).ToList();
+            TutorComboBox.ItemsSource = SchedulerDbContext.DbContext.Employees.ToList();
             CabinetComboBox.ItemsSource = SchedulerDbContext.DbContext.Cabinets.ToList();
             UpdateScheduleEditingView();
         }
@@ -170,7 +170,7 @@ namespace Scheduler.Pages
             ScheduleWeekSpanTB.Text = scheduleController.CurrentWeek.GetWeekSpan();
 
             BackOnTimelineBttn.Visibility = (scheduleController.CurrentWeek.WeekStart == selectedGroupFirstSchedule) ? Visibility.Hidden : Visibility.Visible;
-            if (CurrentUser.Role == true)
+            if (SchedulerDbContext.CurrentUser.Role == true)
                 ForwardOnTimelineBttn.Content = (scheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? "➕" : "▶️";
             else
                 ForwardOnTimelineBttn.Visibility = (scheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? Visibility.Hidden : Visibility.Visible;

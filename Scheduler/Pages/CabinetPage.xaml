@@ -84,7 +84,7 @@
 					</DockPanel>
 					<DockPanel Margin="5">
 						
-						<TextBlock Text="Наименование*:" 
+						<TextBlock Text="Наименование:" 
 								   Foreground="{StaticResource Text gray}" 
 								   FontSize="14" 
 								   FontWeight="Bold" 

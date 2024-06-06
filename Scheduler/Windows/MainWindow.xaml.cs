@@ -15,7 +15,6 @@ namespace Scheduler
         public MainSchedulePage MainSchedulePage = new();
         public AuthorisationPage AuthorisationPage = new();
         public RegistrationPage RegistrationPage = new();
-        public UserProfilePage UserProfilePage = new();
 
         public MainWindow()
         {
@@ -35,7 +34,7 @@ namespace Scheduler
 
         private void UserNamePanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            PagesFrame.Navigate(UserProfilePage);
+            PagesFrame.Navigate(new UserProfilePage(SchedulerDbContext.CurrentUser));
         }
 
         private void StudentGroupPageBttn_Click(object sender, RoutedEventArgs e)

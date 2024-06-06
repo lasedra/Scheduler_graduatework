@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Scheduler.Models;
@@ -9,6 +7,7 @@ public partial class SchedulerDbContext : DbContext
 {
     public static IConfiguration AppConfig = null!;
     public static SchedulerDbContext DbContext = null!;
+    public static Employee CurrentUser = null!;
 
     public virtual DbSet<Cabinet> Cabinets { get; set; }
 

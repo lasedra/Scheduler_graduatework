@@ -50,7 +50,7 @@ namespace Scheduler.Pages
             ScheduleWeekSpanTB.Text = ScheduleController.CurrentWeek.GetWeekSpan();
 
             BackOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekStart == selectedGroupFirstSchedule) ? Visibility.Hidden : Visibility.Visible;
-            if (CurrentUser.Role == true)
+            if (SchedulerDbContext.CurrentUser.Role == true)
                 ForwardOnTimelineBttn.Content = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? "➕" : "▶️";
             else
                 ForwardOnTimelineBttn.Visibility = (ScheduleController.CurrentWeek.WeekEnd.AddDays(-2) == selectedGroupLastSchedule) ? Visibility.Hidden : Visibility.Visible;

@@ -148,7 +148,7 @@ namespace Scheduler.Services {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Scheduler;V1.0.0.0;component/usercontrols/scheduleusercontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Scheduler;component/usercontrols/scheduleusercontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\UserControls\ScheduleUserControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

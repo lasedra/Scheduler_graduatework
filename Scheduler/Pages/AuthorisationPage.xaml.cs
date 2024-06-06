@@ -1,5 +1,4 @@
 ﻿using Scheduler.Models;
-using Scheduler.Services;
 using System;
 using System.Linq;
 using System.Windows;
@@ -19,7 +18,7 @@ namespace Scheduler.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoginTextBox.Text = "admin";
-            PasswordTextBox.Text = "il_admin";
+            PasswordTextBox.Text = "admin";
             CurrentMainWindow = (MainWindow)Application.Current.MainWindow;
             ((DockPanel)CurrentMainWindow.FindName("MenuPanel")).Visibility = Visibility.Collapsed;
         }
@@ -47,8 +46,9 @@ namespace Scheduler.Pages
                     Employee? loggingEmployee = SchedulerDbContext.DbContext.Employees.FirstOrDefault(c => c.Login == login && c.Password == password);
                     if (loggingEmployee != null)
                     {
-                        CurrentUser.SetCurrentUser(loggingEmployee);
-                        ((TextBlock)CurrentMainWindow.FindName("UserNameTextBlock")).Text = CurrentUser.Name;
+                        SchedulerDbContext.CurrentUser = loggingEmployee;
+
+                        ((TextBlock)CurrentMainWindow.FindName("UserNameTextBlock")).Text = SchedulerDbContext.CurrentUser.Name;
                         ((DockPanel)CurrentMainWindow.FindName("MenuPanel")).Visibility = Visibility.Visible;
                         NavigationService.Navigate(CurrentMainWindow.MainSchedulePage);
                     }

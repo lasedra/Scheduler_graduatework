@@ -9,7 +9,7 @@ insert into "Employee" values
 (default, true, false, false, 'Тебина Ольга Вячеславовна', 'tebina_login', 'tebina_password', 'tebina_phone', null),
 (default, true, false, false, 'Федорченко Дмитрий Евгеньевич', 'fedor4enko_login', 'fedor4enko_password', 'fedor4enko_phone', null),
 (default, true, false, false, 'Кузнецова Виктория Александровна', 'kuznetsova_login', 'kuznetsova_password', 'kuznetsova_phone', null),
-(default, true, false, false, 'Адамейко Алина Сергеевна', 'adameyko_login', 'adameyko_password', 'adameyko_phone', null),
+(default, true, false, true, 'Адамейко Алина Сергеевна', 'adameyko_login', 'adameyko_password', 'adameyko_phone', null),
 (default, true, false, false, 'Истомин Владимир Константинович', 'istomin_login', 'istomin_password', 'istomin_phone', null);
 
 

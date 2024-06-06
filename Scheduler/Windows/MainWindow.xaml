@@ -34,13 +34,13 @@
 
                 <Button Name="TutionPageBttn" 
 						Click="TutionPageBttn_Click"
-                        Content="Преподаватели и предметы"
+                        Content="Преподаватели"
                         Background="{StaticResource Mid red}" 
                         Foreground="White" 
                         FontWeight="SemiBold" 
                         FontSize="15" 
                         Style="{StaticResource RoundedButtonStyle}"
-                        Height="35" Width="220" 
+                        Height="35" Width="130" 
                         Margin="15 10 10 10"/>
                 
                 <Button x:Name="CabinetPageBttn" 
@@ -54,7 +54,8 @@
                         Height="35" Width="90" 
                         Margin="10"/>
 
-                <Button Name="StudentGroupPageBttn" Click="StudentGroupPageBttn_Click"
+                <Button Name="StudentGroupPageBttn" 
+						Click="StudentGroupPageBttn_Click"
                         Content="Группы" 
                         Background="{StaticResource Mid red}" 
                         Foreground="White" 
@@ -64,18 +65,19 @@
                         Height="35" Width="80" 
                         Margin="10"/>
 
-                <Button Content="Расписания звонков" 
+                <Button Content="Предметы" 
                         Background="{StaticResource Mid red}" 
                         Foreground="White" 
                         FontWeight="SemiBold" 
                         FontSize="15" 
                         Style="{StaticResource RoundedButtonStyle}"
-                        Height="35" Width="165"
+                        Height="35" Width="100"
                         Margin="10"/>
                 
             </DockPanel>
             
-            <StackPanel Name="UserNamePanel" MouseLeftButtonDown="UserNamePanel_MouseLeftButtonDown"
+            <StackPanel Name="UserNamePanel" 
+						MouseLeftButtonDown="UserNamePanel_MouseLeftButtonDown"
                         Orientation="Horizontal" 
                         HorizontalAlignment="Right" 
                         Margin="10">

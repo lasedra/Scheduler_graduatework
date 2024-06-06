@@ -6,7 +6,22 @@
       xmlns:local="clr-namespace:Scheduler.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TutorAndSubjectPage">
+      Title="TutorAndSubjectPage"
+	  Loaded="Page_Loaded">
+	<Page.Resources>
+		<Style TargetType="TextBlock" x:Key="RoleTextBlockStyle">
+			<Setter Property="Text" Value="{Binding Role}"/>
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding Role}" Value="True">
+					<Setter Property="Text" Value="Менеджер"/>
+				</DataTrigger>
+				<DataTrigger Binding="{Binding Role}" Value="False">
+					<Setter Property="Text" Value=""/>
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+	</Page.Resources>
+	
 	<Grid>
 		<Border BorderBrush="{StaticResource Light gray}"
 				Background="{StaticResource Mid gray}"
@@ -34,35 +49,33 @@
 					   Margin="5"/>
 
 					<ListView x:Name="TutorsListView"
-					  SelectionChanged="TutorsListView_SelectionChanged"
-					  SelectionMode="Single"
-					  SelectedIndex="0">
+							  SelectionChanged="TutorsListView_SelectionChanged"
+							  SelectionMode="Single"
+							  SelectedIndex="0">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<DockPanel>
 
 									<Button x:Name="EditTutorBttn" 
-									Click="EditTutorBttn_Click"
-									DockPanel.Dock="Left"
-									Margin="5" 
-									Height="25"
-									Width="30"
-									Style="{StaticResource RoundedButtonStyle}" 
-									Background="{StaticResource Dark red}">
+											Click="EditTutorBttn_Click"
+											DockPanel.Dock="Left"
+											Margin="5" 
+											Height="25"
+											Width="30"
+											Style="{StaticResource RoundedButtonStyle}" 
+											Background="{StaticResource Dark red}">
 										<Image Source="/Resources/editico.png" Margin="2" />
 									</Button>
 
-									<TextBlock Text="{Binding StudentGroupCode}" 
+									<TextBlock Text="{Binding Name}" 
 									   Margin="5"
+									   FontSize="14"
 									   VerticalAlignment="Center"/>
 
-									<TextBlock Text="—"
-									   Margin="5"
-									   VerticalAlignment="Center"/>
-
-									<TextBlock Text="{Binding Specialization}" 
-									   Margin="5"
-									   VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource RoleTextBlockStyle}"
+											   Foreground="{StaticResource Light gray}"
+											   FontSize="12"
+											   VerticalAlignment="Center"/>
 
 								</DockPanel>
 							</DataTemplate>
@@ -71,107 +84,42 @@
 
 				</StackPanel>
 
-				<StackPanel VerticalAlignment="Bottom"
+				<Button x:Name="AddTutorBttn" 
+					Click="AddTutorBttn_Click" 
+					Content="Добавить преподавателя"
+					VerticalAlignment="Bottom"
+					Grid.Row="1"
 					Grid.Column="0"
-					Grid.Row="1">
-					<DockPanel Margin="5">
-
-						<TextBlock Text="Код группы:" 
-						   Foreground="{StaticResource Text gray}" 
-						   FontSize="14" 
-						   FontWeight="Bold" 
-						   Margin="5"/>
-
-						<TextBox x:Name="StudentGroupCodeTxtBox" 
-						 Margin="5"
-						 DockPanel.Dock="Right"/>
-
-					</DockPanel>
-					<DockPanel Margin="5">
-
-						<TextBlock Text="Специализация:" 
-						   Foreground="{StaticResource Text gray}" 
-						   FontSize="14" 
-						   FontWeight="Bold" 
-						   Margin="5"/>
-
-						<TextBox x:Name="SpecializationTxtBox" 
-						 DockPanel.Dock="Right" 
-						 Margin="5"/>
-
-					</DockPanel>
-
-					<Button x:Name="AddNewGroupBttn" 
-					Click="AddNewGroupBttn_Click" 
-					Content="Добавить группу" 
 					Margin="10" 
-					Height="30" 
-					Padding="5" 
+					Height="30"
 					Style="{StaticResource RoundedButtonStyle}" 
 					Background="{StaticResource Light red}"/>
-
-					<StackPanel x:Name="EditGroupRowStackPanel"
-						Visibility="Collapsed">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition/>
-								<ColumnDefinition/>
-							</Grid.ColumnDefinitions>
-
-							<Button x:Name="CommitEditGroupBttn" 
-							Click="CommitEditGroupBttn_Click"
-							Grid.Column="0"
-							Content="Изменить" 
-							Margin="5" 
-							Height="30"
-							Style="{StaticResource RoundedButtonStyle}" 
-							Background="{StaticResource Light red}"/>
-
-							<Button x:Name="DeleteGroupBttn" Click="DeleteGroupBttn_Click"
-Grid.Column="1"
-Content="Удалить" 
-Margin="5" 
-Height="30"
-Style="{StaticResource RoundedButtonStyle}" 
-Background="{StaticResource Dark red}"
-Foreground="White"/>
-						</Grid>
-
-						<Button x:Name="CancelEditGroupBttn" 
-						Click="CancelEditGroupBttn_Click"
-						Content="Отмена" 
-						Margin="5" 
-						Height="30"
-						Style="{StaticResource RoundedButtonStyle}" 
-						Background="{StaticResource Light red}"/>
-					</StackPanel>
-
-				</StackPanel>
 
 
 				<StackPanel Grid.Column="1"
 					Grid.Row="0"
 					Margin="10">
 
-					<TextBlock Text="Изучаемые предметы" 
+					<TextBlock Text="Преподаваемые предметы" 
 					   Foreground="{StaticResource Text gray}" 
 					   FontSize="14" 
 					   FontWeight="Bold" 
 					   Margin="5"/>
 
-					<ListView x:Name="StudyingListView"
-					  SelectionMode="Single">
+					<ListView x:Name="TutionListView"
+							  SelectionMode="Single">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<DockPanel>
 
-									<Button x:Name="DeleteStudyingBttn" Click="DeleteStudyingBttn_Click"
-									DockPanel.Dock="Left"
-									Margin="5" 
-									Height="25"
-									Width="25"
-									Style="{StaticResource RoundedButtonStyle}" 
-									Background="{StaticResource Dark red}">
+									<Button x:Name="DeleteTutionBttn" 
+											Click="DeleteTutionBttn_Click"
+											DockPanel.Dock="Left"
+											Margin="5" 
+											Height="25"
+											Width="25"
+											Style="{StaticResource RoundedButtonStyle}" 
+											Background="{StaticResource Dark red}">
 										<Image Source="/Resources/declineico.png" Margin="2" />
 									</Button>
 
@@ -197,9 +145,9 @@ Foreground="White"/>
 						   FontWeight="Bold" 
 						   Margin="5"/>
 
-						<ComboBox x:Name="AddStudyingComboBox"
-						  DockPanel.Dock="Right" 
-						  Margin="5">
+						<ComboBox x:Name="AddTutionComboBox"
+								  DockPanel.Dock="Right" 
+								  Margin="5">
 							<ComboBox.ItemTemplate>
 								<DataTemplate>
 									<TextBlock Text="{Binding Name}"/>
@@ -209,14 +157,14 @@ Foreground="White"/>
 
 					</DockPanel>
 
-					<Button x:Name="AddNewStudyingBttn" 
-					Click="AddNewStudyingBttn_Click"
-					Content="Добавить предмет" 
-					Margin="10" 
-					Height="30" 
-					Padding="5" 
-					Style="{StaticResource RoundedButtonStyle}" 
-					Background="{StaticResource Light red}"/>
+					<Button x:Name="AddTutionBttn" 
+							Click="AddTutionBttn_Click"
+							Content="Добавить предмет" 
+							Margin="10" 
+							Height="30" 
+							Padding="5" 
+							Style="{StaticResource RoundedButtonStyle}" 
+							Background="{StaticResource Light red}"/>
 
 
 				</StackPanel>

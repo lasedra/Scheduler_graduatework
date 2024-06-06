@@ -76,7 +76,7 @@ namespace Scheduler.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Scheduler;V1.0.0.0;component/pages/authorisationpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Scheduler;component/pages/authorisationpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\AuthorisationPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
