@@ -25,7 +25,7 @@
                     Height="60" Width="60" 
                     HorizontalAlignment="Left" 
                     Background="{StaticResource Mid red}" 
-                    Style="{StaticResource RoundedButtonStyle}">
+                    Style="{StaticResource ReverseRoundedButtonStyle}">
                 <Image Source="/Resources/homeico.png" Margin="10"/>
             </Button>
 
@@ -39,7 +39,7 @@
                         Foreground="White" 
                         FontWeight="SemiBold" 
                         FontSize="15" 
-                        Style="{StaticResource RoundedButtonStyle}"
+                        Style="{StaticResource ReverseRoundedButtonStyle}"
                         Height="35" Width="130" 
                         Margin="15 10 10 10"/>
                 
@@ -50,7 +50,7 @@
                         Foreground="White" 
                         FontWeight="SemiBold" 
                         FontSize="15" 
-                        Style="{StaticResource RoundedButtonStyle}"
+                        Style="{StaticResource ReverseRoundedButtonStyle}"
                         Height="35" Width="90" 
                         Margin="10"/>
 
@@ -61,7 +61,7 @@
                         Foreground="White" 
                         FontWeight="SemiBold" 
                         FontSize="15" 
-                        Style="{StaticResource RoundedButtonStyle}"
+                        Style="{StaticResource ReverseRoundedButtonStyle}"
                         Height="35" Width="80" 
                         Margin="10"/>
 
@@ -72,7 +72,7 @@
                         Foreground="White" 
                         FontWeight="SemiBold" 
                         FontSize="15" 
-                        Style="{StaticResource RoundedButtonStyle}"
+                        Style="{StaticResource ReverseRoundedButtonStyle}"
                         Height="35" Width="100"
                         Margin="10"/>
                 

@@ -28,7 +28,8 @@
                            VerticalAlignment="Center"/>
 
                 <ComboBox Name="StudentGroupComboBox" SelectionChanged="StudentGroupComboBox_SelectionChanged"
-                          Height="30" Width="100" 
+                          Height="30" 
+						  Width="Auto" 
                           Margin="5 0 0 0">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>

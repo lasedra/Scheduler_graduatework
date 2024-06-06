@@ -5,12 +5,12 @@
     <Application.Resources>
         
         <!--#region Colors-->
-        <SolidColorBrush x:Key="Dark gray" Color="#444444"/>
-        <SolidColorBrush x:Key="Mid gray" Color="#6D6D6D"/>
-        <SolidColorBrush x:Key="Light gray" Color="#9C9C9C"/>
-        <SolidColorBrush x:Key="Dark red" Color="#BD4D5A"/>
-        <SolidColorBrush x:Key="Mid red" Color="#E35C6C"/>
-        <SolidColorBrush x:Key="Light red" Color="#FF94A0"/>
+        <SolidColorBrush x:Key="Dark gray" Color="#303030"/>
+        <SolidColorBrush x:Key="Mid gray" Color="#4D4D4D"/>
+        <SolidColorBrush x:Key="Light gray" Color="#6D6D6D"/>
+		<SolidColorBrush x:Key="Dark red" Color="#730B38"/>
+		<SolidColorBrush x:Key="Mid red" Color="#960A40"/>
+		<SolidColorBrush x:Key="Light red" Color="#B90943"/>
         <!-- TextColors-->
         <SolidColorBrush x:Key="Text gray" Color="#CECECE"/>
         <SolidColorBrush x:Key="Text dark gray" Color="#313131"/>
@@ -22,7 +22,8 @@
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border" CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{StaticResource Mid red}" BorderThickness="2">
@@ -38,7 +39,30 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="RoundedSquareSwitcher" TargetType="ToggleButton">
+		<Style x:Key="ReverseRoundedButtonStyle" TargetType="Button">
+			<Setter Property="Foreground" Value="{StaticResource Text dark gray}"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="FontWeight" Value="DemiBold"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border x:Name="border" CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{StaticResource Mid red}" BorderThickness="2">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="border" Property="Background" Value="{StaticResource Light red}"/>
+								<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Dark red}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="RoundedSquareSwitcher" TargetType="ToggleButton">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="BorderThickness" Value="2"/>

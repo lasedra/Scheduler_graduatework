@@ -40,7 +40,7 @@ namespace Scheduler.Pages
                 if (string.IsNullOrEmpty(login))
                     throw new Exception("Введите логин");
                 else if (string.IsNullOrEmpty(password))
-                    throw new Exception("Введите пароль"); // TODO: Хеширование
+                    throw new Exception("Введите пароль");
                 else
                 {
                     Employee? loggingEmployee = SchedulerDbContext.DbContext.Employees.FirstOrDefault(c => c.Login == login && c.Password == password);

@@ -10,7 +10,7 @@
     <Compile Update="Pages\AuthorisationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\CabinetPage.xaml.cs">
+    <Compile Update="Pages\CRUD\CabinetPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\MainSchedulePage.xaml.cs">
@@ -22,13 +22,13 @@
     <Compile Update="Pages\EditingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\StudentGroupPage.xaml.cs">
+    <Compile Update="Pages\CRUD\StudentGroupPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SubjectPage.xaml.cs">
+    <Compile Update="Pages\CRUD\SubjectPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\TutorAndSubjectPage.xaml.cs">
+    <Compile Update="Pages\CRUD\TutorAndSubjectPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\UserProfilePage.xaml.cs">
@@ -42,7 +42,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\CabinetPage.xaml">
+    <Page Update="Pages\CRUD\CabinetPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\RegistrationPage.xaml">
@@ -51,13 +51,13 @@
     <Page Update="Pages\EditingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\StudentGroupPage.xaml">
+    <Page Update="Pages\CRUD\StudentGroupPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\SubjectPage.xaml">
+    <Page Update="Pages\CRUD\SubjectPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\TutorAndSubjectPage.xaml">
+    <Page Update="Pages\CRUD\TutorAndSubjectPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\UserProfilePage.xaml">
