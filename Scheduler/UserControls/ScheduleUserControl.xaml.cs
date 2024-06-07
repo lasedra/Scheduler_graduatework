@@ -9,8 +9,10 @@ using System.Linq;
 using Scheduler.Models;
 using System.Collections.Generic;
 using Microsoft.Win32;
+using Scheduler.Services;
 
-namespace Scheduler.Services
+// TODO: Неймспейсы проверить
+namespace Scheduler.UserControls
 {
     public partial class ScheduleUserControl : UserControl
     {
@@ -84,6 +86,28 @@ namespace Scheduler.Services
                 if (paragraph.Text.Contains(keyword))
                 {
                     paragraph.ReplaceText(keyword, value);
+                }
+            }
+        }
+
+        // Динамическое выравнивание строк по высоте внутри DataGrid
+        private void MondayGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateRowHeight(sender as DataGrid);
+        }
+        private void UpdateRowHeight(DataGrid dataGrid)
+        {
+            if (dataGrid != null && dataGrid.Items.Count > 0)
+            {
+                double rowHeight = dataGrid.ActualHeight / dataGrid.Items.Count;
+
+                foreach (var item in dataGrid.Items)
+                {
+                    var row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromItem(item);
+                    if (row != null)
+                    {
+                        row.Height = rowHeight - 7.9;
+                    }
                 }
             }
         }
