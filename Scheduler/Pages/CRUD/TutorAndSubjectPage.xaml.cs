@@ -67,7 +67,7 @@ namespace Scheduler.Pages
 
         private void AddTutorBttn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RegistrationPage());
+            NavigationService.Navigate(new UserProfilePage());
         }
 
         private void EditTutorBttn_Click(object sender, RoutedEventArgs e)

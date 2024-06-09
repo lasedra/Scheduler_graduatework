@@ -8,8 +8,9 @@
         WindowStartupLocation="CenterScreen"
         Height="700" Width="1200"
         MinHeight="700" MinWidth="1200"
-        Icon="/Resources/winico.ico"
-        Loaded="Window_Loaded">
+		Icon="\Resources\winico.png"
+        Loaded="Window_Loaded"
+		Closed="Window_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

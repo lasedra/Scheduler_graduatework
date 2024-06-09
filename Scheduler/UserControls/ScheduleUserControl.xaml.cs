@@ -10,6 +10,7 @@ using Scheduler.Models;
 using System.Collections.Generic;
 using Microsoft.Win32;
 using Scheduler.Services;
+using System.Reflection;
 
 // TODO: Неймспейсы проверить
 namespace Scheduler.UserControls
@@ -33,46 +34,60 @@ namespace Scheduler.UserControls
             {
                 ScheduleController scheduleController = ((MainSchedulePage)((Grid)this.Parent).Parent).ScheduleController;
 
-                using (var templateDoc = DocX.Load(@"C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\Resources\schedule.doc-template.docx"))
+                MessageBoxResult result = MessageBoxResult.None;
+                if(scheduleController.HasEmptyCells())
                 {
-                    ReplaceKeywordWithValue(templateDoc, "[studentGroupCode]", scheduleController.CurrentGroupCode);
-                    ReplaceKeywordWithValue(templateDoc, "[weekSpan]", scheduleController.CurrentWeek.GetWeekSpan());
-                    ReplaceKeywordWithValue(templateDoc, "[createdAtDate]", scheduleController.CurrentWeek.TodayDate.ToString("dd.MM.yyyy"));
+                    result = MessageBox.Show(
+                        $"Вы уверены, что хотите создать документ?" +
+                        $"\nРасписание не заполнено полностью.",
+                        "Минуточку",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning);
+                }
 
-                    var dayTabs = scheduleController.GetDayTabs();
-                    StringReplaceTextOptions options = new();
-
-                    int tableCounter = 0;
-                    foreach (List<ScheduleController.DayTab> dayTab in dayTabs)
+                if(result == MessageBoxResult.None || result == MessageBoxResult.Yes)
+                {
+                    using (var templateDoc = DocX.Load(Assembly.GetExecutingAssembly().GetManifestResourceStream(@"Scheduler.Resources.schedule.doc-template.docx")))
                     {
-                        int lessonCounter = 1;
-                        for (int i = 1; i <= 4; i += 1) // Строки в таблицах документа
+                        ReplaceKeywordWithValue(templateDoc, "[studentGroupCode]", scheduleController.CurrentGroupCode);
+                        ReplaceKeywordWithValue(templateDoc, "[weekSpan]", scheduleController.CurrentWeek.GetWeekSpan());
+                        ReplaceKeywordWithValue(templateDoc, "[createdAtDate]", scheduleController.CurrentWeek.TodayDate.ToString("dd.MM.yyyy"));
+
+                        var dayTabs = scheduleController.GetDayTabs();
+                        StringReplaceTextOptions options = new();
+
+                        int tableCounter = 0;
+                        foreach (List<ScheduleController.DayTab> dayTab in dayTabs)
                         {
-                            Subject? subject = dayTab.First(c => c.ClassNumber == lessonCounter).Subject;
-                            Employee? tutor = dayTab.First(c => c.ClassNumber == lessonCounter).Tutor;
-                            Cabinet? cabinet = dayTab.First(c => c.ClassNumber == lessonCounter).AtCabinet;
+                            int lessonCounter = 1;
+                            for (int i = 1; i <= 4; i += 1) // Строки в таблицах документа
+                            {
+                                Subject? subject = dayTab.First(c => c.ClassNumber == lessonCounter).Subject;
+                                Employee? tutor = dayTab.First(c => c.ClassNumber == lessonCounter).Tutor;
+                                Cabinet? cabinet = dayTab.First(c => c.ClassNumber == lessonCounter).AtCabinet;
 
-                            options.SearchValue = "[Subject]";
-                            options.NewValue = subject != null ? subject.Name : string.Empty;
-                            templateDoc.Tables[tableCounter].Rows[i].Cells[1].ReplaceText(options);
+                                options.SearchValue = "[Subject]";
+                                options.NewValue = subject != null ? subject.Name : string.Empty;
+                                templateDoc.Tables[tableCounter].Rows[i].Cells[1].ReplaceText(options);
 
-                            options.SearchValue = "[Tutor]";
-                            options.NewValue = tutor != null ? tutor.Name : string.Empty;
-                            templateDoc.Tables[tableCounter].Rows[i].Cells[1].ReplaceText(options);
+                                options.SearchValue = "[Tutor]";
+                                options.NewValue = tutor != null ? tutor.Name : string.Empty;
+                                templateDoc.Tables[tableCounter].Rows[i].Cells[1].ReplaceText(options);
 
-                            options.SearchValue = "[Cabinet]";
-                            options.NewValue = cabinet != null ? cabinet.Number : string.Empty;
-                            templateDoc.Tables[tableCounter].Rows[i].Cells[1].ReplaceText(options);
-                            lessonCounter++;
+                                options.SearchValue = "[Cabinet]";
+                                options.NewValue = cabinet != null ? cabinet.Number : string.Empty;
+                                templateDoc.Tables[tableCounter].Rows[i].Cells[1].ReplaceText(options);
+                                lessonCounter++;
+                            }
+                            tableCounter++;
                         }
-                        tableCounter++;
-                    }
 
-                    SaveFileDialog sfDialog = new() { DefaultExt = ".docx", Filter = "Word Documents|*.docx" };
-                    if (sfDialog.ShowDialog() == true)
-                    {
-                        templateDoc.SaveAs(sfDialog.FileName);
-                        MessageBox.Show("Документ успешно сохранён!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        SaveFileDialog sfDialog = new() { DefaultExt = ".docx", Filter = "Word Documents|*.docx" };
+                        if (sfDialog.ShowDialog() == true)
+                        {
+                            templateDoc.SaveAs(sfDialog.FileName);
+                            MessageBox.Show("Документ успешно сохранён!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
                     }
                 }
             }

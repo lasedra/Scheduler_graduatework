@@ -290,7 +290,7 @@
                         HorizontalAlignment="Center">
                 
                 <Button Name="ScheduleEditingBttn" Click="ScheduleEditingBttn_Click"
-                        Content="Изменить расписания"
+                        Content="Изменить расписание"
                         Style="{StaticResource RoundedButtonStyle}"
                         Background="{StaticResource Light red}"
                         Margin="10"

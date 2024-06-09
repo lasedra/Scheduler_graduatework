@@ -56,7 +56,7 @@
                                FontSize="14" 
                                FontWeight="Bold"/>
 
-                    <TextBox Name="PasswordTextBox" PreviewKeyDown="AccesNoSpaceInput"
+                    <PasswordBox Name="PasswordTextBox" PreviewKeyDown="AccesNoSpaceInput"
                              Width="220" 
                              HorizontalAlignment="Right"      
                              VerticalAlignment="Center" 
@@ -67,7 +67,10 @@
                 <DockPanel HorizontalAlignment="Center" 
                            Margin="5">
 
-                    <CheckBox VerticalAlignment="Center" 
+                    <CheckBox x:Name="RememberMeCkeckBox"
+							  Checked="RememberMeCkeckBox_Checked"
+							  Unchecked="RememberMeCkeckBox_Unchecked"
+						      VerticalAlignment="Center" 
                               Margin="5"/>
 
                     <TextBlock Text="Запомнить меня " 

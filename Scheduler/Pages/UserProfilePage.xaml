@@ -32,7 +32,15 @@
 				   VerticalAlignment="Center" 
 				   Grid.Row="0">
 
-			<Image Source="/Resources/profileico.png" 
+			<Image x:Name="RegisterProfilePic"
+				   Source="/Resources/registerico.png"
+				   Visibility="Collapsed"
+                   Margin="5" 
+                   Height="50" 
+	               Width="50"/>
+
+			<Image x:Name="UserProfilePic"
+				   Source="/Resources/profileico.png" 
                    Margin="5" 
                    Height="50" 
 				   Width="50"/>
@@ -300,7 +308,6 @@
 
 			<Button Name="LogOutBttn" 
 		            Click="LogOutBttn_Click"
-				    Visibility="Collapsed"
                     Content="Выйти из аккаунта" 
                     Height="30" 
                     Margin="5 15 5 5" 
@@ -309,6 +316,7 @@
 
 			<Button x:Name="DeleteUserBttn"
 					Click="DeleteUserBttn_Click"
+				    Visibility="Collapsed"
                     Grid.Column="1"
                     Content="Удалить" 
                     Margin="5 15 5 5" 
@@ -316,6 +324,15 @@
                     Style="{StaticResource RoundedButtonStyle}" 
                     Background="{StaticResource Dark red}"
                     Foreground="White"/>
+
+			<Button Name="CreateAccountBttn"
+		            Click="CreateAccountBttn_Click"
+				    Visibility="Collapsed"
+                    Content="Добавить пользователя" 
+                    Height="30" 
+                    Margin="5 15 5 5" 
+                    Style="{StaticResource RoundedButtonStyle}" 
+                    Background="{StaticResource Light red}"/>
 
 		</StackPanel>
 

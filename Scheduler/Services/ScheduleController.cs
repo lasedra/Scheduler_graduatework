@@ -257,5 +257,24 @@ namespace Scheduler.Services
                 FridayTab
             };
         }
+
+        public bool HasEmptyCells() 
+        {
+            var listToSort = new List<List<DayTab>>
+            {
+                MondayTab,
+                TuesdayTab,
+                WednesdayTab,
+                ThursdayTab,
+                FridayTab
+            };
+
+            foreach (List<DayTab> dayTab in listToSort)
+            { 
+                if(dayTab.Any(c => c.Subject == null || c.Tutor == null || c.AtCabinet == null))
+                    return true;
+            }
+            return false;
+        }
     }
 }

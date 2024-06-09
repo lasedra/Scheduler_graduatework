@@ -231,6 +231,7 @@ namespace Scheduler.Pages
 
         private void DeleteCell(object sender, RoutedEventArgs e)
         {
+            DateOnly deleteWeek = scheduleController.CurrentWeek.WeekStart;
             List<DailyScheduleBody> weekToEdit = SchedulerDbContext.DbContext.DailyScheduleBodies
                     .Where(c => c.OfDate >= scheduleController.CurrentWeek.WeekStart &&
                            c.OfDate <= scheduleController.CurrentWeek.WeekEnd &&
@@ -249,6 +250,8 @@ namespace Scheduler.Pages
 
                 SchedulerDbContext.DbContext.SaveChanges();
                 scheduleController = new();
+                scheduleController.SetCurrentGroupCode(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
+                scheduleController.SetCurrentWeek(new TimePeriod(deleteWeek));
                 UpdateScheduleEditingView();
             }
         }

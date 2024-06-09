@@ -13,35 +13,62 @@ namespace Scheduler.Pages
 {
     public partial class UserProfilePage : Page
     {
-        private Employee User { get; set; } = null!;
+        private Employee? GivenUser { get; set; }
+        private MainWindow CurrentMainWindow { get; set; } = null!;
 
-        public UserProfilePage(Employee user)
+        public UserProfilePage(Employee? user = null)
         {
-            this.User = user;
+            GivenUser = user;
             InitializeComponent();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ProfileNameTextBlock.Text = User.Name;
-            NameTextBox.Text = User.Name;
-            LoginTextBox.Text = User.Login;
-
-            if(User.Role){
-                ManagerRadioBttn.IsChecked = true;
-                TutorRadioBttn.IsChecked = false;
-            }else{
-                ManagerRadioBttn.IsChecked = false;
-                TutorRadioBttn.IsChecked = true; }
-
-            PasswordTextBox.Text = User.Password;
-            PhoneTextBox.Text = User.PhoneNumber;
-            EmailTextBox.Text = User.EMail;
-
-            if (SchedulerDbContext.CurrentUser.EmployeeId == User.EmployeeId)
+            CurrentMainWindow = (MainWindow)Application.Current.MainWindow;
+            if(GivenUser != null)
             {
-                EditRolePanel.Visibility = Visibility.Collapsed;
-                DeleteUserBttn.Visibility = Visibility.Collapsed;
-                LogOutBttn.Visibility = Visibility.Visible;
+                if (SchedulerDbContext.CurrentUser == GivenUser)
+                    EditRolePanel.Visibility = Visibility.Collapsed;
+                else
+                {
+                    DeleteUserBttn.Visibility = Visibility.Visible;
+                    LogOutBttn.Visibility = Visibility.Collapsed;
+                }
+
+                if (GivenUser.Role)
+                {
+                    ManagerRadioBttn.IsChecked = true;
+                    TutorRadioBttn.IsChecked = false;
+                }else{
+                    ManagerRadioBttn.IsChecked = false;
+                    TutorRadioBttn.IsChecked = true;
+                }
+                ProfileNameTextBlock.Text = GivenUser.Name;
+                NameTextBox.Text = GivenUser.Name;
+                LoginTextBox.Text = GivenUser.Login;
+                PasswordTextBox.Text = GivenUser.Password;
+                PhoneTextBox.Text = GivenUser.PhoneNumber;
+                EmailTextBox.Text = GivenUser.EMail;
+            }
+            else
+            {
+                ProfileNameTextBlock.Text = "Новый пользователь";
+                UserProfilePic.Visibility = Visibility.Collapsed;
+                RegisterProfilePic.Visibility = Visibility.Visible;
+
+                CreateAccountBttn.Visibility = Visibility.Visible;
+                LogOutBttn.Visibility = Visibility.Collapsed;
+
+                EditNameBttn.Visibility = Visibility.Collapsed;
+                NameTextBox.IsReadOnly = false;
+                EditLoginBttn.Visibility = Visibility.Collapsed;
+                LoginTextBox.IsReadOnly = false;
+                EditPasswordBttn.Visibility = Visibility.Collapsed;
+                PasswordTextBox.IsReadOnly = false;
+                TutorRadioBttn.IsChecked = true;
+                EditPhoneBttn.Visibility = Visibility.Collapsed;
+                PhoneTextBox.IsReadOnly = false;
+                EditEmailBttn.Visibility = Visibility.Collapsed;
+                EmailTextBox.IsReadOnly = false;
             }
         }
 
@@ -62,7 +89,7 @@ namespace Scheduler.Pages
         }
         public void EmailTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!InputRegExps.EmailLocaleRegEx().IsMatch(e.Text))
+            if (InputRegExps.EmailLocaleRegEx().IsMatch(e.Text))
                 e.Handled = true;
         }
         private void AccesNoSpaceInput(object sender, KeyEventArgs e)
@@ -87,8 +114,11 @@ namespace Scheduler.Pages
                 EditNameBttn.Visibility = Visibility.Visible;
                 NameDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == User.EmployeeId).Name = NameTextBox.Text.Trim();
+                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).Name = NameTextBox.Text.Trim();
                 SchedulerDbContext.DbContext.SaveChanges();
+
+                ProfileNameTextBlock.Text = GivenUser.Name;
+                ((TextBlock)CurrentMainWindow.FindName("UserNameTextBlock")).Text = SchedulerDbContext.CurrentUser.Name;
             }
         }
         private void NameDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -96,7 +126,7 @@ namespace Scheduler.Pages
             NameTextBox.IsReadOnly = true;
             EditNameBttn.Visibility = Visibility.Visible;
             NameDecision.Visibility = Visibility.Collapsed;
-            NameTextBox.Text = User.Name;
+            NameTextBox.Text = GivenUser.Name;
         }
 
 
@@ -110,13 +140,15 @@ namespace Scheduler.Pages
         {
             if (string.IsNullOrEmpty(LoginTextBox.Text))
                 MessageBox.Show("Введите логин", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
+            else if (GivenUser.Login != LoginTextBox.Text && SchedulerDbContext.DbContext.Employees.Any(c => c.Login == LoginTextBox.Text))
+                MessageBox.Show("Пользователь с таким логином уже существует!", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 LoginTextBox.IsReadOnly = true;
                 EditLoginBttn.Visibility = Visibility.Visible;
                 LoginDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == User.EmployeeId).Login = LoginTextBox.Text.Trim();
+                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).Login = LoginTextBox.Text.Trim();
                 SchedulerDbContext.DbContext.SaveChanges();
             }
         }
@@ -125,7 +157,7 @@ namespace Scheduler.Pages
             LoginTextBox.IsReadOnly = true;
             EditLoginBttn.Visibility = Visibility.Visible;
             LoginDecision.Visibility = Visibility.Collapsed;
-            LoginTextBox.Text = User.Login;
+            LoginTextBox.Text = GivenUser.Login;
         }
 
 
@@ -145,7 +177,7 @@ namespace Scheduler.Pages
                 EditPasswordBttn.Visibility = Visibility.Visible;
                 PasswordDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == User.EmployeeId).Password = PasswordTextBox.Text.Trim();
+                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).Password = PasswordTextBox.Text.Trim();
                 SchedulerDbContext.DbContext.SaveChanges();
             }
         }
@@ -154,7 +186,7 @@ namespace Scheduler.Pages
             PasswordTextBox.IsReadOnly = true;
             EditPasswordBttn.Visibility = Visibility.Visible;
             PasswordDecision.Visibility = Visibility.Collapsed;
-            PasswordTextBox.Text = User.Password;
+            PasswordTextBox.Text = GivenUser.Password;
         }
 
 
@@ -166,25 +198,34 @@ namespace Scheduler.Pages
         }
         public void PhoneAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!InputRegExps.PhoneRegEx().IsMatch(PhoneTextBox.Text))
-                MessageBox.Show("Неверный формат тел. номера", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
-            else
+            if(GivenUser.PhoneNumber != PhoneTextBox.Text)
             {
-                PhoneTextBox.IsReadOnly = true;
-                EditPhoneBttn.Visibility = Visibility.Visible;
-                PhoneDecision.Visibility = Visibility.Collapsed;
+                if (!InputRegExps.PhoneRegEx().IsMatch(PhoneTextBox.Text))
+                    MessageBox.Show("Неверный формат тел. номера", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
+                else if (SchedulerDbContext.DbContext.Employees.Any(c => c.PhoneNumber == PhoneTextBox.Text))
+                    MessageBox.Show("Пользователь с таким номером телефона уже существует!", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    PhoneTextBox.IsReadOnly = true;
+                    EditPhoneBttn.Visibility = Visibility.Visible;
+                    PhoneDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == User.EmployeeId).PhoneNumber = PhoneTextBox.Text.Trim();
-                SchedulerDbContext.DbContext.SaveChanges();
-                SchedulerDbContext.CurrentUser.PhoneNumber = PhoneTextBox.Text;
+                    SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).PhoneNumber = PhoneTextBox.Text.Trim();
+                    SchedulerDbContext.DbContext.SaveChanges();
+                    SchedulerDbContext.CurrentUser.PhoneNumber = PhoneTextBox.Text;
+                }
             }
+
+            PhoneTextBox.IsReadOnly = true;
+            EditPhoneBttn.Visibility = Visibility.Visible;
+            PhoneDecision.Visibility = Visibility.Collapsed;
         }
         public void PhoneDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PhoneTextBox.IsReadOnly = true;
             EditPhoneBttn.Visibility = Visibility.Visible;
             PhoneDecision.Visibility = Visibility.Collapsed;
-            PhoneTextBox.Text = SchedulerDbContext.CurrentUser.PhoneNumber;
+            PhoneTextBox.Text = GivenUser.PhoneNumber;
         }
 
 
@@ -204,7 +245,7 @@ namespace Scheduler.Pages
                 EditEmailBttn.Visibility = Visibility.Visible;
                 EmailDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == User.EmployeeId).EMail = EmailTextBox.Text.Trim();
+                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).EMail = EmailTextBox.Text.Trim();
                 SchedulerDbContext.DbContext.SaveChanges();
                 SchedulerDbContext.CurrentUser.EMail = EmailTextBox.Text;
             }
@@ -220,24 +261,30 @@ namespace Scheduler.Pages
 
         private void ManagerRadioBttn_Checked(object sender, RoutedEventArgs e)
         {
-            User.Role = true;
-            SchedulerDbContext.DbContext.SaveChanges();
+            if (GivenUser != null) 
+            {
+                GivenUser.Role = true;
+                SchedulerDbContext.DbContext.SaveChanges();
+            }
         }
         private void TutorRadioBttn_Checked(object sender, RoutedEventArgs e)
         {
-            User.Role = false;
-            SchedulerDbContext.DbContext.SaveChanges();
+            if (GivenUser != null) 
+            {
+                GivenUser.Role = false;
+                SchedulerDbContext.DbContext.SaveChanges();
+            }
         }
 
 
         public void LogOutBttn_Click(object sender, RoutedEventArgs e)
-            => NavigationService.Navigate(((MainWindow)Application.Current.MainWindow).AuthorisationPage);
+            => NavigationService.Navigate(new AuthorisationPage());
         private void DeleteUserBttn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 var result = MessageBox.Show(
-                    $"Вы уверены, что хотите удалить пользователя {User.Name} ?" +
+                    $"Вы уверены, что хотите удалить пользователя {GivenUser.Name} ?" +
                     $"\nЭто приведёт к удалению всей зависимой информации.",
                     "Минуточку",
                     MessageBoxButton.YesNo,
@@ -245,7 +292,7 @@ namespace Scheduler.Pages
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    List<DailyScheduleBody> bodiesToUnbind = SchedulerDbContext.DbContext.DailyScheduleBodies.Where(c => c.EmployeeId == User.EmployeeId).ToList();
+                    List<DailyScheduleBody> bodiesToUnbind = SchedulerDbContext.DbContext.DailyScheduleBodies.Where(c => c.EmployeeId == GivenUser.EmployeeId).ToList();
                     bodiesToUnbind.ForEach(c => {
                         c.Subject = null;
                         c.Employee = null;
@@ -255,7 +302,7 @@ namespace Scheduler.Pages
 
                     // Работает только при наличии ограничения у связанных таблиц - "ON DELETE CASCADE"
                     SchedulerDbContext.DbContext.Employees
-                        .Where(c => c.EmployeeId == User.EmployeeId)
+                        .Where(c => c.EmployeeId == GivenUser.EmployeeId)
                         .ExecuteDelete();
 
                     NavigationService.Navigate(new TutorAndSubjectPage());
@@ -263,6 +310,57 @@ namespace Scheduler.Pages
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+        private void CreateAccountBttn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NameTextBox.Text = NameTextBox.Text.Trim();
+
+                if (string.IsNullOrEmpty(NameTextBox.Text))
+                    throw new Exception("Введите имя");
+
+                else if (!InputRegExps.PhoneRegEx().IsMatch(PhoneTextBox.Text))
+                    throw new Exception("Неверный формат тел. номера");
+
+                else if (!string.IsNullOrEmpty(EmailTextBox.Text) && !InputRegExps.EmailRegEx().IsMatch(EmailTextBox.Text))
+                    throw new Exception("Неверный формат эл.Почты");
+
+                else if (string.IsNullOrEmpty(LoginTextBox.Text))
+                    throw new Exception("Введите логин");
+
+                else if (string.IsNullOrEmpty(PasswordTextBox.Text))
+                    throw new Exception("Введите пароль");
+
+                else if (SchedulerDbContext.DbContext.Employees.Any(c => c.PhoneNumber == PhoneTextBox.Text))
+                    throw new Exception("Пользователь с таким номером телефона уже существует!");
+
+                else if (SchedulerDbContext.DbContext.Employees.Any(c => c.Login == LoginTextBox.Text))
+                    throw new Exception("Пользователь с таким логином уже существует!");
+                else
+                {
+                    SchedulerDbContext.DbContext.Employees.Add(new Employee
+                    {
+                        EmployeeId = default,
+                        WorkingStatus = true,
+                        IsTelegramConfirmed = false,
+                        Role = ManagerRadioBttn.IsChecked.GetValueOrDefault(),
+                        Name = NameTextBox.Text.Trim(),
+                        Login = LoginTextBox.Text.Trim(),
+                        Password = PasswordTextBox.Text.Trim(),
+                        PhoneNumber = PhoneTextBox.Text.Trim(),
+                        EMail = string.IsNullOrEmpty(EmailTextBox.Text.Trim()) ? null : EmailTextBox.Text.Trim(),
+                    });
+
+                    SchedulerDbContext.DbContext.SaveChanges();
+                    NavigationService.Navigate(new TutorAndSubjectPage());
+                    MessageBox.Show("Новый пользователь зарегистрирован", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

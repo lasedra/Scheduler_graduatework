@@ -16,9 +16,6 @@
     <Compile Update="Pages\MainSchedulePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\RegistrationPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Pages\EditingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -43,9 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\CRUD\CabinetPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\EditingPage.xaml">

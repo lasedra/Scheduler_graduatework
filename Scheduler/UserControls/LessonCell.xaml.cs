@@ -3,6 +3,7 @@ using System.Windows.Controls;
 
 namespace Scheduler.UserControls
 {
+    // TODO: Сменить стандартный цвет выделения Windows(синий) на свой
     public partial class LessonCell : UserControl
     {
         public LessonCell()
