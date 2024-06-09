@@ -5,6 +5,7 @@ Create table "EVENT_LOG"
 	"DateTime" Timestamp without time zone NOT NULL,
 	"Level" Varchar NOT NULL,
 	"Message" Varchar NOT NULL,
+	"IsUpdatedByApp" Boolean NOT NULL,
  primary key ("Event_ID")
 );
 

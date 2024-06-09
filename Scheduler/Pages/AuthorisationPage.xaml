@@ -82,14 +82,14 @@
 
                 </DockPanel>
 
-                <Button Name="LogInButton" Click="LogInButton_Click"
+				<Button Name="LogInButton" Click="LogInButton_Click"
                         Content="Войти" 
                         Height="30" 
                         Margin="5" 
                         Style="{StaticResource RoundedButtonStyle}" 
                         Background="{StaticResource Light red}"/>
 
-            </StackPanel>
+			</StackPanel>
 
         </StackPanel>
     </Grid>

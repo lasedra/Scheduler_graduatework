@@ -1,13 +1,33 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Scheduler.Models;
 
 public partial class SchedulerDbContext : DbContext
 {
-    public static IConfiguration AppConfig = null!;
-    public static SchedulerDbContext DbContext = null!;
-    public static Employee CurrentUser = null!;
+    public static SchedulerDbContext DbContext { get; set; } = null!;
+    public static Employee CurrentUser { get; set; } = null!;
+    public IConfiguration AppConfig { get; set; } = null!;
+    public bool IsAppUpdated { get; set; } = false;
+
+    public override int SaveChanges()
+    {
+        EventLog log = new EventLog
+        {
+            DateTime = DateTime.Now,
+            Level = "INFO",
+            Message = "Changes made by the application.",
+            IsUpdatedByApp = IsAppUpdated
+        };
+        this.EventLogs.Add(log);
+
+        return base.SaveChanges();
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+        => optionsBuilder.UseNpgsql(AppConfig.GetConnectionString("localhost"));
+
 
     public virtual DbSet<Cabinet> Cabinets { get; set; }
 
@@ -30,9 +50,6 @@ public partial class SchedulerDbContext : DbContext
     public virtual DbSet<Subject> Subjects { get; set; }
 
     public virtual DbSet<Tution> Tutions { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Server=localhost;Database=SchedulerDB;UserName=postgres;Password=password");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

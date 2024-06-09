@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Scheduler.Models;
 using Scheduler.Pages;
 
@@ -69,39 +71,42 @@ namespace Scheduler
         {
             new Thread(() =>
             {
-                SchedulerDbContext dbContext = new SchedulerDbContext();
-                List<DailyScheduleBody> beforeUpdateState = dbContext.DailyScheduleBodies.ToList();
-                List<DailyScheduleBody> afterUpdateState = null!;
-
-                Parallel.Invoke(new Action(() =>
+                while(true)
                 {
-                    while (true)
+                    using (SchedulerDbContext dbContext = new() { AppConfig = new ConfigurationBuilder().AddJsonFile("appconfig.json", optional: false, reloadOnChange: true).Build() })
                     {
+                        List<DailyScheduleBody> beforeUpdateState = dbContext.DailyScheduleBodies.ToList();
+                        List<DailyScheduleBody> afterUpdateState = null!;
                         while (true)
                         {
                             afterUpdateState = dbContext.DailyScheduleBodies.ToList();
                             if (!beforeUpdateState.SequenceEqual(afterUpdateState))
                                 break;
+
+                            Thread.Sleep(1000);
                         }
                         beforeUpdateState = afterUpdateState;
 
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        // Отслеживание изменений зависит от таблицы EVENT_LOG
+                        var lastEventLog = dbContext.EventLogs.OrderByDescending(c => c.DateTime).First();
+                        if (!lastEventLog.IsUpdatedByApp)
                         {
-                            MessageBox.Show("Обнаружены изменения в БД! Страница будет перезагружена");
-                            Frame frame = (Frame)Application.Current.MainWindow.FindName("PagesFrame");
-                            Page currentPage = frame.Content as Page;
-                            if (currentPage != null)
+                            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                Type type = currentPage.GetType();
-                                Page newPage = (Page)Activator.CreateInstance(type);
-                                frame.Content = newPage;
-                            }
+                                MessageBox.Show("Обнаружены изменения в БД! Страница будет перезагружена");
+                                Frame frame = (Frame)Application.Current.MainWindow.FindName("PagesFrame");
+                                Page currentPage = frame.Content as Page;
 
-                        }));
-
-                    }
-                }));
-
+                                if (currentPage != null)
+                                {
+                                    Type type = currentPage.GetType();
+                                    Page newPage = (Page)Activator.CreateInstance(type);
+                                    frame.Content = newPage;
+                                }
+                            }));
+                        }
+                    }        
+                }
             }).Start();
         }
 

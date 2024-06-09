@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Scheduler.Pages
 {
-    // TODO: Таблица Studying при GettingStarted
+    // TODO: GettingStarted
 
     public partial class MainSchedulePage : Page
     {
@@ -19,16 +19,10 @@ namespace Scheduler.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // Getting started check
-            if (!SchedulerDbContext.DbContext.StudentGroups.Any()) 
-                NavigationService.Navigate(new StudentGroupPage());
-            else
-            {
-                ScheduleController = new();
-                StudentGroupComboBox.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
-                StudentGroupComboBox.SelectedItem = SchedulerDbContext.DbContext.StudentGroups.First(c => c.StudentGroupCode == ScheduleController.CurrentGroupCode);
-                UpdateScheduleSource();
-            }
+            ScheduleController = new();
+            StudentGroupComboBox.ItemsSource = SchedulerDbContext.DbContext.StudentGroups.ToList();
+            StudentGroupComboBox.SelectedItem = SchedulerDbContext.DbContext.StudentGroups.First(c => c.StudentGroupCode == ScheduleController.CurrentGroupCode);
+            UpdateScheduleSource();
         }
 
         public void UpdateScheduleSource()

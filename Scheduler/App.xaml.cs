@@ -9,9 +9,11 @@ namespace Scheduler
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            SchedulerDbContext.DbContext = new SchedulerDbContext();
-            SchedulerDbContext.AppConfig = new ConfigurationBuilder().AddJsonFile("appconfig.json", optional: false, reloadOnChange: true)
-                                                                     .Build();
+            SchedulerDbContext.DbContext = new SchedulerDbContext()
+            {
+                AppConfig = new ConfigurationBuilder().AddJsonFile("appconfig.json", optional: false, reloadOnChange: true).Build(),
+                IsAppUpdated = true
+            };
         }
     }
 }
