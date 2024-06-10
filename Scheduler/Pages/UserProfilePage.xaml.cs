@@ -46,7 +46,7 @@ namespace Scheduler.Pages
                 NameTextBox.Text = GivenUser.Name;
                 LoginTextBox.Text = GivenUser.Login;
                 PasswordTextBox.Text = GivenUser.Password;
-                PhoneTextBox.Text = GivenUser.PhoneNumber;
+                PhoneTextBox.Text = GivenUser.Phone.ToString();
                 EmailTextBox.Text = GivenUser.EMail;
             }
             else
@@ -95,6 +95,12 @@ namespace Scheduler.Pages
         private void AccesNoSpaceInput(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space) e.Handled = true;
+        }
+        public string ReplaceAt(string input, int index, char newChar)
+        {
+            char[] chars = input.ToCharArray();
+            chars[index] = newChar;
+            return new string(chars);
         }
 
 
@@ -148,7 +154,7 @@ namespace Scheduler.Pages
                 EditLoginBttn.Visibility = Visibility.Visible;
                 LoginDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).Login = LoginTextBox.Text.Trim();
+                GivenUser.Login = LoginTextBox.Text.Trim();
                 SchedulerDbContext.DbContext.SaveChanges();
             }
         }
@@ -177,7 +183,7 @@ namespace Scheduler.Pages
                 EditPasswordBttn.Visibility = Visibility.Visible;
                 PasswordDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).Password = PasswordTextBox.Text.Trim();
+                GivenUser.Password = PasswordTextBox.Text.Trim();
                 SchedulerDbContext.DbContext.SaveChanges();
             }
         }
@@ -198,11 +204,19 @@ namespace Scheduler.Pages
         }
         public void PhoneAcceptBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if(GivenUser.PhoneNumber != PhoneTextBox.Text)
+            // Cтрогая валидация тел. номера к формату long(80000000000)
+            string thePhone = PhoneTextBox.Text.Trim();
+            thePhone = thePhone.Replace("+", "");
+            if (thePhone.StartsWith('7'))
+                thePhone = ReplaceAt(thePhone, 0, '8');
+
+            long newPhone = long.Parse(thePhone.Trim());
+
+            if (GivenUser.Phone != newPhone)
             {
                 if (!InputRegExps.PhoneRegEx().IsMatch(PhoneTextBox.Text))
                     MessageBox.Show("Неверный формат тел. номера", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
-                else if (SchedulerDbContext.DbContext.Employees.Any(c => c.PhoneNumber == PhoneTextBox.Text))
+                else if (SchedulerDbContext.DbContext.Employees.Any(c => c.Phone == newPhone))
                     MessageBox.Show("Пользователь с таким номером телефона уже существует!", "Ошибка ввода!", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
@@ -210,22 +224,17 @@ namespace Scheduler.Pages
                     EditPhoneBttn.Visibility = Visibility.Visible;
                     PhoneDecision.Visibility = Visibility.Collapsed;
 
-                    SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).PhoneNumber = PhoneTextBox.Text.Trim();
+                    GivenUser.Phone = newPhone;
                     SchedulerDbContext.DbContext.SaveChanges();
-                    SchedulerDbContext.CurrentUser.PhoneNumber = PhoneTextBox.Text;
                 }
             }
-
-            PhoneTextBox.IsReadOnly = true;
-            EditPhoneBttn.Visibility = Visibility.Visible;
-            PhoneDecision.Visibility = Visibility.Collapsed;
         }
         public void PhoneDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PhoneTextBox.IsReadOnly = true;
             EditPhoneBttn.Visibility = Visibility.Visible;
             PhoneDecision.Visibility = Visibility.Collapsed;
-            PhoneTextBox.Text = GivenUser.PhoneNumber;
+            PhoneTextBox.Text = GivenUser.Phone.ToString();
         }
 
 
@@ -245,7 +254,7 @@ namespace Scheduler.Pages
                 EditEmailBttn.Visibility = Visibility.Visible;
                 EmailDecision.Visibility = Visibility.Collapsed;
 
-                SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).EMail = EmailTextBox.Text.Trim();
+                GivenUser.EMail = EmailTextBox.Text.Trim();
                 SchedulerDbContext.DbContext.SaveChanges();
                 SchedulerDbContext.CurrentUser.EMail = EmailTextBox.Text;
             }
@@ -332,7 +341,7 @@ namespace Scheduler.Pages
                 else if (string.IsNullOrEmpty(PasswordTextBox.Text))
                     throw new Exception("Введите пароль");
 
-                else if (SchedulerDbContext.DbContext.Employees.Any(c => c.PhoneNumber == PhoneTextBox.Text))
+                else if (SchedulerDbContext.DbContext.Employees.Any(c => c.Phone == long.Parse(PhoneTextBox.Text.Trim())))
                     throw new Exception("Пользователь с таким номером телефона уже существует!");
 
                 else if (SchedulerDbContext.DbContext.Employees.Any(c => c.Login == LoginTextBox.Text))
@@ -343,12 +352,12 @@ namespace Scheduler.Pages
                     {
                         EmployeeId = default,
                         WorkingStatus = true,
-                        IsTelegramConfirmed = false,
+                        TgBotChatId = null,
                         Role = ManagerRadioBttn.IsChecked.GetValueOrDefault(),
                         Name = NameTextBox.Text.Trim(),
                         Login = LoginTextBox.Text.Trim(),
                         Password = PasswordTextBox.Text.Trim(),
-                        PhoneNumber = PhoneTextBox.Text.Trim(),
+                        Phone = long.Parse(PhoneTextBox.Text.Trim()),
                         EMail = string.IsNullOrEmpty(EmailTextBox.Text.Trim()) ? null : EmailTextBox.Text.Trim(),
                     });
 

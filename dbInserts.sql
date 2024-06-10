@@ -1,16 +1,16 @@
 -- Active: 1697616242142@@127.0.0.1@5432@SchedulerDB
 insert into "Employee" values
-(default, true, true, true, 'Козицкий Илья Сергеевич', 'admin', 'admin', '+79776736876', 'praktikasuppport@mail.ru'),
-(default, true, false, false, 'Мурзина Татьяна Витальевна', 'murzina_login', 'murzina_password', 'murzina_phone', null),
-(default, true, false, false, 'Сидорина Владислава Евгеньевна', 'sidorina_login', 'sidorina_password', 'sidorina_phone', null),
-(default, true, false, false, 'Кириллин Николай Владимирович', 'kirillin_login', 'kirillin_password', 'kirillin_phone', null),
-(default, true, false, false, 'Шапошникова Кира Александровна', 'shaposhnikova_login', 'shaposhnikova_password', 'shaposhnikova_phone', null),
-(default, true, false, false, 'Саибназарова Парвина Хусниддиновна', 'saibnazarova_login', 'saibnazarova_password', 'saibnazarova_phone', null),
-(default, true, false, false, 'Тебина Ольга Вячеславовна', 'tebina_login', 'tebina_password', 'tebina_phone', null),
-(default, true, false, false, 'Федорченко Дмитрий Евгеньевич', 'fedor4enko_login', 'fedor4enko_password', 'fedor4enko_phone', null),
-(default, true, false, false, 'Кузнецова Виктория Александровна', 'kuznetsova_login', 'kuznetsova_password', 'kuznetsova_phone', null),
-(default, true, false, true, 'Адамейко Алина Сергеевна', 'adameyko_login', 'adameyko_password', 'adameyko_phone', null),
-(default, true, false, false, 'Истомин Владимир Константинович', 'istomin_login', 'istomin_password', 'istomin_phone', null);
+(default, true, null, true, 'Козицкий Илья Сергеевич', 'admin', 'admin', 89776736876, 'praktikasuppport@mail.ru'),
+(default, true, null, false, 'Мурзина Татьяна Витальевна', 'murzina_login', 'murzina_password', 80000000000, null),
+(default, true, null, false, 'Сидорина Владислава Евгеньевна', 'sidorina_login', 'sidorina_password', 81111111111, null),
+(default, true, null, false, 'Кириллин Николай Владимирович', 'kirillin_login', 'kirillin_password', 82222222222, null),
+(default, true, null, false, 'Шапошникова Кира Александровна', 'shaposhnikova_login', 'shaposhnikova_password', 83333333333, null),
+(default, true, null, false, 'Саибназарова Парвина Хусниддиновна', 'saibnazarova_login', 'saibnazarova_password', 84444444444, null),
+(default, true, null, false, 'Тебина Ольга Вячеславовна', 'tebina_login', 'tebina_password', 85555555555, null),
+(default, true, null, false, 'Федорченко Дмитрий Евгеньевич', 'fedor4enko_login', 'fedor4enko_password', 86666666666, null),
+(default, true, null, false, 'Кузнецова Виктория Александровна', 'kuznetsova_login', 'kuznetsova_password', 87777777777, null),
+(default, true, null, true, 'Адамейко Алина Сергеевна', 'adameyko_login', 'adameyko_password', 88888888888, null),
+(default, true, null, false, 'Истомин Владимир Константинович', 'istomin_login', 'istomin_password', 89999999999, null);
 
 
 insert into "Subject" values 

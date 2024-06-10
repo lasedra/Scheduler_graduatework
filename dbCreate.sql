@@ -13,12 +13,12 @@ Create table "Employee"
 (
 	"Employee_ID" uuid default gen_random_uuid() NOT NULL,
 	"WorkingStatus" Boolean NOT NULL,
-	"IsTelegramConfirmed" Boolean NOT NULL,
+	"TgBotChatId" Bigint UNIQUE,
 	"Role" Boolean NOT NULL,
 	"Name" Varchar NOT NULL,
 	"Login" Varchar NOT NULL UNIQUE,
 	"Password" Varchar NOT NULL,
-	"Phone_Number" Varchar NOT NULL UNIQUE,
+	"Phone" Bigint CHECK ("Phone" BETWEEN 80000000000 AND 89999999999) NOT NULL UNIQUE,
 	"E-mail" Varchar,
  primary key ("Employee_ID")
 );

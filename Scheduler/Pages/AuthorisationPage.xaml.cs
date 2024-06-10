@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Scheduler.Models;
+﻿using Scheduler.Models;
 using System;
 using System.Linq;
 using System.Windows;
@@ -59,6 +58,7 @@ namespace Scheduler.Pages
                                 Properties.Settings.Default.Save();
                             }
 
+                            MainWindow.StartDbWatcher();
                             ((TextBlock)CurrentMainWindow.FindName("UserNameTextBlock")).Text = SchedulerDbContext.CurrentUser.Name;
                             ((DockPanel)CurrentMainWindow.FindName("MenuPanel")).Visibility = Visibility.Visible;
                             NavigationService.Navigate(new MainSchedulePage());

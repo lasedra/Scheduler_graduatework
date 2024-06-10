@@ -9,7 +9,7 @@ public partial class Employee
 
     public bool WorkingStatus { get; set; }
 
-    public bool IsTelegramConfirmed { get; set; }
+    public long? TgBotChatId { get; set; }
 
     public bool Role { get; set; }
 
@@ -19,7 +19,7 @@ public partial class Employee
 
     public string Password { get; set; } = null!;
 
-    public string PhoneNumber { get; set; } = null!;
+    public long Phone { get; set; }
 
     public string? EMail { get; set; }
 

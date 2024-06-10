@@ -60,7 +60,6 @@ namespace Scheduler
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             PagesFrame.Navigate(AuthorisationPage);
-            StartDbWatcher();
         }
         private void Window_Closed(object sender, EventArgs e)
         {
