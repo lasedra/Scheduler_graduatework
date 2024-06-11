@@ -59,7 +59,7 @@ namespace Scheduler.Pages
                             SubjectId = default,
                             Name = NameTxtBox.Text.Trim()
                         });
-                        SchedulerDbContext.DbContext.SaveChanges();
+                        SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary,"Subject added");
 
                         NameTxtBox.Text = string.Empty;
                         SubjectsListView.ItemsSource = SchedulerDbContext.DbContext.Subjects.ToList();
@@ -93,7 +93,7 @@ namespace Scheduler.Pages
                             c.Employee = null;
                             c.CabinetNumber = null;
                         });
-                        SchedulerDbContext.DbContext.SaveChanges();
+                        SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, "Subject deleted");
 
                         // Работает только при наличии ограничения у связанных таблиц - "ON DELETE CASCADE"
                         SchedulerDbContext.DbContext.Subjects

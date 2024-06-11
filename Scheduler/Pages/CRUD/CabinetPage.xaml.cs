@@ -62,7 +62,7 @@ namespace Scheduler.Pages
                             Number = NumberTxtBox.Text.Trim(),
                             Name = !string.IsNullOrEmpty(NameTxtBox.Text) ? NameTxtBox.Text.Trim() : null
                         });
-                        SchedulerDbContext.DbContext.SaveChanges();
+                        SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Secondary, "Cabinet added");
 
                         NumberTxtBox.Text = string.Empty;
                         NameTxtBox.Text = string.Empty;
@@ -97,7 +97,7 @@ namespace Scheduler.Pages
                             c.Employee = null;
                             c.CabinetNumber = null;
                         });
-                        SchedulerDbContext.DbContext.SaveChanges();
+                        SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Secondary, "Cabinet deleted");
 
                         SchedulerDbContext.DbContext.Cabinets
                             .Where(c => c.Number == cabinetToRemove.Number)

@@ -150,7 +150,7 @@ namespace Scheduler.Pages
                     dayToEdit.Subject = SubjectComboBox.SelectedItem as Subject;
                     dayToEdit.CabinetNumber = ((Cabinet)CabinetComboBox.SelectedItem).Number;
                 }
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, "Schedule cell edited");
             }
         }
 
@@ -248,7 +248,7 @@ namespace Scheduler.Pages
                 cellToRemove.Subject = null;
                 cellToRemove.CabinetNumber = null;
 
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, "Schedule cell deleted");
                 scheduleController = new();
                 scheduleController.SetCurrentGroupCode(((StudentGroup)StudentGroupComboBox.SelectedItem).StudentGroupCode);
                 scheduleController.SetCurrentWeek(new TimePeriod(deleteWeek));

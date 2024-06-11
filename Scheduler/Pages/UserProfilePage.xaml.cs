@@ -120,8 +120,9 @@ namespace Scheduler.Pages
                 EditNameBttn.Visibility = Visibility.Visible;
                 NameDecision.Visibility = Visibility.Collapsed;
 
+                string _oldName = GivenUser.Name;
                 SchedulerDbContext.DbContext.Employees.First(c => c.EmployeeId == GivenUser.EmployeeId).Name = NameTextBox.Text.Trim();
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Secondary, $"UserName edited by \"{_oldName}\" to \"{GivenUser.Name}\"");
 
                 ProfileNameTextBlock.Text = GivenUser.Name;
                 ((TextBlock)CurrentMainWindow.FindName("UserNameTextBlock")).Text = SchedulerDbContext.CurrentUser.Name;
@@ -155,7 +156,7 @@ namespace Scheduler.Pages
                 LoginDecision.Visibility = Visibility.Collapsed;
 
                 GivenUser.Login = LoginTextBox.Text.Trim();
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, $"UserLogin edited by \"{GivenUser.Name}\"");
             }
         }
         public void LoginDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -184,7 +185,7 @@ namespace Scheduler.Pages
                 PasswordDecision.Visibility = Visibility.Collapsed;
 
                 GivenUser.Password = PasswordTextBox.Text.Trim();
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, $"UserPassword edited by \"{GivenUser.Name}\"");
             }
         }
         private void PasswordDeclineBttn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -225,7 +226,7 @@ namespace Scheduler.Pages
                     PhoneDecision.Visibility = Visibility.Collapsed;
 
                     GivenUser.Phone = newPhone;
-                    SchedulerDbContext.DbContext.SaveChanges();
+                    SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Secondary, $"UserPhone edited by \"{GivenUser.Name}\"");
                 }
             }
         }
@@ -255,7 +256,7 @@ namespace Scheduler.Pages
                 EmailDecision.Visibility = Visibility.Collapsed;
 
                 GivenUser.EMail = EmailTextBox.Text.Trim();
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Secondary, $"UserEmail edited by \"{GivenUser.Name}\"");
                 SchedulerDbContext.CurrentUser.EMail = EmailTextBox.Text;
             }
         }
@@ -270,18 +271,18 @@ namespace Scheduler.Pages
 
         private void ManagerRadioBttn_Checked(object sender, RoutedEventArgs e)
         {
-            if (GivenUser != null) 
+            if (GivenUser != null && GivenUser.Role != true) 
             {
                 GivenUser.Role = true;
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, $"UserRole changed to Manager by \"{GivenUser.Name}\"");
             }
         }
         private void TutorRadioBttn_Checked(object sender, RoutedEventArgs e)
         {
-            if (GivenUser != null) 
+            if (GivenUser != null && GivenUser.Role != true) 
             {
                 GivenUser.Role = false;
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, $"UserRole changed to Tutor by \"{GivenUser.Name}\"");
             }
         }
 
@@ -293,7 +294,7 @@ namespace Scheduler.Pages
             try
             {
                 var result = MessageBox.Show(
-                    $"Вы уверены, что хотите удалить пользователя {GivenUser.Name} ?" +
+                    $"Вы уверены, что хотите удалить пользователя \"{GivenUser.Name}\" ?" +
                     $"\nЭто приведёт к удалению всей зависимой информации.",
                     "Минуточку",
                     MessageBoxButton.YesNo,
@@ -307,7 +308,7 @@ namespace Scheduler.Pages
                         c.Employee = null;
                         c.CabinetNumber = null;
                     });
-                    SchedulerDbContext.DbContext.SaveChanges();
+                    SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, $"User \"{GivenUser.Name}\" deleted");
 
                     // Работает только при наличии ограничения у связанных таблиц - "ON DELETE CASCADE"
                     SchedulerDbContext.DbContext.Employees
@@ -361,7 +362,7 @@ namespace Scheduler.Pages
                         EMail = string.IsNullOrEmpty(EmailTextBox.Text.Trim()) ? null : EmailTextBox.Text.Trim(),
                     });
 
-                    SchedulerDbContext.DbContext.SaveChanges();
+                    SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Primary, $"User \"{NameTextBox.Text.Trim()}\" created");
                     NavigationService.Navigate(new TutorAndSubjectPage());
                     MessageBox.Show("Новый пользователь зарегистрирован", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }

@@ -88,7 +88,7 @@ namespace Scheduler.Pages
                             StudentGroupCode = newGroupCode,
                             Specialization = newGroupSpecialization
                         });
-                        SchedulerDbContext.DbContext.SaveChanges();
+                        SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Secondary, "StudentGroup added");
 
                         ScheduleController scheduleController = new();
                         scheduleController.CreatePivotSchedule(scheduleController.CurrentWeek.WeekStart, newGroupCode);
@@ -238,7 +238,7 @@ namespace Scheduler.Pages
                             StudentGroupCode = selectedGroup.StudentGroupCode
                         });
 
-                        SchedulerDbContext.DbContext.SaveChanges();
+                        SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Intermediate,"Stydying added");
 
                         AddStudyingComboBox.SelectedItem = null;
                         UpdateStudyingListView();
@@ -261,7 +261,7 @@ namespace Scheduler.Pages
                         c.Subject.SubjectId == ((Studying)StudyingListView.SelectedItem).SubjectId)
                     .ExecuteDelete();
 
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Intermediate,"Studying deleted");
                 UpdateStudyingListView();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }

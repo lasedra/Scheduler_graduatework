@@ -103,7 +103,7 @@ namespace Scheduler.Pages
                             EmployeeId = selectedTutor.EmployeeId
                         });
 
-                        SchedulerDbContext.DbContext.SaveChanges();
+                        SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Intermediate, "Tution added");
 
                         AddTutionComboBox.SelectedItem = null;
                         UpdateTutionListView();
@@ -126,7 +126,7 @@ namespace Scheduler.Pages
                         c.Subject.SubjectId == ((Tution)TutionListView.SelectedItem).SubjectId)
                     .ExecuteDelete();
 
-                SchedulerDbContext.DbContext.SaveChanges();
+                SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Intermediate,"Tution deleted");
                 UpdateTutionListView();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }

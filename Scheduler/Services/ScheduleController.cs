@@ -197,7 +197,7 @@ namespace Scheduler.Services
                     OfDate = onDate.AddDays(d),
                 });
             }
-            SchedulerDbContext.DbContext.SaveChanges();
+            SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Intermediate, "DailyScheduleHeaders added");
 
             // Табличная часть
             for (int d = 0; d <= 4; d++) // Дней в неделе
@@ -217,14 +217,13 @@ namespace Scheduler.Services
                     });
                 }
             }
-            SchedulerDbContext.DbContext.SaveChanges();
+            SchedulerDbContext.DbContext.SaveChanges(SchedulerDbContext.ChangeLogLevel.Intermediate, "DailyScheduleBodies added");
         }
 
         public void AddSchedule(string studentGroupCode)
         {
             DateOnly nextWeek = CurrentWeek.WeekStart.AddDays(7);
             CreatePivotSchedule(nextWeek, studentGroupCode);
-            MessageBox.Show("Расписание на следующую неделю успешно создано!", "Поздравляю!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void SetCurrentWeek(TimePeriod timePeriod)

@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Scheduler.Models;
 using Scheduler.Pages;
@@ -50,8 +48,6 @@ namespace Scheduler
         }
         #endregion
 
-        public AuthorisationPage AuthorisationPage = new();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -59,7 +55,7 @@ namespace Scheduler
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            PagesFrame.Navigate(AuthorisationPage);
+            PagesFrame.Navigate(new AuthorisationPage());
         }
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -92,19 +88,22 @@ namespace Scheduler
                         {
                             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                MessageBox.Show("Обнаружены изменения в БД! Страница будет перезагружена");
+                                MessageBox.Show("Расписания текущей недели будут обновлены", "Кто-то назначил новое занятие!", MessageBoxButton.OK, MessageBoxImage.Information);
                                 Frame frame = (Frame)Application.Current.MainWindow.FindName("PagesFrame");
                                 Page currentPage = frame.Content as Page;
 
                                 if (currentPage != null)
                                 {
-                                    Type type = currentPage.GetType();
-                                    Page newPage = (Page)Activator.CreateInstance(type);
-                                    frame.Content = newPage;
+                                    if(currentPage is MainSchedulePage || currentPage is EditingPage)
+                                    {
+                                        Type type = currentPage.GetType();
+                                        Page newPage = (Page)Activator.CreateInstance(type);
+                                        frame.Content = newPage;
+                                    }
                                 }
                             }));
                         }
-                    }        
+                    }
                 }
             }).Start();
         }
