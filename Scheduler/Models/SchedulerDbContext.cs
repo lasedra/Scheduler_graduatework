@@ -37,7 +37,7 @@ public partial class SchedulerDbContext : DbContext
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(AppConfig.GetConnectionString("localhost"));
+        => optionsBuilder.UseNpgsql(AppConfig.GetConnectionString("Host"));
 
     public virtual DbSet<Cabinet> Cabinets { get; set; }
 
