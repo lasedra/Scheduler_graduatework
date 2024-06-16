@@ -2,10 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Windows/MainWindow.xaml">
-    <Application.Resources>
-        
-        <!--#region Colors-->
-        <SolidColorBrush x:Key="Dark gray" Color="#303030"/>
+	<Application.Resources>
+		<!--#region Colors-->
+		<SolidColorBrush x:Key="Dark gray" Color="#303030"/>
         <SolidColorBrush x:Key="Mid gray" Color="#4D4D4D"/>
         <SolidColorBrush x:Key="Light gray" Color="#6D6D6D"/>
 		<SolidColorBrush x:Key="Dark red" Color="#730B38"/>

@@ -5,6 +5,7 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\winico.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,12 @@
     <None Remove="Resources\winico.ico" />
     <None Remove="Resources\winico.png" />
     <None Remove="Resources\_.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\winico.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

@@ -51,7 +51,7 @@ namespace Scheduler.UserControls
                     {
                         ReplaceKeywordWithValue(templateDoc, "[studentGroupCode]", scheduleController.CurrentGroupCode);
                         ReplaceKeywordWithValue(templateDoc, "[weekSpan]", scheduleController.CurrentWeek.GetWeekSpan());
-                        ReplaceKeywordWithValue(templateDoc, "[createdAtDate]", scheduleController.CurrentWeek.TodayDate.ToString("dd.MM.yyyy"));
+                        ReplaceKeywordWithValue(templateDoc, "[createdAtDate]", DateTime.Now.ToString("dd.MM.yyyy"));
 
                         var dayTabs = scheduleController.GetDayTabs();
                         StringReplaceTextOptions options = new();

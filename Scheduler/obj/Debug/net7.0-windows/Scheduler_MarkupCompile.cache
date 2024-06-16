@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\.eski\Desktop\4 КУРС\ДИПЛОМ\Scheduler\Scheduler\App.xaml
-11-1610678619
+13-1492836662
 
 29-428065144
 221774497976
-Pages\AuthorisationPage.xaml;Pages\CRUD\CabinetPage.xaml;Pages\CRUD\StudentGroupPage.xaml;Pages\CRUD\SubjectPage.xaml;Pages\CRUD\TutorAndSubjectPage.xaml;Pages\EditingPage.xaml;Pages\MainSchedulePage.xaml;Pages\UserProfilePage.xaml;UserControls\LessonCell.xaml;UserControls\ScheduleUserControl.xaml;Windows\MainWindow.xaml;
+Pages\AuthorisationPage.xaml;Pages\CRUD\CabinetPage.xaml;Pages\CRUD\StudentGroupPage.xaml;Pages\CRUD\SubjectPage.xaml;Pages\CRUD\TutorAndSubjectPage.xaml;Pages\EditingPage.xaml;Pages\MainSchedulePage.xaml;Pages\UserProfilePage.xaml;Resources\DarkTheme.xaml;Resources\LightTheme.xaml;UserControls\LessonCell.xaml;UserControls\ScheduleUserControl.xaml;Windows\MainWindow.xaml;
 
 False
 
